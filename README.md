@@ -4,6 +4,19 @@ A .NET core library for accessing the CoffeeCup API.
 # Summary
 We are using [CoffeeCupApp](https://www.coffeecupapp.com) for time tracking on our projects. Luckily the team from CoffeeCup provides an API. The (CoffeeCup API documentation)[https://bitbucket.org/coffeecupapp/api_docs]  is pretty good and so we have writte a .NET core wrapper to enable other to access it easily.
 
+# Version informations
+
+We are currently in alpha-Mode. This means, there are a lot of limitations:
+
+- We only support `GET` requests currently.
+- The C#-documentation is not complete yet.
+- No unit tests where written to this point.
+- The retry-policy in the repository is poor (to say the least).
+
+# Contribution
+
+If you want to contribute feel free to contact us.
+
 # Getting started
 ![NugGet](https://img.shields.io/nuget/vpre/devdeer.CoffeeCupApiAccess.svg)
 
