@@ -18,7 +18,7 @@ We are currently in alpha-Mode. This means, there are a lot of limitations:
 If you want to contribute feel free to contact us.
 
 # Getting started
-![NugGet](https://img.shields.io/nuget/vpre/devdeer.CoffeeCupApiAccess.svg)
+[![NugGet](https://img.shields.io/nuget/vpre/devdeer.CoffeeCupApiAccess.svg)](https://www.nuget.org/packages/devdeer.CoffeeCupApiAccess/)
 
 The easiest way to get started is to create a new .NET Core Console app in Visual Studio and then writte
 
