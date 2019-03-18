@@ -15,7 +15,11 @@
     <PackageTags>.NET CoffeeCup CoffeeCupApp API HTTP</PackageTags>
     <PackageIconUrl>https://devdeer.blob.core.windows.net/shared/DVDR_LOGO_64.png</PackageIconUrl>
     <Copyright>Copyright 2019 (c) DEVDEER GmbH</Copyright>
-    <PackageReleaseNotes>- Renamed models and removed "CoffeeCup" as a prefix</PackageReleaseNotes>
+    <PackageReleaseNotes>- Renamed models and removed "CoffeeCup" as a prefix
+- Enabled bearer token refresh in repository
+- removed retry-strategy in repository</PackageReleaseNotes>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseUrl>https://licenses.nuget.org/MIT</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>
