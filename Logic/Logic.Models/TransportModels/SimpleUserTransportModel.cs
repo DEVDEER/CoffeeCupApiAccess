@@ -1,4 +1,4 @@
-﻿namespace devdeer.CoffeeCupApiAccess.Logic.Core.TransportModels
+﻿namespace devdeer.CoffeeCupApiAccess.Logic.Models.TransportModels
 {
     using System;
     using System.Linq;

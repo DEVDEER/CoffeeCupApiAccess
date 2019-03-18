@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logic", "Logic", "{5FBE882D-5C5A-4F1E-A3F8-6A9A22D9A2D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic.Core", "Logic\Logic.Core\Logic.Core.csproj", "{ABD66048-347C-491A-8369-0981D661B0D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic.Core", "Logic\Logic.Core\Logic.Core.csproj", "{ABD66048-347C-491A-8369-0981D661B0D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic.Models", "Logic\Logic.Models\Logic.Models.csproj", "{8D1CD844-BB26-4C2B-8AA4-29385AC123EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +19,17 @@ Global
 		{ABD66048-347C-491A-8369-0981D661B0D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABD66048-347C-491A-8369-0981D661B0D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABD66048-347C-491A-8369-0981D661B0D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D1CD844-BB26-4C2B-8AA4-29385AC123EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D1CD844-BB26-4C2B-8AA4-29385AC123EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D1CD844-BB26-4C2B-8AA4-29385AC123EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D1CD844-BB26-4C2B-8AA4-29385AC123EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{ABD66048-347C-491A-8369-0981D661B0D3} = {5FBE882D-5C5A-4F1E-A3F8-6A9A22D9A2D3}
+		{8D1CD844-BB26-4C2B-8AA4-29385AC123EA} = {5FBE882D-5C5A-4F1E-A3F8-6A9A22D9A2D3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D5ED0D4E-E0B9-4282-A7FC-1341848AEDC8}

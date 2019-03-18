@@ -1,4 +1,4 @@
-﻿namespace devdeer.CoffeeCupApiAccess.Logic.Core.ResponseModels
+﻿namespace devdeer.CoffeeCupApiAccess.Logic.Models.ResponseModels
 {
     using System;
     using System.Linq;

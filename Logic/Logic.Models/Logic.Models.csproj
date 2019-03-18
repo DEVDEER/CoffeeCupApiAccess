@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>devdeer.CoffeeCupApiAccess.Logic.Models</RootNamespace>
+    <AssemblyName>CoffeeCupApiAccess.Logic.Models</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <PackageId>devdeer.CoffeeCupModels</PackageId>
+    <Title>DEVDEER CoffeeCup API Access Models</Title>
+    <Version>0.0.1-alpha</Version>
+    <Authors>DEVDEER</Authors>
+    <Product>CoffeeCupApiAccess</Product>
+    <Description>Contains the models necessary for the CoffeeCup API Access in NuGet package devdeer.CoffeeCupApiAccess.</Description>
+    <Summary>Contains the models necessary for the CoffeeCup API Access in NuGet package devdeer.CoffeeCupApiAccess.</Summary>
+    <PackageProjectUrl>https://github.com/DEVDEERZ/CoffeeCupApiAccess</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DEVDEERZ/CoffeeCupApiAccess</RepositoryUrl>
+    <PackageTags>.NET CoffeeCup CoffeeCupApp API Models</PackageTags>
+    <PackageIconUrl>https://devdeer.blob.core.windows.net/shared/DVDR_LOGO_64.png</PackageIconUrl>
+    <Copyright>Copyright 2019 (c) DEVDEER GmbH</Copyright>
+    <PackageReleaseNotes>
+      - First release of models package
+    </PackageReleaseNotes>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+  </ItemGroup>
+
+</Project>
