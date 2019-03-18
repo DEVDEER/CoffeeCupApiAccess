@@ -6,7 +6,7 @@
     /// <summary>
     /// Transports meta-data for requests to the repository.
     /// </summary>
-    public class CoffeeCupRequestDataModel
+    public class RequestDataModel
     {
         #region constructors and destructors
 
@@ -21,7 +21,7 @@
         /// happen.
         /// </param>
         /// <param name="coffeeCupPassword">The password of the <paramref name="coffeeCupUsername" />.</param>
-        public CoffeeCupRequestDataModel(string coffeeCupApiVersion, string coffeeCupApiClientId, string coffeeCupApiClientSecret, string coffeeCupUsername, string coffeeCupPassword)
+        public RequestDataModel(string coffeeCupApiVersion, string coffeeCupApiClientId, string coffeeCupApiClientSecret, string coffeeCupUsername, string coffeeCupPassword)
         {
             CoffeeCupApiVersion = coffeeCupApiVersion;
             CoffeeCupApiClientId = coffeeCupApiClientId;

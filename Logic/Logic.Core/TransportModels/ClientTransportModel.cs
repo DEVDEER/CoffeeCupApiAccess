@@ -8,7 +8,7 @@
     /// <summary>
     /// Contains the information about a single client in CoffeeCup.
     /// </summary>
-    public class CoffeeCupClientTransportModel
+    public class ClientTransportModel
     {
         #region properties
 

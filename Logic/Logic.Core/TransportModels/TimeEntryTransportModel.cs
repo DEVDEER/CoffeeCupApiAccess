@@ -8,7 +8,7 @@
     /// <summary>
     /// Contains the information about a single time entry in CoffeeCup.
     /// </summary>
-    public class CoffeeCupTimeEntryTransportModel
+    public class TimeEntryTransportModel
     {
         #region properties
 

@@ -8,7 +8,7 @@
     /// <summary>
     /// Contains the information about a single user in CoffeeCup.
     /// </summary>
-    public class CoffeeCupUserTransportModel
+    public class UserTransportModel
     {
         #region methods
 
@@ -16,9 +16,9 @@
         /// Converts this instance into the simplified version of it.
         /// </summary>
         /// <returns>The simplified model.</returns>
-        public CoffeeCupSimpleUserTransportModel ToSimple()
+        public SimpleUserTransportModel ToSimple()
         {
-            return new CoffeeCupSimpleUserTransportModel
+            return new SimpleUserTransportModel
             {
                 Id = Id,
                 Birthday = Birthday,

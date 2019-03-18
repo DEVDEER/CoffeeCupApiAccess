@@ -8,17 +8,17 @@
     using TransportModels;
 
     /// <summary>
-    /// Represents the response of the CoffeeCup API when the users endpoint is called.
+    /// Represents the response of the CoffeeCup API when the time-entries-endpoint is called.
     /// </summary>
-    public class CoffeeCupUsersResponseModel
+    public class CoffeeCupTimeEntriesResponseModel
     {
         #region properties
 
         /// <summary>
-        /// The list of user information.
+        /// The list of time-entry information.
         /// </summary>
-        [JsonProperty("users")]
-        public CoffeeCupUserTransportModel[] Users { get; set; }
+        [JsonProperty("timeEntries")]
+        public TimeEntryTransportModel[] TimeEntries { get; set; }
 
         #endregion
     }

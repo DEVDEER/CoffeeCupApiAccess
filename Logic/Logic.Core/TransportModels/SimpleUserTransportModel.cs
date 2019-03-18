@@ -4,9 +4,9 @@
     using System.Linq;
 
     /// <summary>
-    /// A simplified version of <see cref="CoffeeCupUserTransportModel" />.
+    /// A simplified version of <see cref="UserTransportModel" />.
     /// </summary>
-    public class CoffeeCupSimpleUserTransportModel
+    public class SimpleUserTransportModel
     {
         #region properties
 

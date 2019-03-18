@@ -6,7 +6,7 @@
     <AssemblyName>CoffeeCupApiAccess.Logic.Core</AssemblyName>
     <LangVersion>latest</LangVersion>
     <PackageId>devdeer.CoffeeCupApiAccess</PackageId>
-    <Version>0.0.1-alpha</Version>
+    <Version>0.0.2-alpha</Version>
     <Authors>DEVDEER</Authors>
     <Product>CoffeeCupApiAccess</Product>
     <Description>A .NET standard lib to gain access to the CoffeeCup API.</Description>
@@ -15,6 +15,7 @@
     <PackageTags>.NET CoffeeCup CoffeeCupApp API HTTP</PackageTags>
     <PackageIconUrl>https://devdeer.blob.core.windows.net/shared/DVDR_LOGO_64.png</PackageIconUrl>
     <Copyright>Copyright 2019 (c) DEVDEER GmbH</Copyright>
+    <PackageReleaseNotes>- Renamed models and removed "CoffeeCup" as a prefix</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

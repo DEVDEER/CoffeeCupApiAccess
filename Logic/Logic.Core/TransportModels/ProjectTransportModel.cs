@@ -8,7 +8,7 @@
     /// <summary>
     /// Contains the information about a single project in CoffeeCup.
     /// </summary>
-    public class CoffeeCupProjectTransportModel
+    public class ProjectTransportModel
     {
         #region properties
 

@@ -5,7 +5,7 @@
 
     using Newtonsoft.Json;
 
-    public class CoffeeCupAuthorizationResponseModel
+    public class AuthorizationResponseModel
     {
         #region properties
 
