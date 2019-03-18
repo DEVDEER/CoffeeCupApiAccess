@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
     using System.Net;
@@ -23,9 +24,7 @@
         #region member vars
 
         private readonly HttpClient _client;
-
-        private int _retries;
-
+        
         #endregion
 
         #region constants
@@ -33,6 +32,8 @@
         private static DateTime? _barerTokenInvalidationTime;
 
         private static string _bearerToken;
+
+        private static string _refreshToken;
 
         #endregion
 
@@ -162,14 +163,55 @@
                     { "client_secret", requestData.CoffeeCupApiClientSecret }
                 };
                 var body = new FormUrlEncodedContent(dict);
+                try
+                {
+                    var response = await _client.PostAsync("oauth2/token", body);
+                    var result = await response.Content.ReadAsStringAsync();
+                    var tokenResult = JsonConvert.DeserializeObject<AuthorizationResponseModel>(result);
+                    // store token, refresh and invalidation timestamp locally
+                    _bearerToken = tokenResult.AccessToken;
+                    _refreshToken = tokenResult.RefreshToken;
+                    _barerTokenInvalidationTime = DateTime.Now.AddSeconds(tokenResult.Expiration);
+                }
+                catch (Exception ex)
+                {
+                    Trace.TraceError(ex.Message);
+                }
+            }
+            return $"Bearer {_bearerToken}";
+        }
+
+        /// <summary>
+        /// Retrieves the currently valid or an updated bearer token from the CoffeeCup API.
+        /// </summary>
+        /// <param name="requestData">The contextual data from the API which is needed by the repository.</param>
+        /// <returns>The a string of the pattern "Bearer {token}" if the operation succeeded.</returns>
+        private async Task<bool> RefreshBearerTokenAsync(RequestDataModel requestData)
+        {
+            try
+            {
+                var dict = new Dictionary<string, string>
+                {
+                    { "grant_type", "refresh_token" },
+                    { "refresh_token", _refreshToken },
+                    { "client_id", requestData.CoffeeCupApiClientId },
+                    { "client_secret", requestData.CoffeeCupApiClientSecret }
+                };
+                var body = new FormUrlEncodedContent(dict);
                 var response = await _client.PostAsync("oauth2/token", body);
                 var result = await response.Content.ReadAsStringAsync();
                 var tokenResult = JsonConvert.DeserializeObject<AuthorizationResponseModel>(result);
-                // store token and invalidation timestamp locally
+                // store token, refresh and invalidation timestamp locally
                 _bearerToken = tokenResult.AccessToken;
+                _refreshToken = tokenResult.RefreshToken;
                 _barerTokenInvalidationTime = DateTime.Now.AddSeconds(tokenResult.Expiration);
+                return true;
             }
-            return $"Bearer {_bearerToken}";
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return false;
+            }
         }
 
         /// <summary>
@@ -181,6 +223,15 @@
         /// <returns>The result.</returns>
         private async Task<TResult> GetCoffeeCupApiResultAsync<TResult>(RequestDataModel requestData, string relativeUrl)
         {
+            if (_barerTokenInvalidationTime <= DateTime.Now)
+            {
+                // we have to refresh the token
+                var ok = await RefreshBearerTokenAsync(requestData);
+                if (!ok)
+                {
+                    throw new ApplicationException("Could not refresh authentication token.");
+                }
+            }
             var bearer = await GetBearerTokenAsync(requestData);
             if (string.IsNullOrEmpty(bearer))
             {
@@ -195,17 +246,9 @@
                     // something went wrong
                     if (response.StatusCode == HttpStatusCode.Unauthorized)
                     {
-                        // seems to be a problem with the bearer token
-                        if (_retries >= 3)
-                        {
-                            Interlocked.Exchange(ref _retries, 0);
-                            throw new InvalidOperationException("Got problems with authentication against CoffeeCup.");
-                        }
-                        _bearerToken = null;
-                        _barerTokenInvalidationTime = null;
-                        Interlocked.Increment(ref _retries);
-                        return await GetCoffeeCupApiResultAsync<TResult>(requestData, relativeUrl);
+                        throw new ApplicationException("Could not read data from CoffeeCup-API due to authorization issues.");
                     }
+                    throw new ApplicationException($"Could not read data from CoffeeCup-API due to response code {response.StatusCode}.");
                 }
                 var result = await response.Content.ReadAsStringAsync();
                 var converted = JsonConvert.DeserializeObject<TResult>(result);
