@@ -7,14 +7,12 @@
     using System.Linq;
     using System.Net;
     using System.Net.Http;
-    using System.Threading;
     using System.Threading.Tasks;
 
+    using Models.ResponseModels;
+    using Models.TransportModels;
+
     using Newtonsoft.Json;
-
-    using ResponseModels;
-
-    using TransportModels;
 
     /// <summary>
     /// Allows data retrieval from the CoffeeCup API.
@@ -24,7 +22,7 @@
         #region member vars
 
         private readonly HttpClient _client;
-        
+
         #endregion
 
         #region constants
@@ -182,39 +180,6 @@
         }
 
         /// <summary>
-        /// Retrieves the currently valid or an updated bearer token from the CoffeeCup API.
-        /// </summary>
-        /// <param name="requestData">The contextual data from the API which is needed by the repository.</param>
-        /// <returns>The a string of the pattern "Bearer {token}" if the operation succeeded.</returns>
-        private async Task<bool> RefreshBearerTokenAsync(RequestDataModel requestData)
-        {
-            try
-            {
-                var dict = new Dictionary<string, string>
-                {
-                    { "grant_type", "refresh_token" },
-                    { "refresh_token", _refreshToken },
-                    { "client_id", requestData.CoffeeCupApiClientId },
-                    { "client_secret", requestData.CoffeeCupApiClientSecret }
-                };
-                var body = new FormUrlEncodedContent(dict);
-                var response = await _client.PostAsync("oauth2/token", body);
-                var result = await response.Content.ReadAsStringAsync();
-                var tokenResult = JsonConvert.DeserializeObject<AuthorizationResponseModel>(result);
-                // store token, refresh and invalidation timestamp locally
-                _bearerToken = tokenResult.AccessToken;
-                _refreshToken = tokenResult.RefreshToken;
-                _barerTokenInvalidationTime = DateTime.Now.AddSeconds(tokenResult.Expiration);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Trace.TraceError(ex.Message);
-                return false;
-            }
-        }
-
-        /// <summary>
         /// Retrieves a result from the CoffeeCup API and tries to convert it to <typeparamref name="TResult" />.
         /// </summary>
         /// <typeparam name="TResult">The type the result is expected to be.</typeparam>
@@ -258,6 +223,39 @@
             {
                 Console.WriteLine(e);
                 throw;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves the currently valid or an updated bearer token from the CoffeeCup API.
+        /// </summary>
+        /// <param name="requestData">The contextual data from the API which is needed by the repository.</param>
+        /// <returns>The a string of the pattern "Bearer {token}" if the operation succeeded.</returns>
+        private async Task<bool> RefreshBearerTokenAsync(RequestDataModel requestData)
+        {
+            try
+            {
+                var dict = new Dictionary<string, string>
+                {
+                    { "grant_type", "refresh_token" },
+                    { "refresh_token", _refreshToken },
+                    { "client_id", requestData.CoffeeCupApiClientId },
+                    { "client_secret", requestData.CoffeeCupApiClientSecret }
+                };
+                var body = new FormUrlEncodedContent(dict);
+                var response = await _client.PostAsync("oauth2/token", body);
+                var result = await response.Content.ReadAsStringAsync();
+                var tokenResult = JsonConvert.DeserializeObject<AuthorizationResponseModel>(result);
+                // store token, refresh and invalidation timestamp locally
+                _bearerToken = tokenResult.AccessToken;
+                _refreshToken = tokenResult.RefreshToken;
+                _barerTokenInvalidationTime = DateTime.Now.AddSeconds(tokenResult.Expiration);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return false;
             }
         }
 
