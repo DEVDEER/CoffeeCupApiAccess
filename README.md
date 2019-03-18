@@ -20,14 +20,13 @@ If you want to contribute feel free to contact us.
 # nuget
 There are 2 packages coming out of this project:
 
-- [![NugGet](https://img.shields.io/nuget/vpre/devdeer.CoffeeCupApiAccess.svg)](https://www.nuget.org/packages/devdeer.CoffeeCupApiAccess/)
-- [![NugGet](https://img.shields.io/nuget/vpre/devdeer.CoffeeCupModels.svg)](https://www.nuget.org/packages/devdeer.CoffeeCupModels/)
+[![NugGet](https://img.shields.io/nuget/vpre/devdeer.CoffeeCupApiAccess.svg?label=devdeer.CoffeeCupApiAccess)](https://www.nuget.org/packages/devdeer.CoffeeCupApiAccess/)
+
+[![NugGet](https://img.shields.io/nuget/vpre/devdeer.CoffeeCupModels.svg?label=devdeer.CoffeeCupModels)](https://www.nuget.org/packages/devdeer.CoffeeCupModels/)
 
 We've splitted this repo into 2 packages because it is very likely that you need to reference the complete logic in one project while another project of your solution just needs to reference the used models.
 
 # Getting started
-[![NugGet](https://img.shields.io/nuget/vpre/devdeer.CoffeeCupApiAccess.svg)](https://www.nuget.org/packages/devdeer.CoffeeCupApiAccess/)
-
 The easiest way to get started is to create a new .NET Core Console app in Visual Studio and then writte
 
     install-package devdeer.CoffeeCupApiAccess -pre
