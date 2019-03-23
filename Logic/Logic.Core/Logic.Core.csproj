@@ -7,7 +7,7 @@
     <LangVersion>latest</LangVersion>
     <PackageId>devdeer.CoffeeCupApiAccess</PackageId>
     <Title>DEVDEER CoffeeCup Api Access</Title>
-    <Version>0.1.1-beta</Version>
+    <Version>0.1.2-beta</Version>
     <Authors>DEVDEER</Authors>
     <Product>CoffeeCupApiAccess</Product>
     <Description>A .NET standard lib to gain access to the CoffeeCup API.</Description>
@@ -24,7 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="devdeer.CoffeeCupModels" Version="0.1.1-beta" />
+    <PackageReference Include="devdeer.CoffeeCupModels" Version="0.1.4-beta" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="2.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
