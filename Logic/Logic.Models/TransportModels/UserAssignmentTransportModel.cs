@@ -18,7 +18,7 @@
         public int? BudgetHours { get; set; }
 
         [JsonProperty("hourlyRate")]
-        public double HourlyRate { get; set; }
+        public double? HourlyRate { get; set; }
 
         [JsonProperty("id")]
         public int Id { get; set; }

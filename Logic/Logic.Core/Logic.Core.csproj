@@ -7,7 +7,7 @@
     <LangVersion>latest</LangVersion>
     <PackageId>devdeer.CoffeeCupApiAccess</PackageId>
     <Title>DEVDEER CoffeeCup Api Access</Title>
-    <Version>0.1.0-beta</Version>
+    <Version>0.1.1-beta</Version>
     <Authors>DEVDEER</Authors>
     <Product>CoffeeCupApiAccess</Product>
     <Description>A .NET standard lib to gain access to the CoffeeCup API.</Description>
@@ -17,9 +17,7 @@
     <PackageTags>.NET CoffeeCup CoffeeCupApp API HTTP</PackageTags>
     <PackageIconUrl>https://devdeer.blob.core.windows.net/shared/DVDR_LOGO_64.png</PackageIconUrl>
     <Copyright>Copyright 2019 (c) DEVDEER GmbH</Copyright>
-    <PackageReleaseNotes>- BREAKING CHANGE: Repository now is named CoffeeCupAccess.
-- Configured new version 0.1.0-beta of model-package.
--</PackageReleaseNotes>
+    <PackageReleaseNotes>Updated reference to models package after bugfix.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
