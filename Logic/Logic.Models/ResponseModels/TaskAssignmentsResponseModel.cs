@@ -10,7 +10,7 @@
     /// <summary>
     /// Represents the response of the CoffeeCup API when the task assignments endpoint is called.
     /// </summary>
-    public class TaskAssignmentsResponseModel
+    public class TaskAssignmentsResponseModel : BaseResponseModel
     {
         #region properties
 

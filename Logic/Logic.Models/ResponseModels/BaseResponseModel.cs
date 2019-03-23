@@ -8,17 +8,17 @@
     using TransportModels;
 
     /// <summary>
-    /// Represents the response of the CoffeeCup API when the colors endpoint is called.
+    /// Abstract base class for all responses.
     /// </summary>
-    public class ColorsResponseModel : BaseResponseModel
+    public abstract class BaseResponseModel
     {
         #region properties
 
         /// <summary>
-        /// The list of colors.
+        /// Contains the meta data which are appended to each response by CoffeeCup.
         /// </summary>
-        [JsonProperty("colors")]
-        public ColorTransportModel[] Colors { get; set; }
+        [JsonProperty("meta")]
+        public MetaDataTransportModel MetaData { get; set; }
 
         #endregion
     }
