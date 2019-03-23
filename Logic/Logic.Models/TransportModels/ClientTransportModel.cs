@@ -3,6 +3,8 @@
     using System;
     using System.Linq;
 
+    using Enumerations;
+
     using Newtonsoft.Json;
 
     /// <summary>
@@ -40,13 +42,13 @@
         public string ImageFileToken { get; set; }
 
         [JsonProperty("imageType")]
-        public int ImageType { get; set; }
+        public ImageType ImageType { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
 
         [JsonProperty("status")]
-        public int Status { get; set; }
+        public Status Status { get; set; }
 
         [JsonProperty("updatedAt")]
         public DateTime UpdatedAt { get; set; }

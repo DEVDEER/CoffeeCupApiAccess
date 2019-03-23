@@ -3,6 +3,8 @@
     using System;
     using System.Linq;
 
+    using Enumerations;
+
     using Newtonsoft.Json;
 
     /// <summary>
@@ -71,7 +73,7 @@
         public string Department { get; set; }
 
         [JsonProperty("durationFormat")]
-        public int? DurationFormat { get; set; }
+        public DurationFormat DurationFormat { get; set; }
 
         [JsonProperty("easybillEnabledAt")]
         public string EasyBillEnabledAt { get; set; }
@@ -104,7 +106,7 @@
         public string ImageFileToken { get; set; }
 
         [JsonProperty("imageType")]
-        public int? ImageType { get; set; }
+        public ImageType? ImageType { get; set; }
 
         [JsonProperty("insuranceName")]
         public string InsuranceName { get; set; }
@@ -128,7 +130,7 @@
         public string MobileNumber { get; set; }
 
         [JsonProperty("passwordStatus")]
-        public int? PasswordStatus { get; set; }
+        public PasswordStatus PasswordStatus { get; set; }
 
         [JsonProperty("phoneNumber")]
         public string PhoneNumber { get; set; }
@@ -146,13 +148,13 @@
         public bool ShowInPlanner { get; set; }
 
         [JsonProperty("status")]
-        public int? Status { get; set; }
+        public Status Status { get; set; }
 
         [JsonProperty("street")]
         public string Street { get; set; }
 
         [JsonProperty("timeEntryBackgroundColor")]
-        public int? TimeEntryBackgroundColor { get; set; }
+        public TimeEntryBackgroundColorType TimeEntryBackgroundColor { get; set; }
 
         [JsonProperty("timeFormat")]
         public string TimeFormat { get; set; }

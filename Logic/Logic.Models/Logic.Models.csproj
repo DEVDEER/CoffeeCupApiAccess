@@ -19,10 +19,12 @@
     <Copyright>Copyright 2019 (c) DEVDEER GmbH</Copyright>
     <PackageReleaseNotes>- Added task-related models
 - Added task-assignment-related models
+- Added user-assignment-related models
 - Added color-related models.
 - Added meta-data-related models
 - Added meta-data to all response models
-- Added user-employment-related models</PackageReleaseNotes>
+- Added user-employment-related models
+- Added enumerations for known enum types</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>

@@ -3,6 +3,8 @@
     using System;
     using System.Linq;
 
+    using Enumerations;
+
     using Newtonsoft.Json;
 
     public class TaskAssignmentTransportModel
@@ -25,7 +27,7 @@
         public int Project { get; set; }
 
         [JsonProperty("status")]
-        public int Status { get; set; }
+        public Status Status { get; set; }
 
         [JsonProperty("task")]
         public int Task { get; set; }

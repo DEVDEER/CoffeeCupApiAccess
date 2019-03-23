@@ -3,6 +3,8 @@
     using System;
     using System.Linq;
 
+    using Enumerations;
+
     using Newtonsoft.Json;
 
     /// <summary>
@@ -13,13 +15,13 @@
         #region properties
 
         [JsonProperty("billBy")]
-        public int BillBy { get; set; }
+        public BillByType BillBy { get; set; }
 
         [JsonProperty("budget")]
         public int Budget { get; set; }
 
         [JsonProperty("budgetBy")]
-        public int BudgetBy { get; set; }
+        public BudgetByType BudgetBy { get; set; }
 
         [JsonProperty("budgetHours")]
         public int BudgetHours { get; set; }
@@ -67,7 +69,7 @@
         public DateTime? StartDate { get; set; }
 
         [JsonProperty("status")]
-        public int Status { get; set; }
+        public Status Status { get; set; }
 
         [JsonProperty("updatedAt")]
         public DateTime UpdatedAt { get; set; }

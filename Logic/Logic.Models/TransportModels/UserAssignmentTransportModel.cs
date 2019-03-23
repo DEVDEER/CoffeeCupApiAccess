@@ -7,15 +7,12 @@
 
     using Newtonsoft.Json;
 
-    public class TaskTransportModel
+    public class UserAssignmentTransportModel
     {
         #region properties
 
-        [JsonProperty("code")]
-        public string Code { get; set; }
-
-        [JsonProperty("color")]
-        public int Color { get; set; }
+        [JsonProperty("budgetHours")]
+        public int? BudgetHours { get; set; }
 
         [JsonProperty("hourlyRate")]
         public double HourlyRate { get; set; }
@@ -23,17 +20,17 @@
         [JsonProperty("id")]
         public int Id { get; set; }
 
-        [JsonProperty("billable")]
-        public bool IsBillable { get; set; }
+        [JsonProperty("isProjectManager")]
+        public bool IsProjectManager { get; set; }
 
-        [JsonProperty("favorite")]
-        public bool IsFavorite { get; set; }
-
-        [JsonProperty("label")]
-        public string Label { get; set; }
+        [JsonProperty("project")]
+        public int Project { get; set; }
 
         [JsonProperty("status")]
         public Status Status { get; set; }
+
+        [JsonProperty("user")]
+        public int User { get; set; }
 
         #endregion
     }
