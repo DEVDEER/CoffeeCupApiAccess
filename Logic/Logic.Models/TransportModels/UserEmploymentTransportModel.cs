@@ -7,6 +7,9 @@
 
     using Newtonsoft.Json;
 
+    /// <summary>
+    /// Holds information about the employment of a single user.
+    /// </summary>
     public class UserEmploymentTransportModel
     {
         #region properties
@@ -51,7 +54,7 @@
         public double? MonthlyRemuneration { get; set; }
 
         [JsonProperty("user")]
-        public int User { get; set; }
+        public int UserId { get; set; }
 
         [JsonProperty("validFrom")]
         public DateTime? ValidFrom { get; set; }

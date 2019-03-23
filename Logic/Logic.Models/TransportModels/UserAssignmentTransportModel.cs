@@ -24,13 +24,13 @@
         public bool IsProjectManager { get; set; }
 
         [JsonProperty("project")]
-        public int Project { get; set; }
+        public int ProjectId { get; set; }
 
         [JsonProperty("status")]
         public Status Status { get; set; }
 
         [JsonProperty("user")]
-        public int User { get; set; }
+        public int UserId { get; set; }
 
         #endregion
     }

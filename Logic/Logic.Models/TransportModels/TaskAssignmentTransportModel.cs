@@ -24,13 +24,13 @@
         public bool IsBillable { get; set; }
 
         [JsonProperty("project")]
-        public int Project { get; set; }
+        public int ProjectId { get; set; }
 
         [JsonProperty("status")]
         public Status Status { get; set; }
 
         [JsonProperty("task")]
-        public int Task { get; set; }
+        public int TaskId { get; set; }
 
         #endregion
     }
