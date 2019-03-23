@@ -89,7 +89,7 @@
         public string Firstname { get; set; }
 
         [JsonProperty("hourlyRate")]
-        public int? HourlyRate { get; set; }
+        public double? HourlyRate { get; set; }
 
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -98,7 +98,7 @@
         public string IdHashed { get; set; }
 
         [JsonProperty("imageDirectoryURL")]
-        public string ImageDirectoryURL { get; set; }
+        public string ImageDirectoryUrl { get; set; }
 
         [JsonProperty("imageFileToken")]
         public string ImageFileToken { get; set; }
