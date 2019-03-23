@@ -60,7 +60,7 @@
         public DateTime? ValidFrom { get; set; }
 
         [JsonProperty("workHoursType")]
-        public int WorkHoursType { get; set; }
+        public int? WorkHoursType { get; set; }
 
         #endregion
     }
