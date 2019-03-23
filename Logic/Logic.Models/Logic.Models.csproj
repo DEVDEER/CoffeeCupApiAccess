@@ -24,7 +24,8 @@
 - Added meta-data-related models
 - Added meta-data to all response models
 - Added user-employment-related models
-- Added enumerations for known enum types</PackageReleaseNotes>
+- Added enumerations for known enum types
+- Added comments</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
