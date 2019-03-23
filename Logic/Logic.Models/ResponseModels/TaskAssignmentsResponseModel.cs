@@ -15,7 +15,7 @@
         #region properties
 
         /// <summary>
-        /// The list of user information.
+        /// The list of task assignment information.
         /// </summary>
         [JsonProperty("taskAssignments")]
         public TaskAssignmentTransportModel[] TaskAssignments { get; set; }

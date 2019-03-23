@@ -18,7 +18,8 @@
     <PackageIconUrl>https://devdeer.blob.core.windows.net/shared/DVDR_LOGO_64.png</PackageIconUrl>
     <Copyright>Copyright 2019 (c) DEVDEER GmbH</Copyright>
     <PackageReleaseNotes>- Added task-related models
-- Added task-assignment-related models</PackageReleaseNotes>
+- Added task-assignment-related models
+- Added color-related models.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>

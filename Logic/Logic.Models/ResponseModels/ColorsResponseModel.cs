@@ -8,17 +8,17 @@
     using TransportModels;
 
     /// <summary>
-    /// Represents the response of the CoffeeCup API when the tasks endpoint is called.
+    /// Represents the response of the CoffeeCup API when the colors endpoint is called.
     /// </summary>
-    public class TasksResponseModel
+    public class ColorsResponseModel
     {
         #region properties
 
         /// <summary>
-        /// The list of task information.
+        /// The list of colors.
         /// </summary>
-        [JsonProperty("tasks")]
-        public TaskTransportModel[] Tasks { get; set; }
+        [JsonProperty("colors")]
+        public ColorTransportModel[] Colors { get; set; }
 
         #endregion
     }
