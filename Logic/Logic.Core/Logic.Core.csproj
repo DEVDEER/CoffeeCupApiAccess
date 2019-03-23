@@ -26,7 +26,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="devdeer.CoffeeCupModels" Version="0.1.0-beta" />
+    <PackageReference Include="devdeer.CoffeeCupModels" Version="0.1.1-beta" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="2.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>

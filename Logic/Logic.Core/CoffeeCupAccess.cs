@@ -49,64 +49,86 @@
         /// <summary>
         /// Retrieves the list of client information from the CoffeeCup API.
         /// </summary>
-        /// <param name="requestData">The contextual data from the API which is needed by the repository.</param>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of client information.</returns>
-        public async Task<IEnumerable<ClientTransportModel>> GetColorsAsync(RequestDataModel requestData)
+        public async Task<IEnumerable<ClientTransportModel>> GetClientsAsync(RequestDataModel requestData)
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<ColorsResponseModel>(requestData, "colors");
+            var apiResult = await GetCoffeeCupApiResultAsync<ClientsResponseModel>(requestData, "clients");
             return apiResult.Clients.OrderBy(p => p.Name);
         }
 
         /// <summary>
-        /// Retrieves the list of client information from the CoffeeCup API.
+        /// Retrieves the list of color information from the CoffeeCup API.
         /// </summary>
-        /// <param name="requestData">The contextual data from the API which is needed by the repository.</param>
-        /// <returns>The list of client information.</returns>
-        public async Task<IEnumerable<ClientTransportModel>> GetClientsAsync(RequestDataModel requestData)
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
+        /// <returns>The list of color information.</returns>
+        public async Task<IEnumerable<ColorTransportModel>> GetColorsAsync(RequestDataModel requestData)
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<CoffeeCupClientsResponseModel>(requestData, "clients");
-            return apiResult.Clients.OrderBy(p => p.Name);
+            var apiResult = await GetCoffeeCupApiResultAsync<ColorsResponseModel>(requestData, "colors");
+            return apiResult.Colors.OrderBy(p => p.Label);
         }
 
         /// <summary>
         /// Retrieves the list of project information from the CoffeeCup API.
         /// </summary>
-        /// <param name="requestData">The contextual data from the API which is needed by the repository.</param>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of project information.</returns>
         public async Task<IEnumerable<ProjectTransportModel>> GetProjectsAsync(RequestDataModel requestData)
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<CoffeeCupProjectsResponseModel>(requestData, "projects");
+            var apiResult = await GetCoffeeCupApiResultAsync<ProjectsResponseModel>(requestData, "projects");
             return apiResult.Projects.OrderBy(p => p.Name);
+        }
+
+        /// <summary>
+        /// Retrieves the list of task assignments from the CoffeeCup API.
+        /// </summary>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
+        /// <returns>The list of task assignments.</returns>
+        public async Task<IEnumerable<TaskAssignmentTransportModel>> GetTaskAssignmentsAsync(RequestDataModel requestData)
+        {
+            var apiResult = await GetCoffeeCupApiResultAsync<TaskAssignmentsResponseModel>(requestData, "taskAssignments");
+            return apiResult.TaskAssignments;
+        }
+
+        /// <summary>
+        /// Retrieves the list of task information from the CoffeeCup API.
+        /// </summary>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
+        /// <returns>The list of task information.</returns>
+        public async Task<IEnumerable<TaskTransportModel>> GetTasksAsync(RequestDataModel requestData)
+        {
+            var apiResult = await GetCoffeeCupApiResultAsync<TasksResponseModel>(requestData, "tasks");
+            return apiResult.Tasks.OrderBy(p => p.Label);
         }
 
         /// <summary>
         /// Retrieves the list of time entries from the CoffeeCup API.
         /// </summary>
-        /// <param name="requestData">The contextual data from the API which is needed by the repository.</param>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of time entries.</returns>
         public async Task<IEnumerable<TimeEntryTransportModel>> GetTimeEntriesAsync(RequestDataModel requestData)
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<CoffeeCupTimeEntriesResponseModel>(requestData, "timeEntries");
+            var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(requestData, "timeEntries");
             return apiResult.TimeEntries.OrderBy(p => p.Day).ThenBy(p => p.StartTime).ThenBy(p => p.UserId);
         }
 
         /// <summary>
         /// Retrieves the list of time entries from the CoffeeCup API.
         /// </summary>
-        /// <param name="requestData">The contextual data from the API which is needed by the repository.</param>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <param name="day">The day for which to retrieve the entries.</param>
         /// <returns>The list of time entries.</returns>
         public async Task<IEnumerable<TimeEntryTransportModel>> GetTimeEntriesByDayAsync(RequestDataModel requestData, DateTime day)
         {
             var relativeUrl = string.Format(CultureInfo.InvariantCulture, @"timeEntries?where={{""day"":{{"">="": ""{0}""}}}}", day.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
-            var apiResult = await GetCoffeeCupApiResultAsync<CoffeeCupTimeEntriesResponseModel>(requestData, relativeUrl);
+            var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(requestData, relativeUrl);
             return apiResult.TimeEntries.OrderBy(p => p.Day).ThenBy(p => p.StartTime).ThenBy(p => p.UserId);
         }
 
         /// <summary>
         /// Retrieves the list of time entries from the CoffeeCup API.
         /// </summary>
-        /// <param name="requestData">The contextual data from the API which is needed by the repository.</param>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <param name="from">The starting day for which to retrieve the entries.</param>
         /// <param name="to">The ending day for which to retrieve the entries.</param>
         /// <returns>The list of time entries.</returns>
@@ -117,15 +139,37 @@
                 @"timeEntries?where={{""day"":{{"">="": ""{0}""}},{{""<="": ""{1}""}}}}",
                 from.ToString("YYYY-MM-dd", CultureInfo.InvariantCulture),
                 to.ToString("YYYY-MM-dd", CultureInfo.InvariantCulture));
-            var apiResult = await GetCoffeeCupApiResultAsync<CoffeeCupTimeEntriesResponseModel>(requestData, relativeUrl);
+            var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(requestData, relativeUrl);
             return apiResult.TimeEntries.OrderBy(p => p.Day).ThenBy(p => p.StartTime).ThenBy(p => p.UserId);
+        }
+
+        /// <summary>
+        /// Retrieves the list of user assignments from the CoffeeCup API.
+        /// </summary>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
+        /// <returns>The list of user assignments.</returns>
+        public async Task<IEnumerable<UserAssignmentTransportModel>> GetUserAssignmentsAsync(RequestDataModel requestData)
+        {
+            var apiResult = await GetCoffeeCupApiResultAsync<UserAssignmentsResponseModel>(requestData, "userAssignments");
+            return apiResult.UserAssignments;
+        }
+
+        /// <summary>
+        /// Retrieves the list of user employments from the CoffeeCup API.
+        /// </summary>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
+        /// <returns>The list of user employments.</returns>
+        public async Task<IEnumerable<UserEmploymentTransportModel>> GetUserEmploymentsAsync(RequestDataModel requestData)
+        {
+            var apiResult = await GetCoffeeCupApiResultAsync<UserEmploymentsResponseModel>(requestData, "userEmployments");
+            return apiResult.UserEmployments;
         }
 
         /// <summary>
         /// Retrieves the list of complete user information from the CoffeeCup API.
         /// </summary>
         /// <param name="onlyValid">If set to <c>true</c> only currently valid users will be loaded.</param>
-        /// <param name="requestData">The contextual data from the API which is needed by the repository.</param>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of user information.</returns>
         public async Task<IEnumerable<UserTransportModel>> GetUsersAsync(RequestDataModel requestData, bool onlyValid = true)
         {
@@ -138,7 +182,7 @@
         /// Retrieves the list of simplified user information from the CoffeeCup API.
         /// </summary>
         /// <param name="onlyValid">If set to <c>true</c> only currently valid users will be loaded.</param>
-        /// <param name="requestData">The contextual data from the API which is needed by the repository.</param>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of user information.</returns>
         public async Task<IEnumerable<SimpleUserTransportModel>> GetUsersSimpleAsync(RequestDataModel requestData, bool onlyValid = true)
         {
@@ -150,7 +194,7 @@
         /// <summary>
         /// Retrieves the currently valid or an updated bearer token from the CoffeeCup API.
         /// </summary>
-        /// <param name="requestData">The contextual data from the API which is needed by the repository.</param>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The a string of the pattern "Bearer {token}" if the operation succeeded.</returns>
         private async Task<string> GetBearerTokenAsync(RequestDataModel requestData)
         {
@@ -195,7 +239,7 @@
         /// </summary>
         /// <typeparam name="TResult">The type the result is expected to be.</typeparam>
         /// <param name="relativeUrl">The relative URL to the CoffeeCup API without the configured base address.</param>
-        /// <param name="requestData">The contextual data from the API which is needed by the repository.</param>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The result.</returns>
         private async Task<TResult> GetCoffeeCupApiResultAsync<TResult>(RequestDataModel requestData, string relativeUrl)
         {
@@ -240,7 +284,7 @@
         /// <summary>
         /// Retrieves the currently valid or an updated bearer token from the CoffeeCup API.
         /// </summary>
-        /// <param name="requestData">The contextual data from the API which is needed by the repository.</param>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The a string of the pattern "Bearer {token}" if the operation succeeded.</returns>
         private async Task<bool> RefreshBearerTokenAsync(RequestDataModel requestData)
         {
