@@ -3,6 +3,8 @@
     using System;
     using System.Linq;
 
+    using Enumerations;
+
     using Newtonsoft.Json;
 
     public class UserEmploymentTransportModel
@@ -13,7 +15,7 @@
         public double? EmployerContribution { get; set; }
 
         [JsonProperty("employmentType")]
-        public int EmploymentType { get; set; }
+        public EmploymentType EmploymentType { get; set; }
 
         [JsonProperty("hourlyRemuneration")]
         public double? HourlyRemuneration { get; set; }
