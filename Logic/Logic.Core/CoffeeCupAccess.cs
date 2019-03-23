@@ -17,7 +17,7 @@
     /// <summary>
     /// Allows data retrieval from the CoffeeCup API.
     /// </summary>
-    public class Repository
+    public class CoffeeCupAccess
     {
         #region member vars
 
@@ -37,7 +37,7 @@
 
         #region constructors and destructors
 
-        public Repository(HttpClient client)
+        public CoffeeCupAccess(HttpClient client)
         {
             _client = client;
         }
@@ -45,6 +45,17 @@
         #endregion
 
         #region methods
+
+        /// <summary>
+        /// Retrieves the list of client information from the CoffeeCup API.
+        /// </summary>
+        /// <param name="requestData">The contextual data from the API which is needed by the repository.</param>
+        /// <returns>The list of client information.</returns>
+        public async Task<IEnumerable<ClientTransportModel>> GetColorsAsync(RequestDataModel requestData)
+        {
+            var apiResult = await GetCoffeeCupApiResultAsync<ColorsResponseModel>(requestData, "colors");
+            return apiResult.Clients.OrderBy(p => p.Name);
+        }
 
         /// <summary>
         /// Retrieves the list of client information from the CoffeeCup API.

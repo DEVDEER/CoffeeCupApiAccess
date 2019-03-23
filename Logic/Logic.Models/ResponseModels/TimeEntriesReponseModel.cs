@@ -10,7 +10,7 @@
     /// <summary>
     /// Represents the response of the CoffeeCup API when the time-entries-endpoint is called.
     /// </summary>
-    public class CoffeeCupTimeEntriesResponseModel : BaseResponseModel
+    public class TimeEntriesResponseModel : BaseResponseModel
     {
         #region properties
 

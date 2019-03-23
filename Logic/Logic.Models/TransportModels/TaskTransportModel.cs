@@ -7,6 +7,9 @@
 
     using Newtonsoft.Json;
 
+    /// <summary>
+    /// Contains the information about a single task in CoffeeCup.
+    /// </summary>
     public class TaskTransportModel
     {
         #region properties

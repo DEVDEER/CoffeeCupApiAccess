@@ -7,7 +7,7 @@
     <LangVersion>latest</LangVersion>
     <PackageId>devdeer.CoffeeCupModels</PackageId>
     <Title>DEVDEER CoffeeCup API Access Models</Title>
-    <Version>0.1.0-beta</Version>
+    <Version>0.1.1-beta</Version>
     <Authors>DEVDEER</Authors>
     <Product>CoffeeCupApiAccess</Product>
     <Description>Contains the models necessary for the CoffeeCup API Access in NuGet package devdeer.CoffeeCupApiAccess.</Description>
@@ -25,7 +25,8 @@
 - Added meta-data to all response models
 - Added user-employment-related models
 - Added enumerations for known enum types
-- Added comments</PackageReleaseNotes>
+- Added comments
+- Fixed some naming issues</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>

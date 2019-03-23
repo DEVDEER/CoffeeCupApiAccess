@@ -10,7 +10,7 @@
     /// <summary>
     /// Represents the response of the CoffeeCup API when the clients endpoint is called.
     /// </summary>
-    public class CoffeeCupClientsResponseModel : BaseResponseModel
+    public class ClientsResponseModel : BaseResponseModel
     {
         #region properties
 
