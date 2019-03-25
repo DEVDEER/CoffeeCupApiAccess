@@ -47,6 +47,28 @@
         #region methods
 
         /// <summary>
+        /// Retrieves the list of absence information from the CoffeeCup API.
+        /// </summary>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
+        /// <returns>The list of absence information ordered by date and user.</returns>
+        public async Task<IEnumerable<AbsenceTransportModel>> GetAbsencesAsync(RequestDataModel requestData)
+        {
+            var apiResult = await GetCoffeeCupApiResultAsync<AbsencesReponseModel>(requestData, "absences");
+            return apiResult.Absences.OrderByDescending(p => p.StartDate).ThenBy(p => p.UserId);
+        }
+
+        /// <summary>
+        /// Retrieves the list of task information from the CoffeeCup API.
+        /// </summary>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
+        /// <returns>The list of task information ordered by label.</returns>
+        public async Task<IEnumerable<AbsenceTypeTransportModel>> GetAbsenceTypesAsync(RequestDataModel requestData)
+        {
+            var apiResult = await GetCoffeeCupApiResultAsync<AbsenceTypesResponseModel>(requestData, "absenceTypes");
+            return apiResult.AbsenceTypes.OrderBy(p => p.Label);
+        }
+
+        /// <summary>
         /// Retrieves the list of client information from the CoffeeCup API.
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>

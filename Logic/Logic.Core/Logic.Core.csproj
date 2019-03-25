@@ -7,7 +7,7 @@
     <LangVersion>latest</LangVersion>
     <PackageId>devdeer.CoffeeCupApiAccess</PackageId>
     <Title>DEVDEER CoffeeCup Api Access</Title>
-    <Version>0.1.2-beta</Version>
+    <Version>0.1.3-beta</Version>
     <Authors>DEVDEER</Authors>
     <Product>CoffeeCupApiAccess</Product>
     <Description>A .NET standard lib to gain access to the CoffeeCup API.</Description>
@@ -17,14 +17,15 @@
     <PackageTags>.NET CoffeeCup CoffeeCupApp API HTTP</PackageTags>
     <PackageIconUrl>https://devdeer.blob.core.windows.net/shared/DVDR_LOGO_64.png</PackageIconUrl>
     <Copyright>Copyright 2019 (c) DEVDEER GmbH</Copyright>
-    <PackageReleaseNotes>Updated reference to models package after bugfix.</PackageReleaseNotes>
+    <PackageReleaseNotes>- New models package with absence types and absences.
+- Retrieval of absences and absence-types implemented.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="devdeer.CoffeeCupModels" Version="0.1.4-beta" />
+    <PackageReference Include="devdeer.CoffeeCupModels" Version="0.1.6-beta" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="2.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
