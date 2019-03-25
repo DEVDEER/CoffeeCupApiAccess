@@ -10,7 +10,7 @@
     /// <summary>
     /// Represents the response of the CoffeeCup API when the absence-types-endpoint is called.
     /// </summary>
-    public class AbsenceTypesReponseModel : BaseResponseModel
+    public class AbsenceTypesResponseModel : BaseResponseModel
     {
         #region properties
 
