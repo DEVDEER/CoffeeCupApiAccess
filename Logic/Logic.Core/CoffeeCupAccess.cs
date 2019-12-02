@@ -7,12 +7,11 @@
     using System.Linq;
     using System.Net;
     using System.Net.Http;
+    using System.Text.Json;
     using System.Threading.Tasks;
 
     using Models.ResponseModels;
     using Models.TransportModels;
-
-    using Newtonsoft.Json;
 
     /// <summary>
     /// Allows data retrieval from the CoffeeCup API.
@@ -242,7 +241,7 @@
                 {
                     var response = await _client.PostAsync("oauth2/token", body);
                     var result = await response.Content.ReadAsStringAsync();
-                    var tokenResult = JsonConvert.DeserializeObject<AuthorizationResponseModel>(result);
+                    var tokenResult = JsonSerializer.Deserialize<AuthorizationResponseModel>(result);
                     // store token, refresh and invalidation timestamp locally
                     _bearerToken = tokenResult.AccessToken;
                     _refreshToken = tokenResult.RefreshToken;
@@ -293,7 +292,7 @@
                     throw new ApplicationException($"Could not read data from CoffeeCup-API due to response code {response.StatusCode}.");
                 }
                 var result = await response.Content.ReadAsStringAsync();
-                var converted = JsonConvert.DeserializeObject<TResult>(result);
+                var converted = JsonSerializer.Deserialize<TResult>(result);
                 return converted;
             }
             catch (Exception e)
@@ -322,7 +321,7 @@
                 var body = new FormUrlEncodedContent(dict);
                 var response = await _client.PostAsync("oauth2/token", body);
                 var result = await response.Content.ReadAsStringAsync();
-                var tokenResult = JsonConvert.DeserializeObject<AuthorizationResponseModel>(result);
+                var tokenResult = JsonSerializer.Deserialize<AuthorizationResponseModel>(result);
                 // store token, refresh and invalidation timestamp locally
                 _bearerToken = tokenResult.AccessToken;
                 _refreshToken = tokenResult.RefreshToken;

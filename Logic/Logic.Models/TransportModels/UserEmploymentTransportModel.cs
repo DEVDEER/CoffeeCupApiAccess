@@ -5,7 +5,7 @@
 
     using Enumerations;
 
-    using Newtonsoft.Json;
+    using System.Text.Json.Serialization;
 
     /// <summary>
     /// Holds information about the employment of a single user.
@@ -14,52 +14,52 @@
     {
         #region properties
 
-        [JsonProperty("employerContribution")]
+        [JsonPropertyName("employerContribution")]
         public double? EmployerContribution { get; set; }
 
-        [JsonProperty("employmentType")]
+        [JsonPropertyName("employmentType")]
         public EmploymentType EmploymentType { get; set; }
 
-        [JsonProperty("hourlyRemuneration")]
+        [JsonPropertyName("hourlyRemuneration")]
         public double? HourlyRemuneration { get; set; }
 
-        [JsonProperty("hoursFriday")]
+        [JsonPropertyName("hoursFriday")]
         public int? HoursFriday { get; set; }
 
-        [JsonProperty("hoursMonday")]
+        [JsonPropertyName("hoursMonday")]
         public int? HoursMonday { get; set; }
 
-        [JsonProperty("hoursSaturday")]
+        [JsonPropertyName("hoursSaturday")]
         public int? HoursSaturday { get; set; }
 
-        [JsonProperty("hoursSunday")]
+        [JsonPropertyName("hoursSunday")]
         public int? HoursSunday { get; set; }
 
-        [JsonProperty("hoursThursday")]
+        [JsonPropertyName("hoursThursday")]
         public int? HoursThursday { get; set; }
 
-        [JsonProperty("hoursTuesday")]
+        [JsonPropertyName("hoursTuesday")]
         public int? HoursTuesday { get; set; }
 
-        [JsonProperty("hoursWednesday")]
+        [JsonPropertyName("hoursWednesday")]
         public int? HoursWednesday { get; set; }
 
-        [JsonProperty("hoursWeekly")]
+        [JsonPropertyName("hoursWeekly")]
         public int? HoursWeekly { get; set; }
 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonProperty("monthlyRemuneration")]
+        [JsonPropertyName("monthlyRemuneration")]
         public double? MonthlyRemuneration { get; set; }
 
-        [JsonProperty("user")]
+        [JsonPropertyName("user")]
         public int UserId { get; set; }
 
-        [JsonProperty("validFrom")]
+        [JsonPropertyName("validFrom")]
         public DateTime? ValidFrom { get; set; }
 
-        [JsonProperty("workHoursType")]
+        [JsonPropertyName("workHoursType")]
         public int? WorkHoursType { get; set; }
 
         #endregion

@@ -5,7 +5,7 @@
 
     using Enumerations;
 
-    using Newtonsoft.Json;
+    using System.Text.Json.Serialization;
 
     /// <summary>
     /// Contains the information about a single user assignment in CoffeeCup.
@@ -14,25 +14,25 @@
     {
         #region properties
 
-        [JsonProperty("budgetHours")]
+        [JsonPropertyName("budgetHours")]
         public int? BudgetHours { get; set; }
 
-        [JsonProperty("hourlyRate")]
+        [JsonPropertyName("hourlyRate")]
         public double? HourlyRate { get; set; }
 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonProperty("isProjectManager")]
+        [JsonPropertyName("isProjectManager")]
         public bool IsProjectManager { get; set; }
 
-        [JsonProperty("project")]
+        [JsonPropertyName("project")]
         public int ProjectId { get; set; }
 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public Status Status { get; set; }
 
-        [JsonProperty("user")]
+        [JsonPropertyName("user")]
         public int UserId { get; set; }
 
         #endregion

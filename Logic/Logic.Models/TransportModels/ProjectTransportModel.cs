@@ -5,7 +5,7 @@
 
     using Enumerations;
 
-    using Newtonsoft.Json;
+    using System.Text.Json.Serialization;
 
     /// <summary>
     /// Contains the information about a single project in CoffeeCup.
@@ -17,112 +17,112 @@
         /// <summary>
         /// The billing type.
         /// </summary>
-        [JsonProperty("billBy")]
+        [JsonPropertyName("billBy")]
         public BillByType BillBy { get; set; }
 
         /// <summary>
         /// The overall project budget.
         /// </summary>
-        [JsonProperty("budget")]
+        [JsonPropertyName("budget")]
         public double Budget { get; set; }
 
         /// <summary>
         /// The budget-type.
         /// </summary>
-        [JsonProperty("budgetBy")]
+        [JsonPropertyName("budgetBy")]
         public BudgetByType BudgetBy { get; set; }
 
         /// <summary>
         /// The amount of hours available for this project.
         /// </summary>
-        [JsonProperty("budgetHours")]
+        [JsonPropertyName("budgetHours")]
         public int BudgetHours { get; set; }
 
         /// <summary>
         /// The id of the client.
         /// </summary>
-        [JsonProperty("client")]
+        [JsonPropertyName("client")]
         public int? ClientId { get; set; }
 
         /// <summary>
         /// The project code.
         /// </summary>
-        [JsonProperty("code")]
+        [JsonPropertyName("code")]
         public string Code { get; set; }
 
         /// <summary>
         /// The id of the color.
         /// </summary>
-        [JsonProperty("color")]
+        [JsonPropertyName("color")]
         public int ColorId { get; set; }
 
         /// <summary>
         /// The comment for the project.
         /// </summary>
-        [JsonProperty("comment")]
+        [JsonPropertyName("comment")]
         public string Comment { get; set; }
 
         /// <summary>
         /// The date the project was actually finished.
         /// </summary>
-        [JsonProperty("completedAt")]
+        [JsonPropertyName("completedAt")]
         public DateTime? CompletedAt { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("contact")]
+        [JsonPropertyName("contact")]
         public string Contact { get; set; }
 
         /// <summary>
         /// The date when the project was created.
         /// </summary>
-        [JsonProperty("createdAt")]
+        [JsonPropertyName("createdAt")]
         public DateTime CreatedAt { get; set; }
 
         /// <summary>
         /// The planned end-date for the project.
         /// </summary>
-        [JsonProperty("endDate")]
+        [JsonPropertyName("endDate")]
         public DateTime? EndDate { get; set; }
 
         /// <summary>
         /// The hourly rate for this project.
         /// </summary>
-        [JsonProperty("hourlyRate")]
+        [JsonPropertyName("hourlyRate")]
         public double HourlyRate { get; set; }
 
         /// <summary>
         /// The unique id of this project.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
         /// <summary>
         /// The project name.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [JsonProperty("roundingAmount")]
+        [JsonPropertyName("roundingAmount")]
         public double RoundingAmount { get; set; }
 
-        [JsonProperty("roundingType")]
+        [JsonPropertyName("roundingType")]
         public int RoundingType { get; set; }
 
-        [JsonProperty("startDate")]
+        [JsonPropertyName("startDate")]
         public DateTime? StartDate { get; set; }
 
         /// <summary>
         /// The current status of the project.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public Status Status { get; set; }
 
         /// <summary>
         /// The timestamp when the project was updated last.
         /// </summary>
-        [JsonProperty("updatedAt")]
+        [JsonPropertyName("updatedAt")]
         public DateTime UpdatedAt { get; set; }
 
         #endregion

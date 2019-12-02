@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
 
-    using Newtonsoft.Json;
+    using System.Text.Json.Serialization;
 
     using TransportModels;
 
@@ -17,7 +17,7 @@
         /// <summary>
         /// Contains the meta data which are appended to each response by CoffeeCup.
         /// </summary>
-        [JsonProperty("meta")]
+        [JsonPropertyName("meta")]
         public MetaDataTransportModel MetaData { get; set; }
 
         #endregion

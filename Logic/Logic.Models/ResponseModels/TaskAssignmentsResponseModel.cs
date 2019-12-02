@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
 
-    using Newtonsoft.Json;
+    using System.Text.Json.Serialization;
 
     using TransportModels;
 
@@ -17,7 +17,7 @@
         /// <summary>
         /// The list of task assignment information.
         /// </summary>
-        [JsonProperty("taskAssignments")]
+        [JsonPropertyName("taskAssignments")]
         public TaskAssignmentTransportModel[] TaskAssignments { get; set; }
 
         #endregion

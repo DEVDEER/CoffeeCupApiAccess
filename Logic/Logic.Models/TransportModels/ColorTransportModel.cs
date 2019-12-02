@@ -5,7 +5,7 @@
 
     using Enumerations;
 
-    using Newtonsoft.Json;
+    using System.Text.Json.Serialization;
 
     /// <summary>
     /// Contains the information about a single color in CoffeeCup.
@@ -17,25 +17,25 @@
         /// <summary>
         /// The hex value of the color.
         /// </summary>
-        [JsonProperty("hex")]
+        [JsonPropertyName("hex")]
         public string HexValue { get; set; }
 
         /// <summary>
         /// The id of the color entry.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
         /// <summary>
         /// A label describing the color.
         /// </summary>
-        [JsonProperty("label")]
+        [JsonPropertyName("label")]
         public string Label { get; set; }
 
         /// <summary>
         /// The current status of the color.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public Status Status { get; set; }
 
         #endregion

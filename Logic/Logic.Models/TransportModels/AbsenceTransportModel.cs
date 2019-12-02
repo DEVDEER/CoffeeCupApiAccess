@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
 
-    using Newtonsoft.Json;
+    using System.Text.Json.Serialization;
 
     /// <summary>
     /// Contains the information about a single absence in CoffeeCup.
@@ -12,43 +12,43 @@
     {
         #region properties
 
-        [JsonProperty("absenceType")]
+        [JsonPropertyName("absenceType")]
         public int AbsenceTypeId { get; set; }
 
-        [JsonProperty("comment")]
+        [JsonPropertyName("comment")]
         public string Comment { get; set; }
 
-        [JsonProperty("countsAsVacation")]
+        [JsonPropertyName("countsAsVacation")]
         public bool CountsAsVacation { get; set; }
 
-        [JsonProperty("createdAt")]
+        [JsonPropertyName("createdAt")]
         public DateTime CreatedAt { get; set; }
 
-        [JsonProperty("endDate")]
+        [JsonPropertyName("endDate")]
         public DateTime? EndDate { get; set; }
 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonProperty("remunerationActive")]
+        [JsonPropertyName("remunerationActive")]
         public bool IsRemunerationActive { get; set; }
 
-        [JsonProperty("rangeType")]
+        [JsonPropertyName("rangeType")]
         public string RangeType { get; set; }
 
-        [JsonProperty("reducesOvertime")]
+        [JsonPropertyName("reducesOvertime")]
         public bool ReducesOvertime { get; set; }
 
-        [JsonProperty("startDate")]
+        [JsonPropertyName("startDate")]
         public DateTime StartDate { get; set; }
 
-        [JsonProperty("updatedAt")]
+        [JsonPropertyName("updatedAt")]
         public DateTime UpdatedAt { get; set; }
 
-        [JsonProperty("user")]
+        [JsonPropertyName("user")]
         public int UserId { get; set; }
 
-        [JsonProperty("workHoursExpected")]
+        [JsonPropertyName("workHoursExpected")]
         public bool WorkHoursExpected { get; set; }
 
         #endregion

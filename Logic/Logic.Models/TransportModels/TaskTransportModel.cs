@@ -5,7 +5,7 @@
 
     using Enumerations;
 
-    using Newtonsoft.Json;
+    using System.Text.Json.Serialization;
 
     /// <summary>
     /// Contains the information about a single task in CoffeeCup.
@@ -14,28 +14,28 @@
     {
         #region properties
 
-        [JsonProperty("code")]
+        [JsonPropertyName("code")]
         public string Code { get; set; }
 
-        [JsonProperty("color")]
+        [JsonPropertyName("color")]
         public int Color { get; set; }
 
-        [JsonProperty("hourlyRate")]
+        [JsonPropertyName("hourlyRate")]
         public double HourlyRate { get; set; }
 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonProperty("billable")]
+        [JsonPropertyName("billable")]
         public bool IsBillable { get; set; }
 
-        [JsonProperty("favorite")]
+        [JsonPropertyName("favorite")]
         public bool IsFavorite { get; set; }
 
-        [JsonProperty("label")]
+        [JsonPropertyName("label")]
         public string Label { get; set; }
 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public Status Status { get; set; }
 
         #endregion

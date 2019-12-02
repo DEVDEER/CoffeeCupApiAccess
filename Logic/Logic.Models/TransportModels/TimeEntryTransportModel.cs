@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
 
-    using Newtonsoft.Json;
+    using System.Text.Json.Serialization;
 
     /// <summary>
     /// Contains the information about a single time entry in CoffeeCup.
@@ -12,73 +12,73 @@
     {
         #region properties
 
-        [JsonProperty("billedAt")]
+        [JsonPropertyName("billedAt")]
         public DateTime? BilledAt { get; set; }
 
-        [JsonProperty("comment")]
+        [JsonPropertyName("comment")]
         public string Comment { get; set; }
 
-        [JsonProperty("createdAt")]
+        [JsonPropertyName("createdAt")]
         public DateTime CreatedAt { get; set; }
 
-        [JsonProperty("day")]
+        [JsonPropertyName("day")]
         public DateTime Day { get; set; }
 
-        [JsonProperty("duration")]
+        [JsonPropertyName("duration")]
         public int Duration { get; set; }
 
-        [JsonProperty("durationRoundedOverride")]
+        [JsonPropertyName("durationRoundedOverride")]
         public int? DurationRoundedOverride { get; set; }
 
-        [JsonProperty("endTime")]
+        [JsonPropertyName("endTime")]
         public DateTime? EndTime { get; set; }
 
-        [JsonProperty("estimate")]
+        [JsonPropertyName("estimate")]
         public int? Estimate { get; set; }
 
-        [JsonProperty("hourlyRate")]
+        [JsonPropertyName("hourlyRate")]
         public double HourlyRate { get; set; }
 
-        [JsonProperty("hourlyRateInternal")]
+        [JsonPropertyName("hourlyRateInternal")]
         public double? HourlyRateInternal { get; set; }
 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonProperty("billable")]
+        [JsonPropertyName("billable")]
         public bool IsBillable { get; set; }
 
-        [JsonProperty("running")]
+        [JsonPropertyName("running")]
         public bool IsRunning { get; set; }
 
-        [JsonProperty("lockedAt")]
+        [JsonPropertyName("lockedAt")]
         public DateTime? LockedAt { get; set; }
 
-        [JsonProperty("project")]
+        [JsonPropertyName("project")]
         public int? ProjectId { get; set; }
 
-        [JsonProperty("projectSettlement")]
+        [JsonPropertyName("projectSettlement")]
         public object ProjectSettlement { get; set; }
 
-        [JsonProperty("sorting")]
+        [JsonPropertyName("sorting")]
         public int Sorting { get; set; }
 
-        [JsonProperty("spentAt")]
+        [JsonPropertyName("spentAt")]
         public DateTime SpentAt { get; set; }
 
-        [JsonProperty("startTime")]
+        [JsonPropertyName("startTime")]
         public DateTime? StartTime { get; set; }
 
-        [JsonProperty("task")]
+        [JsonPropertyName("task")]
         public int? TaskId { get; set; }
 
-        [JsonProperty("trackingType")]
+        [JsonPropertyName("trackingType")]
         public string TrackingType { get; set; }
 
-        [JsonProperty("updatedAt")]
+        [JsonPropertyName("updatedAt")]
         public DateTime UpdatedAt { get; set; }
 
-        [JsonProperty("user")]
+        [JsonPropertyName("user")]
         public int UserId { get; set; }
 
         #endregion

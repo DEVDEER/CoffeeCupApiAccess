@@ -5,7 +5,7 @@
 
     using Enumerations;
 
-    using Newtonsoft.Json;
+    using System.Text.Json.Serialization;
 
     /// <summary>
     /// Contains the information about a single absence type in CoffeeCup.
@@ -17,63 +17,63 @@
         /// <summary>
         /// Indicates if the absence can be created as a request by an employee.
         /// </summary>
-        [JsonProperty("canBeRequested")]
+        [JsonPropertyName("canBeRequested")]
         public bool CanBeRequested { get; set; }
 
-        [JsonProperty("color")]
+        [JsonPropertyName("color")]
         public int? Color { get; set; }
 
-        [JsonProperty("createdAt")]
+        [JsonPropertyName("createdAt")]
         public DateTime CreatedAt { get; set; }
 
         /// <summary>
         /// Indicates if absence reduces the vacation budget.
         /// </summary>
-        [JsonProperty("defaultCountsAsVacation")]
+        [JsonPropertyName("defaultCountsAsVacation")]
         public bool DefaultCountsAsVacation { get; set; }
 
         /// <summary>
         /// Indicates if absence reduces the overtime of an employee.
         /// </summary>
-        [JsonProperty("defaultReducesOvertime")]
+        [JsonPropertyName("defaultReducesOvertime")]
         public bool DefaultReducesOvertime { get; set; }
 
         /// <summary>
         /// Indicates if remuneration is active for the absence.
         /// </summary>
-        [JsonProperty("defaultRemunerationActive")]
+        [JsonPropertyName("defaultRemunerationActive")]
         public bool DefaultRemunerationActive { get; set; }
 
         /// <summary>
         /// Indicates if the absence expects the employee to work.
         /// </summary>
-        [JsonProperty("defaultWorkHoursExpected")]
+        [JsonPropertyName("defaultWorkHoursExpected")]
         public bool DefaultWorkHoursExpected { get; set; }
 
         /// <summary>
         /// Indicates if absence is visible for other employees.
         /// </summary>
-        [JsonProperty("detailsVisibleToOtherUsers")]
+        [JsonPropertyName("detailsVisibleToOtherUsers")]
         public bool DetailsVisibleToOtherUsers { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty("icon")]
+        [JsonPropertyName("icon")]
         public int Icon { get; set; }
 
         /// <summary>
         /// The unique id of the absence type.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonProperty("label")]
+        [JsonPropertyName("label")]
         public string Label { get; set; }
 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public Status Status { get; set; }
 
-        [JsonProperty("updatedAt")]
+        [JsonPropertyName("updatedAt")]
         public DateTime UpdatedAt { get; set; }
 
         #endregion

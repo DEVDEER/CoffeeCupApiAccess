@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
 
-    using Newtonsoft.Json;
+    using System.Text.Json.Serialization;
 
     using TransportModels;
 
@@ -17,7 +17,7 @@
         /// <summary>
         /// The list of project information.
         /// </summary>
-        [JsonProperty("projects")]
+        [JsonPropertyName("projects")]
         public ProjectTransportModel[] Projects { get; set; }
 
         #endregion

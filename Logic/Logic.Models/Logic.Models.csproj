@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>devdeer.CoffeeCupApiAccess.Logic.Models</RootNamespace>
     <AssemblyName>CoffeeCupApiAccess.Logic.Models</AssemblyName>
     <LangVersion>latest</LangVersion>
     <PackageId>devdeer.CoffeeCupModels</PackageId>
     <Title>DEVDEER CoffeeCup API Access Models</Title>
-    <Version>0.1.6-beta</Version>
+    <Version>0.1.7-beta</Version>
     <Authors>DEVDEER</Authors>
     <Product>CoffeeCupApiAccess</Product>
     <Description>Contains the models necessary for the CoffeeCup API Access in NuGet package devdeer.CoffeeCupApiAccess.</Description>
@@ -17,14 +17,14 @@
     <PackageTags>.NET CoffeeCup CoffeeCupApp API Models</PackageTags>
     <PackageIconUrl>https://devdeer.blob.core.windows.net/shared/DVDR_LOGO_64.png</PackageIconUrl>
     <Copyright>Copyright 2019 (c) DEVDEER GmbH</Copyright>
-    <PackageReleaseNotes>Fixed type in AbsenceTypesResponseModel name.</PackageReleaseNotes>
+    <PackageReleaseNotes>Upgraded to .NET Standard 2.1</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="System.Text.Json" Version="4.6.0" />
   </ItemGroup>
 
 </Project>

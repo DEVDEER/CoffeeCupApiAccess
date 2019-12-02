@@ -5,7 +5,7 @@
 
     using Enumerations;
 
-    using Newtonsoft.Json;
+    using System.Text.Json.Serialization;
 
     /// <summary>
     /// Contains the information about a single user in CoffeeCup.
@@ -36,139 +36,139 @@
 
         #region properties
 
-        [JsonProperty("allowConcurrentTimeEntries")]
+        [JsonPropertyName("allowConcurrentTimeEntries")]
         public bool AllowConcurrentTimeEntries { get; set; }
 
-        [JsonProperty("bicNumber")]
+        [JsonPropertyName("bicNumber")]
         public string BankBicNumber { get; set; }
 
-        [JsonProperty("ibanNumber")]
+        [JsonPropertyName("ibanNumber")]
         public string BankIbanNumber { get; set; }
 
-        [JsonProperty("bankName")]
+        [JsonPropertyName("bankName")]
         public string BankName { get; set; }
 
-        [JsonProperty("beginningOfWeek")]
+        [JsonPropertyName("beginningOfWeek")]
         public string BeginningOfWeek { get; set; }
 
-        [JsonProperty("birthday")]
+        [JsonPropertyName("birthday")]
         public DateTime? Birthday { get; set; }
 
-        [JsonProperty("birthplace")]
+        [JsonPropertyName("birthplace")]
         public string Birthplace { get; set; }
 
-        [JsonProperty("canManageAbsenceRequests")]
+        [JsonPropertyName("canManageAbsenceRequests")]
         public bool CanManageAbsenceRequests { get; set; }
 
-        [JsonProperty("city")]
+        [JsonPropertyName("city")]
         public string City { get; set; }
 
-        [JsonProperty("country")]
+        [JsonPropertyName("country")]
         public string Country { get; set; }
 
-        [JsonProperty("dateFormat")]
+        [JsonPropertyName("dateFormat")]
         public string DateFormat { get; set; }
 
-        [JsonProperty("department")]
+        [JsonPropertyName("department")]
         public string Department { get; set; }
 
-        [JsonProperty("durationFormat")]
+        [JsonPropertyName("durationFormat")]
         public DurationFormat DurationFormat { get; set; }
 
-        [JsonProperty("easybillEnabledAt")]
+        [JsonPropertyName("easybillEnabledAt")]
         public string EasyBillEnabledAt { get; set; }
 
-        [JsonProperty("email")]
+        [JsonPropertyName("email")]
         public string Email { get; set; }
 
-        [JsonProperty("emailHmacHash")]
+        [JsonPropertyName("emailHmacHash")]
         public string EmailHmacHash { get; set; }
 
-        [JsonProperty("faxNumber")]
+        [JsonPropertyName("faxNumber")]
         public string FaxNumber { get; set; }
 
-        [JsonProperty("firstname")]
+        [JsonPropertyName("firstname")]
         public string Firstname { get; set; }
 
-        [JsonProperty("hourlyRate")]
+        [JsonPropertyName("hourlyRate")]
         public double? HourlyRate { get; set; }
 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonProperty("idHashed")]
+        [JsonPropertyName("idHashed")]
         public string IdHashed { get; set; }
 
-        [JsonProperty("imageDirectoryURL")]
+        [JsonPropertyName("imageDirectoryURL")]
         public string ImageDirectoryUrl { get; set; }
 
-        [JsonProperty("imageFileToken")]
+        [JsonPropertyName("imageFileToken")]
         public string ImageFileToken { get; set; }
 
-        [JsonProperty("imageType")]
+        [JsonPropertyName("imageType")]
         public ImageType? ImageType { get; set; }
 
-        [JsonProperty("insuranceName")]
+        [JsonPropertyName("insuranceName")]
         public string InsuranceName { get; set; }
 
-        [JsonProperty("insuranceType")]
+        [JsonPropertyName("insuranceType")]
         public int? InsuranceType { get; set; }
 
-        [JsonProperty("favorite")]
+        [JsonPropertyName("favorite")]
         public bool IsFavorite { get; set; }
 
-        [JsonProperty("jobLabel")]
+        [JsonPropertyName("jobLabel")]
         public string JobLabel { get; set; }
 
-        [JsonProperty("language")]
+        [JsonPropertyName("language")]
         public string Language { get; set; }
 
-        [JsonProperty("lastname")]
+        [JsonPropertyName("lastname")]
         public string Lastname { get; set; }
 
-        [JsonProperty("mobileNumber")]
+        [JsonPropertyName("mobileNumber")]
         public string MobileNumber { get; set; }
 
-        [JsonProperty("passwordStatus")]
+        [JsonPropertyName("passwordStatus")]
         public PasswordStatus PasswordStatus { get; set; }
 
-        [JsonProperty("phoneNumber")]
+        [JsonPropertyName("phoneNumber")]
         public string PhoneNumber { get; set; }
 
-        [JsonProperty("postCode")]
+        [JsonPropertyName("postCode")]
         public string PostCode { get; set; }
 
-        [JsonProperty("privateEmail")]
+        [JsonPropertyName("privateEmail")]
         public string PrivateEmail { get; set; }
 
-        [JsonProperty("role")]
+        [JsonPropertyName("role")]
         public int? Role { get; set; }
 
-        [JsonProperty("showInPlanner")]
+        [JsonPropertyName("showInPlanner")]
         public bool ShowInPlanner { get; set; }
 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public Status Status { get; set; }
 
-        [JsonProperty("street")]
+        [JsonPropertyName("street")]
         public string Street { get; set; }
 
-        [JsonProperty("timeEntryBackgroundColor")]
+        [JsonPropertyName("timeEntryBackgroundColor")]
         public TimeEntryBackgroundColorType TimeEntryBackgroundColor { get; set; }
 
-        [JsonProperty("timeFormat")]
+        [JsonPropertyName("timeFormat")]
         public string TimeFormat { get; set; }
 
-        [JsonProperty("timezone")]
+        [JsonPropertyName("timezone")]
         public string Timezone { get; set; }
 
-        [JsonProperty("uiState")]
+        [JsonPropertyName("uiState")]
         public string UiState { get; set; }
 
-        [JsonProperty("updatedAt")]
+        [JsonPropertyName("updatedAt")]
         public DateTime? UpdatedAt { get; set; }
 
-        [JsonProperty("visibleDaysPerWeek")]
+        [JsonPropertyName("visibleDaysPerWeek")]
         public int? VisibleDaysPerWeek { get; set; }
 
         #endregion
