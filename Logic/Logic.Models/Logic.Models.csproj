@@ -7,7 +7,7 @@
     <LangVersion>latest</LangVersion>
     <PackageId>devdeer.CoffeeCupModels</PackageId>
     <Title>DEVDEER CoffeeCup API Access Models</Title>
-    <Version>0.1.7-beta</Version>
+    <Version>0.1.10-beta</Version>
     <Authors>DEVDEER</Authors>
     <Product>CoffeeCupApiAccess</Product>
     <Description>Contains the models necessary for the CoffeeCup API Access in NuGet package devdeer.CoffeeCupApiAccess.</Description>
@@ -15,6 +15,7 @@
     <PackageProjectUrl>https://github.com/DEVDEERZ/CoffeeCupApiAccess</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DEVDEERZ/CoffeeCupApiAccess</RepositoryUrl>
     <PackageTags>.NET CoffeeCup CoffeeCupApp API Models</PackageTags>
+    <PackageIcon>devdeer.png</PackageIcon>
     <PackageIconUrl>https://devdeer.blob.core.windows.net/shared/DVDR_LOGO_64.png</PackageIconUrl>
     <Copyright>Copyright 2019 (c) DEVDEER GmbH</Copyright>
     <PackageReleaseNotes>Upgraded to .NET Standard 2.1</PackageReleaseNotes>
@@ -24,6 +25,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="../../devdeer.png" Pack="true" PackagePath="\" />
     <PackageReference Include="System.Text.Json" Version="4.6.0" />
   </ItemGroup>
 
