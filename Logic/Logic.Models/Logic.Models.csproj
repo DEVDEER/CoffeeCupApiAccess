@@ -7,7 +7,7 @@
     <LangVersion>latest</LangVersion>
     <PackageId>devdeer.CoffeeCupModels</PackageId>
     <Title>DEVDEER CoffeeCup API Access Models</Title>
-    <Version>0.1.11-beta</Version>
+    <Version>0.1.12-beta</Version>
     <Authors>DEVDEER</Authors>
     <Product>CoffeeCupApiAccess</Product>
     <Description>Contains the models necessary for the CoffeeCup API Access in NuGet package devdeer.CoffeeCupApiAccess.</Description>
