@@ -12,6 +12,7 @@
 
     using Models.ResponseModels;
     using Models.TransportModels;
+    using Models.TransportModels.Analytics;
 
     /// <summary>
     /// Allows data retrieval from the CoffeeCup API.
@@ -90,6 +91,18 @@
         }
 
         /// <summary>
+        /// Retrieves the analytics data for a single project identified by its <paramref name="projectId" />.
+        /// </summary>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
+        /// <param name="projectId">The unique id of the project in CoffeeCup.</param>
+        /// <returns>The project information or <c>null</c> if the project wasn't found.</returns>
+        public async Task<ProjectAnalyticsTransportModel> GetProjectAnalyticsAsync(RequestDataModel requestData, int projectId)
+        {
+            var apiResult = await GetCoffeeCupApiResultAsync<ProjectAnalyticsResponseModel>(requestData, $"analytics/projects?project={projectId}");
+            return apiResult.Project;
+        }
+
+        /// <summary>
         /// Retrieves the list of project information from the CoffeeCup API.
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
@@ -120,6 +133,33 @@
         {
             var apiResult = await GetCoffeeCupApiResultAsync<TasksResponseModel>(requestData, "tasks");
             return apiResult.Tasks.OrderBy(p => p.Label);
+        }
+
+        /// <summary>
+        /// Retrieves a list of entries for time-entry-analytics based on a given time range.
+        /// </summary>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
+        /// <param name="from">The start date for the analysis result.</param>
+        /// <param name="to">The end date for the analysis result.</param>
+        /// <returns>The list of matching analytics results.</returns>
+        /// <exception cref="ArgumentException">Is thrown if from or to are invalid.</exception>
+        public async Task<IEnumerable<TimeEntryAnalyticsTransportModel>> GetTimeEntriesAnalyticsAsync(RequestDataModel requestData, DateTime from, DateTime to)
+        {
+            if (from >= DateTime.Now)
+            {
+                throw new ArgumentException("The from date must be in the past.", nameof(from));
+            }
+            if (from > to)
+            {
+                throw new ArgumentException("The from date must lay before the to date.", nameof(to));
+            }
+            var relativeUrl = string.Format(
+                CultureInfo.InvariantCulture,
+                @"timeEntries?start_date={0}&end_date={1}",
+                from.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
+                to.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
+            var apiResult = await GetCoffeeCupApiResultAsync<AnalyticsTimeEntriesResponseModel>(requestData, relativeUrl);
+            return apiResult.TimeEntries;
         }
 
         /// <summary>
