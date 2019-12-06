@@ -8,6 +8,7 @@
     using System.Net;
     using System.Net.Http;
     using System.Text.Json;
+    using System.Text.Json.Serialization;
     using System.Threading.Tasks;
 
     using Models.ResponseModels;
@@ -22,6 +23,8 @@
         #region member vars
 
         private readonly HttpClient _client;
+
+        private JsonSerializerOptions _options;
 
         #endregion
 
@@ -332,7 +335,7 @@
                     throw new ApplicationException($"Could not read data from CoffeeCup-API due to response code {response.StatusCode}.");
                 }
                 var result = await response.Content.ReadAsStringAsync();
-                var converted = JsonSerializer.Deserialize<TResult>(result);
+                var converted = JsonSerializer.Deserialize<TResult>(result, Options);
                 return converted;
             }
             catch (Exception e)
@@ -372,6 +375,30 @@
             {
                 Trace.TraceError(ex.Message);
                 return false;
+            }
+        }
+
+        #endregion
+
+        #region properties
+
+        /// <summary>
+        /// Retrieves the lazy initialized options for JSON converting.
+        /// </summary>
+        private JsonSerializerOptions Options
+        {
+            get
+            {
+                if (_options == null)
+                {
+                    _options = new JsonSerializerOptions
+                    {
+                        IgnoreNullValues = true
+                    };
+                    _options.Converters.Add(new JsonDateTimeConverter());
+                    _options.Converters.Add(new JsonStringEnumConverter());
+                }
+                return _options;
             }
         }
 
