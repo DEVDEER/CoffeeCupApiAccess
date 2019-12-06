@@ -26,7 +26,7 @@
 
   <ItemGroup>
     <None Include="../../devdeer.png" Pack="true" PackagePath="\" />
-    <PackageReference Include="devdeer.CoffeeCupModels" Version="0.1.12-beta" />
+    <PackageReference Include="devdeer.CoffeeCupModels" Version="0.1.13-beta" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.0" />
     <PackageReference Include="System.Text.Json" Version="4.7.0" />
   </ItemGroup>
