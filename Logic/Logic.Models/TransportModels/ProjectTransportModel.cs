@@ -69,10 +69,10 @@
         public DateTime? CompletedAt { get; set; }
 
         /// <summary>
-        /// 
+        /// TODO
         /// </summary>
         [JsonPropertyName("contact")]
-        public string Contact { get; set; }
+        public int? Contact { get; set; }
 
         /// <summary>
         /// The date when the project was created.
