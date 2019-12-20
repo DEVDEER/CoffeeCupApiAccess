@@ -61,7 +61,7 @@
         public object ProjectSettlement { get; set; }
 
         [JsonPropertyName("sorting")]
-        public int Sorting { get; set; }
+        public int? Sorting { get; set; }
 
         [JsonPropertyName("spentAt")]
         public DateTime SpentAt { get; set; }
