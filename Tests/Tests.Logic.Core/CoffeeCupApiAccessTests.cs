@@ -31,6 +31,17 @@
         }
 
         /// <summary>
+        /// Simple null-check for <see cref="CoffeeCupAccess.GetUserEmploymentsAsync" />.
+        /// </summary>
+        [Test]
+        public async Task GetUserEmployments_RetrievesNotNull()
+        {
+            Assert.IsNotNull(ApiAccess, "Logic not initialized");
+            var result = await ApiAccess.GetUserEmploymentsAsync(RequestModel);
+            Assert.IsNotNull(result);
+        }
+
+        /// <summary>
         /// Reads the values from the settings.json file if it exists.
         /// </summary>
         [OneTimeSetUp]

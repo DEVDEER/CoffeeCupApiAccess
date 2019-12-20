@@ -7,7 +7,7 @@
     <LangVersion>latest</LangVersion>
     <PackageId>devdeer.CoffeeCupApiAccess</PackageId>
     <Title>DEVDEER CoffeeCup Api Access</Title>
-    <Version>0.1.12-beta</Version>
+    <Version>0.1.13-beta</Version>
     <Authors>DEVDEER</Authors>
     <Product>CoffeeCupApiAccess</Product>
     <Description>A .NET standard lib to gain access to the CoffeeCup API.</Description>
@@ -18,7 +18,7 @@
     <PackageIcon>devdeer.png</PackageIcon>
     <PackageIconUrl>https://devdeer.blob.core.windows.net/shared/DVDR_LOGO_64.png</PackageIconUrl>
     <Copyright>Copyright 2019 (c) DEVDEER GmbH</Copyright>
-    <PackageReleaseNotes>Removed parameterless ctor for RequestDataModel.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added custom JSON converters for dealing with null values on int.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>

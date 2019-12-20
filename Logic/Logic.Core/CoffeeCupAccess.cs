@@ -321,6 +321,10 @@
             {
                 throw new InvalidOperationException("Could not retrieve bearer token.");
             }
+            if (_client.DefaultRequestHeaders.Contains("Authorization"))
+            {
+                _client.DefaultRequestHeaders.Remove("Authorization");
+            }
             _client.DefaultRequestHeaders.Add("Authorization", bearer);
             try
             {
@@ -397,6 +401,8 @@
                     };
                     _options.Converters.Add(new JsonDateTimeConverter());
                     _options.Converters.Add(new JsonStringEnumConverter());
+                    _options.Converters.Add(new JsonIntConverter());
+                    _options.Converters.Add(new JsonNullableIntConverter());
                 }
                 return _options;
             }
