@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic.Models", "Logic\Logic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EBEBA2B7-7392-4FF1-AA81-765D13C7FA80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Logic.Core", "Tests\Tests.Logic.Core\Tests.Logic.Core.csproj", "{03FCF12D-92AB-4AB7-A41A-BE01E5BCEE0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Logic.Core", "Tests\Tests.Logic.Core\Tests.Logic.Core.csproj", "{03FCF12D-92AB-4AB7-A41A-BE01E5BCEE0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".dependabot", ".dependabot", "{ACCBD00B-590E-433E-A8BF-91F7934FFDA7}"
+	ProjectSection(SolutionItems) = preProject
+		.dependabot\config.yml = .dependabot\config.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
