@@ -1,8 +1,8 @@
 version: 1
-update-configs:
-- package-manager: 'dotnet:nuget'
+update_configs:
+- package_manager: 'dotnet:nuget'
   directory: '/Logic/Logic.Models'
-  update-schedule: 'live'
-- package-manager: 'dotnet:nuget'
+  update_schedule: 'live'
+- package_manager: 'dotnet:nuget'
   directory: '/Logic.Logic.Core'
-  update-schedule: 'live'
+  update_schedule: 'live'
