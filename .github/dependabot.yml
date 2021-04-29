@@ -1,0 +1,14 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/Logic/Logic.Models/Logic.Models.csproj"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/Logic.Logic.Core/Logic.Core.csproj"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
