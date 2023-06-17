@@ -1,52 +1,12 @@
-# devdeer.Libraries.Abstractions
+# devdeer.CoffeeCupApiAccess
 
 ## Disclaimer
 
-If you want to use this package you should be aware of some principles and practices we at DEVDEER use. So be aware that this is not backed by a public repository. The purpose here is to give out customers easy access to our logic. Nevertheless you are welcome to use this lib if it provides any advantages.
+We are using this package in our own projects. So it is not only a playground but also production code. We are trying to keep the quality high but we are also humans. So if you find any issues please report them or even better: fix them and create a pull request.
 
 ## Summary
 
-This package contains base types and helper classes for all other [DEVDEER Nuget Packages](https://www.nuget.org/packages?q=devdeer). It is usually referenced by those packages so you don't need to put an explicit reference in your projects.
-
-The default namespace is `devdeer.Libraries.Abstractions`. Types are organized in sub-namespaces (see below).
-
-## Sub-namespaces
-
-### Attributes
-
-We are collecting .NET attributes here which are normally used by sub-packages.
-
-### BaseTypes
-
-We are building our apps in a multi-layered architecture. This means that we have components providing business logic and other components taking care of data access (usuallly to relational databases). The logic-components are calling the repositories. This enables us to easilly switch database backends if we need to.
-
-The types in this namespace are abstract base types for those classes. They already contain some basic logic but are not related to any specific technology. Have a look at [devdeer.Libraries.Repository.EntityFrameworkCore](https://www.nuget.org/packages/devdeer.Libraries.Repository.EntityFrameworkCore) to see how these types are used. Also [devdeer.Libraries.AspNetCore.RestApi](https://www.nuget.org/packages/devdeer.Libraries.AspNetCore.RestApi) might be interesting here because the `BaseController` is using these types here indirectly.
-
-Also see the `Interfaces` section below.
-
-### Enums
-
-We are collecting all Enumerations needed by this or sub-projects in this namespace.
-
-### Exceptions
-
-Contains types inheriting from `System.Exception`.
-
-### Extensions
-
-All of the types here are extension types for other types.
-
-### Helpers
-
-For some issues like reflection, expressions and other things we often need logic which is collected in this namespace.
-
-### Interfaces
-
-Contains all base interfaces. Most of them are used to enable IoC for the stuff in `BaseTypes` namespace.
-
-### Models
-
-Some of our `BaseTypes` and `Interfaces` are expecting or returning certain POCO`s which are defined here. Some other types might be added too.
+This package contains logic to access CoffeeCup API with .NET 6 onwards.
 
 ## About DEVDEER
 

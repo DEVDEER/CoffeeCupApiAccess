@@ -8,6 +8,7 @@
     using System.Threading.Tasks;
 
     using CoffeeCupApiAccess.Logic.Core;
+    using CoffeeCupApiAccess.Logic.Models.Settings;
 
     using NUnit.Framework;
 
@@ -53,21 +54,15 @@
             }
             // the file was found -> map the data
             var json = File.ReadAllText("settings.json");
-            var document = JsonDocument.Parse(json);
-            var version = document.RootElement.GetProperty("CoffeeCupApiVersion").GetString();
-            var clientId = document.RootElement.GetProperty("CoffeeCupApiClientId").GetString();
-            var clientSecret = document.RootElement.GetProperty("CoffeeCupApiClientSecret").GetString();
-            var user = document.RootElement.GetProperty("CoffeeCupUsername").GetString();
-            var pass = document.RootElement.GetProperty("CoffeeCupPassword").GetString();
-            var origin = document.RootElement.GetProperty("CoffeeCupOrigin").GetString();
+            var document = JsonSerializer.Deserialize<SettingsModel>(json);
             // generate a new request model
-            RequestModel = new RequestDataModel(version, clientId, clientSecret, user, pass);
+            RequestModel = new RequestDataModel(document);
             // initialize HTTP client and logic
             var client = new HttpClient
             {
                 BaseAddress = new Uri("https://api.coffeecupapp.com")
             };
-            client.DefaultRequestHeaders.Add("Origin", origin);
+            client.DefaultRequestHeaders.Add("Origin", document.CoffeeCupOrigin);
             ApiAccess = new CoffeeCupAccess(client);
         }
 

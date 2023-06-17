@@ -3,6 +3,8 @@
     using System;
     using System.Linq;
 
+    using Models.Settings;
+
     /// <summary>
     /// Transports meta-data for requests to the repository.
     /// </summary>
@@ -13,21 +15,10 @@
         /// <summary>
         /// Default constructor taking values for all readonly properties.
         /// </summary>
-        /// <param name="coffeeCupApiVersion">The API version in the pattern "v{number}" of CoffeeCup.</param>
-        /// <param name="coffeeCupApiClientId">The client id configured on CoffeeCup-side.</param>
-        /// <param name="coffeeCupApiClientSecret">The secret matching the <paramref name="coffeeCupApiClientId" />.</param>
-        /// <param name="coffeeCupUsername">
-        /// The email-address (username) of the CoffeeCup user in which name the request should
-        /// happen.
-        /// </param>
-        /// <param name="coffeeCupPassword">The password of the <paramref name="coffeeCupUsername" />.</param>
-        public RequestDataModel(string coffeeCupApiVersion, string coffeeCupApiClientId, string coffeeCupApiClientSecret, string coffeeCupUsername, string coffeeCupPassword)
+        /// <param name="settings">The settings to use.</param>
+        public RequestDataModel(SettingsModel settings)
         {
-            CoffeeCupApiVersion = coffeeCupApiVersion;
-            CoffeeCupApiClientId = coffeeCupApiClientId;
-            CoffeeCupApiClientSecret = coffeeCupApiClientSecret;
-            CoffeeCupUsername = coffeeCupUsername;
-            CoffeeCupPassword = coffeeCupPassword;
+            Settings = settings;
         }
 
         #endregion
@@ -37,27 +28,29 @@
         /// <summary>
         /// The client id configured on CoffeeCup-side.
         /// </summary>
-        public string CoffeeCupApiClientId { get; }
+        public string CoffeeCupApiClientId => Settings.ClientId;
 
         /// <summary>
         /// The secret matching the <see cref="CoffeeCupApiClientId" />.
         /// </summary>
-        public string CoffeeCupApiClientSecret { get; }
+        public string CoffeeCupApiClientSecret => Settings.ClientSecret;
 
         /// <summary>
         /// The API version in the pattern "v{number}" of CoffeeCup.
         /// </summary>
-        public string CoffeeCupApiVersion { get; }
+        public string CoffeeCupApiVersion => Settings.CoffeeCupApiVersion;
 
         /// <summary>
         /// The password of the <see cref="CoffeeCupUsername" />.
         /// </summary>
-        public string CoffeeCupPassword { get; }
+        public string CoffeeCupPassword => Settings.CoffeeCupPassword;
 
         /// <summary>
         /// The email-address (username) of the CoffeeCup user in which name the request should happen.
         /// </summary>
-        public string CoffeeCupUsername { get; }
+        public string CoffeeCupUsername => Settings.CoffeeCupUsername;
+
+        private SettingsModel Settings { get; }
 
         #endregion
     }

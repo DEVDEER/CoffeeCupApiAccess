@@ -7,6 +7,7 @@
     using System.Linq;
     using System.Net;
     using System.Net.Http;
+    using System.Security.Authentication;
     using System.Text.Json;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
@@ -24,7 +25,7 @@
 
         private readonly HttpClient _client;
 
-        private JsonSerializerOptions _options;
+        private JsonSerializerOptions? _options;
 
         #endregion
 
@@ -32,14 +33,18 @@
 
         private static DateTime? _barerTokenInvalidationTime;
 
-        private static string _bearerToken;
+        private static string? _bearerToken;
 
-        private static string _refreshToken;
+        private static string? _refreshToken;
 
         #endregion
 
         #region constructors and destructors
 
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        /// <param name="client">The HTTP client to use.</param>
         public CoffeeCupAccess(HttpClient client)
         {
             _client = client;
@@ -54,10 +59,11 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of absence information ordered by date and user.</returns>
-        public async Task<IEnumerable<AbsenceTransportModel>> GetAbsencesAsync(RequestDataModel requestData)
+        public async Task<IEnumerable<AbsenceTransportModel>?> GetAbsencesAsync(RequestDataModel requestData)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<AbsencesReponseModel>(requestData, "absences");
-            return apiResult.Absences.OrderByDescending(p => p.StartDate).ThenBy(p => p.UserId);
+            return apiResult?.Absences.OrderByDescending(p => p.StartDate)
+                .ThenBy(p => p.UserId);
         }
 
         /// <summary>
@@ -65,10 +71,10 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of task information ordered by label.</returns>
-        public async Task<IEnumerable<AbsenceTypeTransportModel>> GetAbsenceTypesAsync(RequestDataModel requestData)
+        public async Task<IEnumerable<AbsenceTypeTransportModel>?> GetAbsenceTypesAsync(RequestDataModel requestData)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<AbsenceTypesResponseModel>(requestData, "absenceTypes");
-            return apiResult.AbsenceTypes.OrderBy(p => p.Label);
+            return apiResult?.AbsenceTypes.OrderBy(p => p.Label);
         }
 
         /// <summary>
@@ -76,10 +82,10 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of client information.</returns>
-        public async Task<IEnumerable<ClientTransportModel>> GetClientsAsync(RequestDataModel requestData)
+        public async Task<IEnumerable<ClientTransportModel>?> GetClientsAsync(RequestDataModel requestData)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<ClientsResponseModel>(requestData, "clients");
-            return apiResult.Clients.OrderBy(p => p.Name);
+            return apiResult?.Clients.OrderBy(p => p.Name);
         }
 
         /// <summary>
@@ -87,10 +93,10 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of color information.</returns>
-        public async Task<IEnumerable<ColorTransportModel>> GetColorsAsync(RequestDataModel requestData)
+        public async Task<IEnumerable<ColorTransportModel>?> GetColorsAsync(RequestDataModel requestData)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<ColorsResponseModel>(requestData, "colors");
-            return apiResult.Colors.OrderBy(p => p.Label);
+            return apiResult?.Colors.OrderBy(p => p.Label);
         }
 
         /// <summary>
@@ -99,10 +105,14 @@
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <param name="projectId">The unique id of the project in CoffeeCup.</param>
         /// <returns>The project information or <c>null</c> if the project wasn't found.</returns>
-        public async Task<ProjectAnalyticsTransportModel> GetProjectAnalyticsAsync(RequestDataModel requestData, int projectId)
+        public async Task<ProjectAnalyticsTransportModel?> GetProjectAnalyticsAsync(
+            RequestDataModel requestData,
+            int projectId)
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<ProjectAnalyticsResponseModel>(requestData, $"analytics/projects?project={projectId}");
-            return apiResult.Project;
+            var apiResult = await GetCoffeeCupApiResultAsync<ProjectAnalyticsResponseModel>(
+                requestData,
+                $"analytics/projects?project={projectId}");
+            return apiResult?.Project;
         }
 
         /// <summary>
@@ -110,10 +120,10 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of project information.</returns>
-        public async Task<IEnumerable<ProjectTransportModel>> GetProjectsAsync(RequestDataModel requestData)
+        public async Task<IEnumerable<ProjectTransportModel>?> GetProjectsAsync(RequestDataModel requestData)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<ProjectsResponseModel>(requestData, "projects");
-            return apiResult.Projects.OrderBy(p => p.Name);
+            return apiResult?.Projects.OrderBy(p => p.Name);
         }
 
         /// <summary>
@@ -121,10 +131,12 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of task assignments.</returns>
-        public async Task<IEnumerable<TaskAssignmentTransportModel>> GetTaskAssignmentsAsync(RequestDataModel requestData)
+        public async Task<IEnumerable<TaskAssignmentTransportModel>?> GetTaskAssignmentsAsync(
+            RequestDataModel requestData)
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<TaskAssignmentsResponseModel>(requestData, "taskAssignments");
-            return apiResult.TaskAssignments;
+            var apiResult =
+                await GetCoffeeCupApiResultAsync<TaskAssignmentsResponseModel>(requestData, "taskAssignments");
+            return apiResult?.TaskAssignments;
         }
 
         /// <summary>
@@ -132,10 +144,10 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of task information.</returns>
-        public async Task<IEnumerable<TaskTransportModel>> GetTasksAsync(RequestDataModel requestData)
+        public async Task<IEnumerable<TaskTransportModel>?> GetTasksAsync(RequestDataModel requestData)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<TasksResponseModel>(requestData, "tasks");
-            return apiResult.Tasks.OrderBy(p => p.Label);
+            return apiResult?.Tasks.OrderBy(p => p.Label);
         }
 
         /// <summary>
@@ -146,7 +158,10 @@
         /// <param name="to">The end date for the analysis result.</param>
         /// <returns>The list of matching analytics results.</returns>
         /// <exception cref="ArgumentException">Is thrown if from or to are invalid.</exception>
-        public async Task<IEnumerable<TimeEntryAnalyticsTransportModel>> GetTimeEntriesAnalyticsAsync(RequestDataModel requestData, DateTime from, DateTime to)
+        public async Task<IEnumerable<TimeEntryAnalyticsTransportModel>?> GetTimeEntriesAnalyticsAsync(
+            RequestDataModel requestData,
+            DateTime from,
+            DateTime to)
         {
             if (from >= DateTime.Now)
             {
@@ -161,8 +176,9 @@
                 @"timeEntries?start_date={0}&end_date={1}",
                 from.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
                 to.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
-            var apiResult = await GetCoffeeCupApiResultAsync<AnalyticsTimeEntriesResponseModel>(requestData, relativeUrl);
-            return apiResult.TimeEntries;
+            var apiResult =
+                await GetCoffeeCupApiResultAsync<AnalyticsTimeEntriesResponseModel>(requestData, relativeUrl);
+            return apiResult?.TimeEntries;
         }
 
         /// <summary>
@@ -170,10 +186,12 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of time entries.</returns>
-        public async Task<IEnumerable<TimeEntryTransportModel>> GetTimeEntriesAsync(RequestDataModel requestData)
+        public async Task<IEnumerable<TimeEntryTransportModel>?> GetTimeEntriesAsync(RequestDataModel requestData)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(requestData, "timeEntries");
-            return apiResult.TimeEntries.OrderBy(p => p.Day).ThenBy(p => p.StartTime).ThenBy(p => p.UserId);
+            return apiResult?.TimeEntries.OrderBy(p => p.Day)
+                .ThenBy(p => p.StartTime)
+                .ThenBy(p => p.UserId);
         }
 
         /// <summary>
@@ -182,11 +200,18 @@
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <param name="day">The day for which to retrieve the entries.</param>
         /// <returns>The list of time entries.</returns>
-        public async Task<IEnumerable<TimeEntryTransportModel>> GetTimeEntriesByDayAsync(RequestDataModel requestData, DateTime day)
+        public async Task<IEnumerable<TimeEntryTransportModel>?> GetTimeEntriesByDayAsync(
+            RequestDataModel requestData,
+            DateTime day)
         {
-            var relativeUrl = string.Format(CultureInfo.InvariantCulture, @"timeEntries?where={{""day"":{{"">="": ""{0}""}}}}", day.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
+            var relativeUrl = string.Format(
+                CultureInfo.InvariantCulture,
+                @"timeEntries?where={{""day"":{{"">="": ""{0}""}}}}",
+                day.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(requestData, relativeUrl);
-            return apiResult.TimeEntries.OrderBy(p => p.Day).ThenBy(p => p.StartTime).ThenBy(p => p.UserId);
+            return apiResult?.TimeEntries.OrderBy(p => p.Day)
+                .ThenBy(p => p.StartTime)
+                .ThenBy(p => p.UserId);
         }
 
         /// <summary>
@@ -196,7 +221,10 @@
         /// <param name="from">The starting day for which to retrieve the entries.</param>
         /// <param name="to">The ending day for which to retrieve the entries.</param>
         /// <returns>The list of time entries.</returns>
-        public async Task<IEnumerable<TimeEntryTransportModel>> GetTimeEntriesByDayRangeAsync(RequestDataModel requestData, DateTime from, DateTime to)
+        public async Task<IEnumerable<TimeEntryTransportModel>?> GetTimeEntriesByDayRangeAsync(
+            RequestDataModel requestData,
+            DateTime from,
+            DateTime to)
         {
             var relativeUrl = string.Format(
                 CultureInfo.InvariantCulture,
@@ -204,7 +232,9 @@
                 from.ToString("YYYY-MM-dd", CultureInfo.InvariantCulture),
                 to.ToString("YYYY-MM-dd", CultureInfo.InvariantCulture));
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(requestData, relativeUrl);
-            return apiResult.TimeEntries.OrderBy(p => p.Day).ThenBy(p => p.StartTime).ThenBy(p => p.UserId);
+            return apiResult?.TimeEntries.OrderBy(p => p.Day)
+                .ThenBy(p => p.StartTime)
+                .ThenBy(p => p.UserId);
         }
 
         /// <summary>
@@ -212,10 +242,12 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of user assignments.</returns>
-        public async Task<IEnumerable<UserAssignmentTransportModel>> GetUserAssignmentsAsync(RequestDataModel requestData)
+        public async Task<IEnumerable<UserAssignmentTransportModel>?> GetUserAssignmentsAsync(
+            RequestDataModel requestData)
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<UserAssignmentsResponseModel>(requestData, "userAssignments");
-            return apiResult.UserAssignments;
+            var apiResult =
+                await GetCoffeeCupApiResultAsync<UserAssignmentsResponseModel>(requestData, "userAssignments");
+            return apiResult?.UserAssignments;
         }
 
         /// <summary>
@@ -223,10 +255,12 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of user employments.</returns>
-        public async Task<IEnumerable<UserEmploymentTransportModel>> GetUserEmploymentsAsync(RequestDataModel requestData)
+        public async Task<IEnumerable<UserEmploymentTransportModel>?> GetUserEmploymentsAsync(
+            RequestDataModel requestData)
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<UserEmploymentsResponseModel>(requestData, "userEmployments");
-            return apiResult.UserEmployments;
+            var apiResult =
+                await GetCoffeeCupApiResultAsync<UserEmploymentsResponseModel>(requestData, "userEmployments");
+            return apiResult?.UserEmployments;
         }
 
         /// <summary>
@@ -235,11 +269,14 @@
         /// <param name="onlyValid">If set to <c>true</c> only currently valid users will be loaded.</param>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of user information.</returns>
-        public async Task<IEnumerable<UserTransportModel>> GetUsersAsync(RequestDataModel requestData, bool onlyValid = true)
+        public async Task<IEnumerable<UserTransportModel>?> GetUsersAsync(
+            RequestDataModel requestData,
+            bool onlyValid = true)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<UsersResponseModel>(requestData, "users");
-            var result = apiResult.Users.OrderBy(u => u.Lastname).ThenBy(u => u.Firstname);
-            return onlyValid ? result.Where(r => r.ShowInPlanner) : result;
+            var result = apiResult?.Users.OrderBy(u => u.Lastname)
+                .ThenBy(u => u.Firstname);
+            return onlyValid ? result?.Where(r => r.ShowInPlanner) : result;
         }
 
         /// <summary>
@@ -248,11 +285,15 @@
         /// <param name="onlyValid">If set to <c>true</c> only currently valid users will be loaded.</param>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of user information.</returns>
-        public async Task<IEnumerable<SimpleUserTransportModel>> GetUsersSimpleAsync(RequestDataModel requestData, bool onlyValid = true)
+        public async Task<IEnumerable<SimpleUserTransportModel>?> GetUsersSimpleAsync(
+            RequestDataModel requestData,
+            bool onlyValid = true)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<UsersResponseModel>(requestData, "users");
-            var result = apiResult.Users.Select(u => u.ToSimple()).OrderBy(u => u.Lastname).ThenBy(u => u.Firstname);
-            return onlyValid ? result.Where(r => r.IsCurrentlyValid) : result;
+            var result = apiResult?.Users.Select(u => u.ToSimple())
+                .OrderBy(u => u.Lastname)
+                .ThenBy(u => u.Firstname);
+            return onlyValid ? result?.Where(r => r.IsCurrentlyValid) : result;
         }
 
         /// <summary>
@@ -268,9 +309,10 @@
             {
                 throw new InvalidOperationException("Invalid CoffeeCup credentials.");
             }
-            if (_bearerToken == null || _barerTokenInvalidationTime.HasValue && _barerTokenInvalidationTime.Value < DateTime.Now)
+            if (_bearerToken == null
+                || (_barerTokenInvalidationTime.HasValue && _barerTokenInvalidationTime.Value < DateTime.Now))
             {
-                // Either we've never received a bearer token or it is invalidated now.                                
+                // Either we've never received a bearer token or it is invalidated now.
                 var dict = new Dictionary<string, string>
                 {
                     { "grant_type", "password" },
@@ -285,6 +327,10 @@
                     var response = await _client.PostAsync("oauth2/token", body);
                     var result = await response.Content.ReadAsStringAsync();
                     var tokenResult = JsonSerializer.Deserialize<AuthorizationResponseModel>(result);
+                    if (tokenResult == null)
+                    {
+                        throw new AuthenticationException("Could not receive token from CoffeeCup.");
+                    }
                     // store token, refresh and invalidation timestamp locally
                     _bearerToken = tokenResult.AccessToken;
                     _refreshToken = tokenResult.RefreshToken;
@@ -305,7 +351,9 @@
         /// <param name="relativeUrl">The relative URL to the CoffeeCup API without the configured base address.</param>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The result.</returns>
-        private async Task<TResult> GetCoffeeCupApiResultAsync<TResult>(RequestDataModel requestData, string relativeUrl)
+        private async Task<TResult?> GetCoffeeCupApiResultAsync<TResult>(
+            RequestDataModel requestData,
+            string relativeUrl)
         {
             if (_barerTokenInvalidationTime <= DateTime.Now)
             {
@@ -334,9 +382,11 @@
                     // something went wrong
                     if (response.StatusCode == HttpStatusCode.Unauthorized)
                     {
-                        throw new ApplicationException("Could not read data from CoffeeCup-API due to authorization issues.");
+                        throw new ApplicationException(
+                            "Could not read data from CoffeeCup-API due to authorization issues.");
                     }
-                    throw new ApplicationException($"Could not read data from CoffeeCup-API due to response code {response.StatusCode}.");
+                    throw new ApplicationException(
+                        $"Could not read data from CoffeeCup-API due to response code {response.StatusCode}.");
                 }
                 var result = await response.Content.ReadAsStringAsync();
                 var converted = JsonSerializer.Deserialize<TResult>(result, Options);
@@ -356,6 +406,10 @@
         /// <returns>The a string of the pattern "Bearer {token}" if the operation succeeded.</returns>
         private async Task<bool> RefreshBearerTokenAsync(RequestDataModel requestData)
         {
+            if (string.IsNullOrEmpty(_refreshToken))
+            {
+                throw new InvalidOperationException("No refresh token defined.");
+            }
             try
             {
                 var dict = new Dictionary<string, string>
@@ -369,6 +423,10 @@
                 var response = await _client.PostAsync("oauth2/token", body);
                 var result = await response.Content.ReadAsStringAsync();
                 var tokenResult = JsonSerializer.Deserialize<AuthorizationResponseModel>(result);
+                if (tokenResult == null)
+                {
+                    throw new AuthenticationException("Could not receive token from CoffeeCup.");
+                }
                 // store token, refresh and invalidation timestamp locally
                 _bearerToken = tokenResult.AccessToken;
                 _refreshToken = tokenResult.RefreshToken;
@@ -393,17 +451,18 @@
         {
             get
             {
-                if (_options == null)
+                if (_options != null)
                 {
-                    _options = new JsonSerializerOptions
-                    {
-                        IgnoreNullValues = true
-                    };
-                    _options.Converters.Add(new JsonDateTimeConverter());
-                    _options.Converters.Add(new JsonStringEnumConverter());
-                    _options.Converters.Add(new JsonIntConverter());
-                    _options.Converters.Add(new JsonNullableIntConverter());
+                    return _options;
                 }
+                _options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                _options.Converters.Add(new JsonDateTimeConverter());
+                _options.Converters.Add(new JsonStringEnumConverter());
+                _options.Converters.Add(new JsonIntConverter());
+                _options.Converters.Add(new JsonNullableIntConverter());
                 return _options;
             }
         }

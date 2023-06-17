@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <RootNamespace>devdeer.CoffeeCupApiAccess.Logic.Core</RootNamespace>
         <AssemblyName>CoffeeCupApiAccess.Logic.Core</AssemblyName>
         <LangVersion>latest</LangVersion>
@@ -21,7 +21,7 @@
         <RepositoryUrl>https://github.com/DEVDEERZ/CoffeeCupApiAccess</RepositoryUrl>
         <PackageTags>.NET CoffeeCup CoffeeCupApp API HTTP</PackageTags>
         <PackageIcon>icon.png</PackageIcon>
-        <PackageIconUrl>https://devdeer.blob.core.windows.net/shared/DVDR_LOGO_64.png</PackageIconUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <Copyright>Copyright 2019-2023 DEVDEER GmbH</Copyright>
         <PackageReleaseNotes>
             Complete rework including:
@@ -32,14 +32,14 @@
             - Rework of API access
         </PackageReleaseNotes>
         <RepositoryType>git</RepositoryType>
-        <LicenseUrl>https://licenses.nuget.org/Apache-2.0</LicenseUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="devdeer.CoffeeCupModels" Version="0.1.14-beta" />
+        <PackageReference Include="devdeer.CoffeeCupModels" Version="2.0.2-beta" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
-        <PackageReference Include="System.Text.Json" Version="7.0.3" />
     </ItemGroup>
     <ItemGroup>
         <None Include="README.md" Pack="true" PackagePath="\" />

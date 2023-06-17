@@ -21,9 +21,8 @@
         <PackageTags>.NET CoffeeCup CoffeeCupApp API Models</PackageTags>
         <PackageIcon>icon.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageIconUrl>https://devdeer.blob.core.windows.net/shared/DVDR_LOGO_64.png</PackageIconUrl>
         <Copyright>2019-2023 DEVDEER GmbH</Copyright>
-        <Version>2.0.0-beta</Version>
+        <Version>2.0.2-beta</Version>
         <PackageReleaseNotes>
             Complete rework including:
             - Shift to .NET 7.0
@@ -32,14 +31,12 @@
             - New license
             - Rework of API access
         </PackageReleaseNotes>
-        <RepositoryType>git</RepositoryType>
-        <LicenseUrl>https://licenses.nuget.org/Apache-2.0</LicenseUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <RepositoryType>git</RepositoryType>
         <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     </PropertyGroup>
-    <ItemGroup>
-        <PackageReference Include="System.Text.Json" Version="7.0.3" />
-    </ItemGroup>
     <ItemGroup>
         <None Include="README.md" Pack="true" PackagePath="\" />
         <None Remove="bin\Debug\net7.0\/CoffeeCupApiAccess.Logic.Models.xml" />
