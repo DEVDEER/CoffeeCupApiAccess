@@ -42,6 +42,7 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="README.md" Pack="true" PackagePath="\" />
+        <None Remove="bin\Debug\net7.0\/CoffeeCupApiAccess.Logic.Models.xml" />
         <None Include="$(OutputPath)/$(AssemblyName).xml" Pack="true" PackagePath="\" />
         <None Include="icon.png">
             <Pack>True</Pack>
