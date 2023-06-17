@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <RootNamespace>devdeer.CoffeeCupApiAccess.Logic.Models</RootNamespace>
+        <AssemblyName>CoffeeCupApiAccess.Logic.Models</AssemblyName>
+        <LangVersion>latest</LangVersion>
+        <PackageId>devdeer.CoffeeCupModels</PackageId>
+        <Title>DEVDEER CoffeeCup API Access Models</Title>
+        <Nullable>Enable</Nullable>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+        <Authors>DEVDEER</Authors>
+        <Product>CoffeeCupApiAccess</Product>
+        <Description>Contains the models necessary for the CoffeeCup API Access in NuGet package devdeer.CoffeeCupApiAccess.</Description>
+        <Summary>Contains the models necessary for the CoffeeCup API Access in NuGet package devdeer.CoffeeCupApiAccess.</Summary>
+        <PackageProjectUrl>https://github.com/DEVDEERZ/CoffeeCupApiAccess</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/DEVDEERZ/CoffeeCupApiAccess</RepositoryUrl>
+        <PackageTags>.NET CoffeeCup CoffeeCupApp API Models</PackageTags>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIconUrl>https://devdeer.blob.core.windows.net/shared/DVDR_LOGO_64.png</PackageIconUrl>
+        <Copyright>2019-2023 DEVDEER GmbH</Copyright>
+        <Version>2.0.0-beta</Version>
+        <PackageReleaseNotes>
+            Complete rework including:
+            - Shift to .NET 7.0
+            - Nuget updates
+            - New branding
+            - New license
+            - Rework of API access
+        </PackageReleaseNotes>
+        <RepositoryType>git</RepositoryType>
+        <LicenseUrl>https://licenses.nuget.org/Apache-2.0</LicenseUrl>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="System.Text.Json" Version="7.0.3" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+        <None Include="$(OutputPath)/$(AssemblyName).xml" Pack="true" PackagePath="\" />
+        <None Include="icon.png">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+    </ItemGroup>
+</Project>

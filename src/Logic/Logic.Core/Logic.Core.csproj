@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <RootNamespace>devdeer.CoffeeCupApiAccess.Logic.Core</RootNamespace>
+        <AssemblyName>CoffeeCupApiAccess.Logic.Core</AssemblyName>
+        <LangVersion>latest</LangVersion>
+        <PackageId>devdeer.CoffeeCupApiAccess</PackageId>
+        <Title>DEVDEER CoffeeCup Api Access</Title>
+        <Version>0.2.0-beta</Version>
+        <Nullable>Enable</Nullable>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+        <Authors>DEVDEER</Authors>
+        <Product>CoffeeCupApiAccess</Product>
+        <Description>A .NET library to gain access to the CoffeeCup API.</Description>
+        <Summary>A .NET library to gain access to the CoffeeCup API.</Summary>
+        <PackageProjectUrl>https://github.com/DEVDEERZ/CoffeeCupApiAccess</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/DEVDEERZ/CoffeeCupApiAccess</RepositoryUrl>
+        <PackageTags>.NET CoffeeCup CoffeeCupApp API HTTP</PackageTags>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageIconUrl>https://devdeer.blob.core.windows.net/shared/DVDR_LOGO_64.png</PackageIconUrl>
+        <Copyright>Copyright 2019-2023 DEVDEER GmbH</Copyright>
+        <PackageReleaseNotes>
+            Complete rework including:
+            - Shift to .NET 7.0
+            - Nuget updates
+            - New branding
+            - New license
+            - Rework of API access
+        </PackageReleaseNotes>
+        <RepositoryType>git</RepositoryType>
+        <LicenseUrl>https://licenses.nuget.org/Apache-2.0</LicenseUrl>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="devdeer.CoffeeCupModels" Version="0.1.14-beta" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+        <PackageReference Include="System.Text.Json" Version="7.0.3" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+        <None Remove="bin\Debug\net7.0\/CoffeeCupApiAccess.Logic.Core.xml" />
+        <None Include="$(OutputPath)/$(AssemblyName).xml" Pack="true" PackagePath="\" />
+        <None Include="icon.png">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+    </ItemGroup>
+</Project>
