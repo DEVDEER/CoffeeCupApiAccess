@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
 
-    using Models.Settings;
+    using Models.Options;
 
     /// <summary>
     /// Transports meta-data for requests to the repository.
@@ -15,10 +15,10 @@
         /// <summary>
         /// Default constructor taking values for all readonly properties.
         /// </summary>
-        /// <param name="settings">The settings to use.</param>
-        public RequestDataModel(SettingsModel settings)
+        /// <param name="options">The options to use.</param>
+        public RequestDataModel(ApiOptions options)
         {
-            Settings = settings;
+            Options = options;
         }
 
         #endregion
@@ -28,29 +28,32 @@
         /// <summary>
         /// The client id configured on CoffeeCup-side.
         /// </summary>
-        public string CoffeeCupApiClientId => Settings.ClientId;
+        public string CoffeeCupApiClientId => Options.ClientId;
 
         /// <summary>
         /// The secret matching the <see cref="CoffeeCupApiClientId" />.
         /// </summary>
-        public string CoffeeCupApiClientSecret => Settings.ClientSecret;
+        public string CoffeeCupApiClientSecret => Options.ClientSecret;
 
         /// <summary>
         /// The API version in the pattern "v{number}" of CoffeeCup.
         /// </summary>
-        public string CoffeeCupApiVersion => Settings.CoffeeCupApiVersion;
+        public string CoffeeCupApiVersion => Options.ApiVersion;
 
         /// <summary>
         /// The password of the <see cref="CoffeeCupUsername" />.
         /// </summary>
-        public string CoffeeCupPassword => Settings.CoffeeCupPassword;
+        public string CoffeeCupPassword => Options.Password;
 
         /// <summary>
         /// The email-address (username) of the CoffeeCup user in which name the request should happen.
         /// </summary>
-        public string CoffeeCupUsername => Settings.CoffeeCupUsername;
+        public string CoffeeCupUsername => Options.Username;
 
-        private SettingsModel Settings { get; }
+        /// <summary>
+        /// The injected configuration options.
+        /// </summary>
+        private ApiOptions Options { get; }
 
         #endregion
     }

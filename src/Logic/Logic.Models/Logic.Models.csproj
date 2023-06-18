@@ -22,14 +22,15 @@
         <PackageIcon>icon.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Copyright>2019-2023 DEVDEER GmbH</Copyright>
-        <Version>2.0.2-beta</Version>
+        <Version>2.1.1</Version>
         <PackageReleaseNotes>
             Complete rework including:
-            - Shift to .NET 7.0
+            - Shift to .NET 6.0
             - Nuget updates
             - New branding
             - New license
             - Rework of API access
+            - Namespace changes
         </PackageReleaseNotes>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>

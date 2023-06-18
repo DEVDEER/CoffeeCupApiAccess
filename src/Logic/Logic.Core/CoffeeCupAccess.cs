@@ -12,7 +12,7 @@
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
 
-    using Models.ResponseModels;
+    using Models.Responses;
     using Models.TransportModels;
     using Models.TransportModels.Analytics;
 
