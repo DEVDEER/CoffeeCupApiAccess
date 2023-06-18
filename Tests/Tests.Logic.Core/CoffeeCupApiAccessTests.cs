@@ -62,7 +62,7 @@
             {
                 BaseAddress = new Uri("https://api.coffeecupapp.com")
             };
-            client.DefaultRequestHeaders.Add("Origin", document.CoffeeCupOrigin);
+            client.DefaultRequestHeaders.Add("Origin", document.Origin);
             ApiAccess = new CoffeeCupAccess(client);
         }
 
