@@ -21,19 +21,14 @@
         public DateTime? To { get; set; }
 
         /// <summary>
-        /// A flag indicating if relations should be resolved.
+        /// Optional ids of projects for which to filter.
         /// </summary>
-        public bool ResolveRelations { get; set; }
+        public int[]? ProjectFilterIds { get; set; }
 
         /// <summary>
-        /// Optional id of a client for which to filter.
+        /// Optional ids of users for which to filter.
         /// </summary>
-        public int? ClientFilterId { get; set; }
-
-        /// <summary>
-        /// Optional id of a project for which to filter.
-        /// </summary>
-        public int? ProjectFilterId { get; set; }
+        public int[]? UserIds { get; set; }
 
         #endregion
     }

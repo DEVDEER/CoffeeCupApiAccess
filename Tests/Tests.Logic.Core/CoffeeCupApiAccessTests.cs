@@ -8,7 +8,8 @@
     using System.Threading.Tasks;
 
     using CoffeeCupApiAccess.Logic.Core;
-    using CoffeeCupApiAccess.Logic.Models.Settings;
+    using CoffeeCupApiAccess.Logic.Models.Options;
+    using CoffeeCupApiAccess.Logic.Models.Requests;
 
     using NUnit.Framework;
 
@@ -43,6 +44,49 @@
         }
 
         /// <summary>
+        /// Checks the data of <see cref="CoffeeCupAccess.GetTimeEntriesAsync(RequestDataModel,TimeEntriesRequest)" />.
+        /// </summary>
+        [Test]
+        public async Task GetTimeEntries_Filtered()
+        {
+            Assert.IsNotNull(ApiAccess, "Logic not initialized");
+            var minDate = new DateTime(2023, 6, 1);
+            var maxDate = new DateTime(2023, 6, 30);
+            var filter = new TimeEntriesRequest
+            {
+                From = minDate,
+                To = maxDate,
+                ProjectFilterIds = new [] { 15639 }
+            };
+            var result = await ApiAccess.GetTimeEntriesAsync(RequestModel, filter);
+            Assert.IsNotNull(result);
+            Assert.That(result.Count(), Is.GreaterThan(0));
+            Assert.That(result.All(r => r.ProjectId == 15639), Is.True);
+            var minResultDate = result.Min(r => r.Day);
+            var maxResultDate = result.Max(r => r.Day);
+            Assert.That(minDate, Is.LessThanOrEqualTo(minResultDate));
+            Assert.That(maxDate, Is.GreaterThanOrEqualTo(maxResultDate));
+        }
+
+        /// <summary>
+        /// Checks the data of <see cref="CoffeeCupAccess.GetTimeEntriesByDayRangeAsync" />.
+        /// </summary>
+        [Test]
+        public async Task GetTimeEntries_ByDayRange()
+        {
+            Assert.IsNotNull(ApiAccess, "Logic not initialized");
+            var minDate = new DateTime(2023, 6, 1);
+            var maxDate = new DateTime(2023, 6, 30);
+            var result = await ApiAccess.GetTimeEntriesByDayRangeAsync(RequestModel, minDate, maxDate);
+            Assert.IsNotNull(result);
+            Assert.That(result.Count(), Is.GreaterThan(0));
+            var minResultDate = result.Min(r => r.Day);
+            var maxResultDate = result.Max(r => r.Day);
+            Assert.That(minDate, Is.LessThanOrEqualTo(minResultDate));
+            Assert.That(maxDate, Is.GreaterThanOrEqualTo(maxResultDate));
+        }
+
+        /// <summary>
         /// Reads the values from the settings.json file if it exists.
         /// </summary>
         [OneTimeSetUp]
@@ -54,7 +98,7 @@
             }
             // the file was found -> map the data
             var json = File.ReadAllText("settings.json");
-            var document = JsonSerializer.Deserialize<SettingsModel>(json);
+            var document = JsonSerializer.Deserialize<ApiOptions>(json);
             // generate a new request model
             RequestModel = new RequestDataModel(document);
             // initialize HTTP client and logic
