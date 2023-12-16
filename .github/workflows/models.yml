@@ -21,15 +21,13 @@ jobs:
           global-json-file: global.json
           cache: true
           cache-dependency-path: src/Logic/Logic.Models/packages.lock.json
-      - run: dotnet restore .
-        env:
-          working-directory: "src/Logic/Logic.Models"
+      - run: dotnet restore src/Logic/Logic.Models/Logic.Models.csproj
       - name: Build
-        run: dotnet build .
+        run: dotnet build src/Logic/Logic.Models/Logic.Models.csproj
         env:
           working-directory: "src/Logic/Logic.Models"
       - name: Package
-        run: dotnet pack -c Release
+        run: dotnet pack src/Logic/Logic.Models/Logic.Models.csproj   -c Release
         env:
           working-directory: "src/Logic/Logic.Models"
   publish:
