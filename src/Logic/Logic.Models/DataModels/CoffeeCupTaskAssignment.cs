@@ -9,7 +9,7 @@
     /// <summary>
     /// Contains the information about a single task assignment in CoffeeCup.
     /// </summary>
-    public class TaskAssignment
+    public class CoffeeCupTaskAssignment
     {
         #region properties
 

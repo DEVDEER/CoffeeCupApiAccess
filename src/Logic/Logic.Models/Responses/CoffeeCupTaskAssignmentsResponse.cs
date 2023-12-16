@@ -9,7 +9,7 @@
     /// <summary>
     /// Represents the response of the CoffeeCup API when the task assignments endpoint is called.
     /// </summary>
-    public class TaskAssignmentsResponse : BaseResponse
+    public class CoffeeCupTaskAssignmentsResponse : BaseResponse
     {
         #region properties
 
@@ -17,7 +17,7 @@
         /// The list of task assignment information.
         /// </summary>
         [JsonPropertyName("taskAssignments")]
-        public TaskAssignment[] TaskAssignments { get; set; } = default!;
+        public CoffeeCupTaskAssignment[] TaskAssignments { get; set; } = default!;
 
         #endregion
     }

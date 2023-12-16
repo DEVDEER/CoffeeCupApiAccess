@@ -1,14 +1,14 @@
 <Project>
-    <PropertyGroup>
-        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-        <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
-    </PropertyGroup>
-    <ItemGroup>
-        <PackageVersion Include="devdeer.CoffeeCupModels" Version="3.0.0" />
-        <PackageVersion Include="Microsoft.Extensions.Http" Version="8.0.0" />
-        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
-        <PackageVersion Include="NUnit" Version="4.0.1" />
-        <PackageVersion Include="NUnit3TestAdapter" Version="4.5.0" />
-    </ItemGroup>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="devdeer.CoffeeCupModels" Version="3.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageVersion Include="NUnit" Version="4.0.1" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="4.5.0" />
+  </ItemGroup>
 </Project>
