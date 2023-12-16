@@ -8,10 +8,12 @@
     using System.Net;
     using System.Net.Http;
     using System.Security.Authentication;
+    using System.Text;
     using System.Text.Json;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
 
+    using Models.Requests;
     using Models.Responses;
     using Models.TransportModels;
     using Models.TransportModels.Analytics;
@@ -151,6 +153,56 @@
         }
 
         /// <summary>
+        /// Retrieves a list of entries for time entries based on a given <paramref name="filter"/>.
+        /// </summary>
+        /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
+        /// <param name="filter">The options for filtering the request.</param>
+        /// <returns>The list of matching results.</returns>
+        /// <exception cref="ArgumentException">Is thrown if from or to are invalid.</exception>
+        public async Task<IEnumerable<TimeEntryTransportModel>?> GetTimeEntriesAsync(
+            RequestDataModel requestData,
+            TimeEntriesRequest filter)
+        {
+            var urlBuilder = new StringBuilder("timeEntries");
+            var postProjectFilter = false;
+            if ((filter is { From: null, To: null}) && (filter.ProjectFilterIds?.Any() ?? false))
+            {
+                urlBuilder.AppendFormat(
+                    CultureInfo.InvariantCulture,
+                    "?project[]={0}",
+                    filter.ProjectFilterIds.First());
+            }
+            else if (filter is { From: not null, To: not null })
+            {
+                if (filter.From.Value >= DateTime.Now)
+                {
+                    throw new ArgumentException("The from date must be in the past.", nameof(filter.From));
+                }
+                if (filter.From.Value > filter.To.Value)
+                {
+                    throw new ArgumentException("The from date must lay before the to date.", nameof(filter.To));
+                }
+                urlBuilder.AppendFormat(
+                    CultureInfo.InvariantCulture,
+                    @"?where={{""day"":{{"">="": ""{0}"", ""<="": ""{1}""}}}}",
+                    filter.From.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
+                    filter.To.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
+                postProjectFilter = (filter.ProjectFilterIds?.Any() ?? false);
+            }
+            var apiResult =
+                await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(requestData, urlBuilder.ToString());
+            var items = apiResult?.TimeEntries.AsQueryable();
+            if (items != null && filter != null)
+            {
+                if (postProjectFilter && (filter.ProjectFilterIds?.Any() ?? false))
+                {
+                    items = items.Where(i => i.ProjectId != null && i.ProjectId == filter.ProjectFilterIds.First());
+                }
+            }
+            return items;
+        }
+
+        /// <summary>
         /// Retrieves a list of entries for time-entry-analytics based on a given time range.
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
@@ -228,9 +280,10 @@
         {
             var relativeUrl = string.Format(
                 CultureInfo.InvariantCulture,
-                @"timeEntries?where={{""day"":{{"">="": ""{0}""}},{{""<="": ""{1}""}}}}",
-                from.ToString("YYYY-MM-dd", CultureInfo.InvariantCulture),
-                to.ToString("YYYY-MM-dd", CultureInfo.InvariantCulture));
+                @"timeEntries?where={{""day"":{{"">="": ""{0}"", ""<="": ""{1}""}}}}",
+                from.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
+                to.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
+            Trace.WriteLine(relativeUrl);
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(requestData, relativeUrl);
             return apiResult?.TimeEntries.OrderBy(p => p.Day)
                 .ThenBy(p => p.StartTime)

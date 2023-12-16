@@ -6,7 +6,7 @@
         <LangVersion>latest</LangVersion>
         <PackageId>devdeer.CoffeeCupApiAccess</PackageId>
         <Title>DEVDEER CoffeeCup Api Access</Title>
-        <Version>1.0.0</Version>
+        <Version>1.1.0</Version>
         <Nullable>Enable</Nullable>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -24,12 +24,8 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Copyright>Copyright 2019-2023 DEVDEER GmbH</Copyright>
         <PackageReleaseNotes>
-            Complete rework including:
-            - Shift to .NET 6.0
-            - Nuget updates
-            - New branding
-            - New license
-            - Rework of API access
+            - New endpoint allows querying of time entries with a filter model.
+            - Fixes for existing time range endpoints.
         </PackageReleaseNotes>
         <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -38,7 +34,7 @@
         <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="devdeer.CoffeeCupModels" Version="2.1.1" />
+        <PackageReference Include="devdeer.CoffeeCupModels" Version="2.2.1" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
     </ItemGroup>
     <ItemGroup>

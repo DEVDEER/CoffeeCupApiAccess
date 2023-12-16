@@ -22,15 +22,9 @@
         <PackageIcon>icon.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Copyright>2019-2023 DEVDEER GmbH</Copyright>
-        <Version>2.1.1</Version>
+        <Version>2.2.1</Version>
         <PackageReleaseNotes>
-            Complete rework including:
-            - Shift to .NET 6.0
-            - Nuget updates
-            - New branding
-            - New license
-            - Rework of API access
-            - Namespace changes
+            - Added `TimeEntriesRequest` to the models.
         </PackageReleaseNotes>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
