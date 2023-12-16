@@ -1,0 +1,59 @@
+name: 'CoffeeCup CI/CD'
+
+on:
+    pull_request:
+        branches: [main]
+    workflow_dispatch:
+
+concurrency:
+    group: ${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+
+            - uses: actions/cache@v1
+              id: yarn-cache
+              with:
+                  path: ./web
+                  key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-yarn-
+            - name: Yarn Restore
+              if: steps.yarn-cache.outputs.cache-hit != 'true'
+              working-directory: ./web
+              run: |
+                  yarn global add gatsby-cli
+                  yarn install
+            - name: Yarn Build
+              working-directory: ./web
+              run: |
+                  yarn run build
+            - name: 'Azure CLI login'
+              uses: azure/login@v1
+              with:
+                  creds: ${{ secrets.AZURE_CREDENTIALS }}
+            - name: 'Azure ACR login'
+              uses: azure/docker-login@v1
+              with:
+                  login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+                  username: ${{ secrets.REGISTRY_USERNAME }}
+                  password: ${{ secrets.REGISTRY_PASSWORD }}
+            - name: 'Get date tag'
+              id: date
+              run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+            - name: 'Docker build and push'
+              working-directory: ./web
+              run: |
+                  docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/codingfreaks:${{ steps.date.outputs.date }}.${{ github.run_id }}
+                  docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/codingfreaks:${{ steps.date.outputs.date }}.${{ github.run_id }}
+            - name: 'Change Web Image'
+              uses: azure/CLI@v1
+              with:
+                  azcliversion: 2.53.1
+                  inlineScript: |
+                      az account show
+                      az webapp config container set -n web-dd-codingfreaks -g rg-codingfreaks --docker-custom-image-name ${{ secrets.REGISTRY_LOGIN_SERVER }}/codingfreaks:${{ steps.date.outputs.date }}.${{ github.run_id }}
