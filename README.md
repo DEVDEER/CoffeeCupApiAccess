@@ -4,16 +4,17 @@ A .NET core library for accessing the CoffeeCup API.
 # Summary
 We are using [CoffeeCupApp](https://www.coffeecupapp.com) for time tracking on our projects.
 
-This library supports in accessing the public [API](https://dev.coffeecupapp.com/) which is documented at [Github](https://github.com/coffeecupapp/api).
+This library supports in accessing the public [API](https://dev.coffeecupapp.com/) which is developed at [Github](https://github.com/coffeecupapp/api).
 
-# Version informations
+We are currently targetting version 1.0.2 of the CoffeeCup API.
 
-We are currently in alpha-Mode. This means, there are a lot of limitations:
+# Known limitations
 
 - We only support `GET` requests currently.
 - The C#-documentation is not complete yet.
 - No unit tests where written to this point.
 - The retry-policy in the repository is poor (to say the least).
+- Most of the optional parameters for queries are not supported.
 
 # Contribution
 

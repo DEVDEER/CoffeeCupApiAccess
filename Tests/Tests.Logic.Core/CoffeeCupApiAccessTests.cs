@@ -27,9 +27,9 @@
         [Test]
         public async Task GetTimeEntries_RetrievesNotNull()
         {
-            Assert.IsNotNull(ApiAccess, "Logic not initialized");
+            Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
             var result = await ApiAccess.GetTimeEntriesAsync(RequestModel);
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
         }
 
         /// <summary>
@@ -38,9 +38,9 @@
         [Test]
         public async Task GetUserEmployments_RetrievesNotNull()
         {
-            Assert.IsNotNull(ApiAccess, "Logic not initialized");
+            Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
             var result = await ApiAccess.GetUserEmploymentsAsync(RequestModel);
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
         }
 
         /// <summary>
@@ -49,7 +49,7 @@
         [Test]
         public async Task GetTimeEntries_Filtered()
         {
-            Assert.IsNotNull(ApiAccess, "Logic not initialized");
+            Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
             var minDate = new DateTime(2023, 6, 1);
             var maxDate = new DateTime(2023, 6, 30);
             var filter = new TimeEntriesRequest
@@ -59,7 +59,7 @@
                 ProjectFilterIds = new [] { 15639 }
             };
             var result = await ApiAccess.GetTimeEntriesAsync(RequestModel, filter);
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
             Assert.That(result.Count(), Is.GreaterThan(0));
             Assert.That(result.All(r => r.ProjectId == 15639), Is.True);
             var minResultDate = result.Min(r => r.Day);
@@ -74,11 +74,11 @@
         [Test]
         public async Task GetTimeEntries_ByDayRange()
         {
-            Assert.IsNotNull(ApiAccess, "Logic not initialized");
+            Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
             var minDate = new DateTime(2023, 6, 1);
             var maxDate = new DateTime(2023, 6, 30);
             var result = await ApiAccess.GetTimeEntriesByDayRangeAsync(RequestModel, minDate, maxDate);
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
             Assert.That(result.Count(), Is.GreaterThan(0));
             var minResultDate = result.Min(r => r.Day);
             var maxResultDate = result.Max(r => r.Day);

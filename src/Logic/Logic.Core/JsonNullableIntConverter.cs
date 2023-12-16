@@ -18,7 +18,6 @@
         {
             var ok = reader.TryGetInt32(out var tmp);
             return ok ? tmp : default(int?);
-            
         }
 
         /// <inheritdoc />
