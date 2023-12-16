@@ -30,6 +30,7 @@
         /// <typeparam name="T">The type of the required service.</typeparam>
         /// <returns>The resolved instance.</returns>
         public static T GetRequiredService<T>()
+            where T : notnull
         {
             return Provider.GetRequiredService<T>();
         }
@@ -56,7 +57,7 @@
                                 }
                                 // the file was found -> map the data
                                 var json = File.ReadAllText("appsettings.json");
-                                var document = JsonSerializer.Deserialize<ApiOptions>(json);
+                                var document = JsonSerializer.Deserialize<ApiOptions>(json) ?? throw new ApplicationException("Could not deserialize settings.");
                                 a.ApiVersion = document.ApiVersion;
                                 a.ClientId = document.ClientId;
                                 a.ClientSecret = document.ClientSecret;

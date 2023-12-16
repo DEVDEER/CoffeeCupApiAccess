@@ -23,14 +23,15 @@
         <PackageIcon>icon.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Copyright>2019-2023 DEVDEER GmbH</Copyright>
-        <Version>3.0.1</Version>
+        <Version>3.0.3</Version>
         <PackageReleaseNotes>
             - Switched to .NET 6 + 8
             - Updated readme.
             - BREAKING:
-              - Namespace TransportModels was renamed to DataModels.
-              - Suffix "TransportModel" was removed from types.
+              - Namespace s was renamed to DataModels.
+              - Suffix "" was removed from types.
               - Suffix "Model" was removed from types.
+              - TaskTransportModel is now CoffeeCupTask
         </PackageReleaseNotes>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>

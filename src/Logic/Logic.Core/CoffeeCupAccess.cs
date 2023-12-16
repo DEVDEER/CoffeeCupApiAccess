@@ -21,7 +21,7 @@
     using Models.Responses;
     using Models.DataModels;
     using Models.DataModels.Analytics;
-
+    
     /// <summary>
     /// Allows data retrieval from the CoffeeCup API.
     /// </summary>
@@ -72,9 +72,9 @@
         /// Retrieves the list of absence information from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of absence information ordered by date and user.</returns>
-        public async Task<AbsenceTransportModel[]?> GetAbsencesAsync()
+        public async Task<Absence[]?> GetAbsencesAsync()
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<AbsencesReponseModel>("absences");
+            var apiResult = await GetCoffeeCupApiResultAsync<AbsencesReponse>("absences");
             return apiResult?.Absences.OrderByDescending(p => p.StartDate)
                 .ThenBy(p => p.UserId)
                 .ToArray();
@@ -84,9 +84,9 @@
         /// Retrieves the list of task information from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of task information ordered by label.</returns>
-        public async Task<AbsenceTypeTransportModel[]?> GetAbsenceTypesAsync()
+        public async Task<AbsenceType[]?> GetAbsenceTypesAsync()
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<AbsenceTypesResponseModel>("absenceTypes");
+            var apiResult = await GetCoffeeCupApiResultAsync<AbsenceTypesResponse>("absenceTypes");
             return apiResult?.AbsenceTypes.OrderBy(p => p.Label)
                 .ToArray();
         }
@@ -95,7 +95,7 @@
         /// Retrieves the list of client information from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of client information.</returns>
-        public async Task<ClientTransportModel[]?> GetClientsAsync()
+        public async Task<Client[]?> GetClientsAsync()
         {
             var apiResult = await GetCoffeeCupApiResultAsync<ClientsResponseModel>("clients");
             return apiResult?.Clients.OrderBy(p => p.Name)
@@ -106,9 +106,9 @@
         /// Retrieves the list of color information from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of color information.</returns>
-        public async Task<ColorTransportModel[]?> GetColorsAsync()
+        public async Task<Color[]?> GetColorsAsync()
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<ColorsResponseModel>("colors");
+            var apiResult = await GetCoffeeCupApiResultAsync<ColorsResponse>("colors");
             return apiResult?.Colors.OrderBy(p => p.Label)
                 .ToArray();
         }
@@ -118,9 +118,9 @@
         /// </summary>
         /// <param name="projectId">The unique id of the project in CoffeeCup.</param>
         /// <returns>The project information or <c>null</c> if the project wasn't found.</returns>
-        public async Task<ProjectAnalyticsTransportModel?> GetProjectAnalyticsAsync(int projectId)
+        public async Task<ProjectAnalytics?> GetProjectAnalyticsAsync(int projectId)
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<ProjectAnalyticsResponseModel>(
+            var apiResult = await GetCoffeeCupApiResultAsync<ProjectAnalyticsResponse>(
                 $"analytics/projects?project={projectId}");
             return apiResult?.Project;
         }
@@ -129,7 +129,7 @@
         /// Retrieves the list of project information from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of project information.</returns>
-        public async Task<ProjectTransportModel[]?> GetProjectsAsync()
+        public async Task<Project[]?> GetProjectsAsync()
         {
             var apiResult = await GetCoffeeCupApiResultAsync<ProjectsResponseModel>("projects");
             return apiResult?.Projects.OrderBy(p => p.Name)
@@ -140,9 +140,9 @@
         /// Retrieves the list of task assignments from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of task assignments.</returns>
-        public async Task<TaskAssignmentTransportModel[]?> GetTaskAssignmentsAsync()
+        public async Task<CoffeeCupTaskAssignment[]?> GetTaskAssignmentsAsync()
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<TaskAssignmentsResponseModel>("taskAssignments");
+            var apiResult = await GetCoffeeCupApiResultAsync<CoffeeCupTaskAssignmentsResponse>("taskAssignments");
             return apiResult?.TaskAssignments.ToArray();
         }
 
@@ -150,11 +150,10 @@
         /// Retrieves the list of task information from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of task information.</returns>
-        public async Task<TaskTransportModel[]?> GetTasksAsync()
+        public async Task<CoffeeCupTask[]?> GetTasksAsync()
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<TasksResponseModel>("tasks");
-            return apiResult?.Tasks.OrderBy(p => p.Label)
-                .ToArray();
+            var apiResult = await GetCoffeeCupApiResultAsync<CoffeeCupTasksResponse>("tasks");
+            return apiResult?.Tasks.OrderBy(p => p.Label).ToArray();
         }
 
         /// <summary>
@@ -164,7 +163,7 @@
         /// <param name="to">The end date for the analysis result.</param>
         /// <returns>The list of matching analytics results.</returns>
         /// <exception cref="ArgumentException">Is thrown if from or to are invalid.</exception>
-        public async Task<TimeEntryAnalyticsTransportModel[]?> GetTimeEntriesAnalyticsAsync(DateTime from, DateTime to)
+        public async Task<TimeEntryAnalytics[]?> GetTimeEntriesAnalyticsAsync(DateTime from, DateTime to)
         {
             if (from >= DateTime.Now)
             {
@@ -189,7 +188,7 @@
         /// <param name="filter">The apiOptions for filtering the request.</param>
         /// <returns>The list of matching results.</returns>
         /// <exception cref="ArgumentException">Is thrown if from or to are invalid.</exception>
-        public async Task<TimeEntryTransportModel[]?> GetTimeEntriesAsync(TimeEntriesRequest filter)
+        public async Task<TimeEntry[]?> GetTimeEntriesAsync(TimeEntriesRequest filter)
         {
             var urlBuilder = new StringBuilder("timeEntries");
             var postProjectFilter = false;
@@ -233,7 +232,7 @@
         /// Retrieves the list of time entries from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of time entries.</returns>
-        public async Task<TimeEntryTransportModel[]?> GetTimeEntriesAsync()
+        public async Task<TimeEntry[]?> GetTimeEntriesAsync()
         {
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>("timeEntries");
             return apiResult?.TimeEntries.OrderBy(p => p.Day)
@@ -247,7 +246,7 @@
         /// </summary>
         /// <param name="day">The day for which to retrieve the entries.</param>
         /// <returns>The list of time entries.</returns>
-        public async Task<TimeEntryTransportModel[]?> GetTimeEntriesByDayAsync(DateTime day)
+        public async Task<TimeEntry[]?> GetTimeEntriesByDayAsync(DateTime day)
         {
             var relativeUrl = string.Format(
                 CultureInfo.InvariantCulture,
@@ -266,7 +265,7 @@
         /// <param name="from">The starting day for which to retrieve the entries.</param>
         /// <param name="to">The ending day for which to retrieve the entries.</param>
         /// <returns>The list of time entries.</returns>
-        public async Task<TimeEntryTransportModel[]?> GetTimeEntriesByDayRangeAsync(DateTime from, DateTime to)
+        public async Task<TimeEntry[]?> GetTimeEntriesByDayRangeAsync(DateTime from, DateTime to)
         {
             var relativeUrl = string.Format(
                 CultureInfo.InvariantCulture,
@@ -285,9 +284,9 @@
         /// Retrieves the list of user assignments from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of user assignments.</returns>
-        public async Task<UserAssignmentTransportModel[]?> GetUserAssignmentsAsync()
+        public async Task<UserAssignment[]?> GetUserAssignmentsAsync()
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<UserAssignmentsResponseModel>("userAssignments");
+            var apiResult = await GetCoffeeCupApiResultAsync<UserAssignmentsResponse>("userAssignments");
             return apiResult?.UserAssignments;
         }
 
@@ -295,9 +294,9 @@
         /// Retrieves the list of user employments from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of user employments.</returns>
-        public async Task<UserEmploymentTransportModel[]?> GetUserEmploymentsAsync()
+        public async Task<UserEmployment[]?> GetUserEmploymentsAsync()
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<UserEmploymentsResponseModel>("userEmployments");
+            var apiResult = await GetCoffeeCupApiResultAsync<UserEmploymentsResponse>("userEmployments");
             return apiResult?.UserEmployments;
         }
 
@@ -306,9 +305,9 @@
         /// </summary>
         /// <param name="onlyValid">If set to <c>true</c> only currently valid users will be loaded.</param>
         /// <returns>The list of user information.</returns>
-        public async Task<UserTransportModel[]?> GetUsersAsync(bool onlyValid = true)
+        public async Task<User[]?> GetUsersAsync(bool onlyValid = true)
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<UsersResponseModel>("users");
+            var apiResult = await GetCoffeeCupApiResultAsync<UsersResponse>("users");
             var result = apiResult?.Users.OrderBy(u => u.Lastname)
                 .ThenBy(u => u.Firstname);
             return onlyValid
@@ -322,9 +321,9 @@
         /// </summary>
         /// <param name="onlyValid">If set to <c>true</c> only currently valid users will be loaded.</param>
         /// <returns>The list of user information.</returns>
-        public async Task<SimpleUserTransportModel[]?> GetUsersSimpleAsync(bool onlyValid = true)
+        public async Task<SimpleUser[]?> GetUsersSimpleAsync(bool onlyValid = true)
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<UsersResponseModel>("users");
+            var apiResult = await GetCoffeeCupApiResultAsync<UsersResponse>("users");
             var result = apiResult?.Users.Select(u => u.ToSimple())
                 .OrderBy(u => u.Lastname)
                 .ThenBy(u => u.Firstname);
@@ -363,7 +362,7 @@
                 {
                     var response = await _client.PostAsync("oauth2/token", body);
                     var result = await response.Content.ReadAsStringAsync();
-                    var tokenResult = JsonSerializer.Deserialize<AuthorizationResponseModel>(result);
+                    var tokenResult = JsonSerializer.Deserialize<AuthorizationResponse>(result);
                     if (tokenResult == null)
                     {
                         throw new AuthenticationException("Could not receive token from CoffeeCup.");
@@ -452,7 +451,7 @@
                 var body = new FormUrlEncodedContent(dict);
                 var response = await _client.PostAsync("oauth2/token", body);
                 var result = await response.Content.ReadAsStringAsync();
-                var tokenResult = JsonSerializer.Deserialize<AuthorizationResponseModel>(result);
+                var tokenResult = JsonSerializer.Deserialize<AuthorizationResponse>(result);
                 if (tokenResult == null)
                 {
                     throw new AuthenticationException("Could not receive token from CoffeeCup.");
