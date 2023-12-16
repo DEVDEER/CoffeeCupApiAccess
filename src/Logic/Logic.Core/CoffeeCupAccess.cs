@@ -19,8 +19,8 @@
     using Models.Options;
     using Models.Requests;
     using Models.Responses;
-    using Models.TransportModels;
-    using Models.TransportModels.Analytics;
+    using Models.DataModels;
+    using Models.DataModels.Analytics;
 
     /// <summary>
     /// Allows data retrieval from the CoffeeCup API.
