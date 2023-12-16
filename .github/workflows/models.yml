@@ -14,26 +14,40 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      working-directory: "src/Logic/Logic.Models"
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-dotnet@v3
         with:
           global-json-file: ../../../global.json
           cache: true
-          cache-dependency-path: packages.lock.json
+          cache-dependency-path: "**/packages.lock.json"
       - run: dotnet restore --locked-mode
       - name: Build
-        run: dotnet build .
-      - name: Package
+        run: dotnet build CoffeeCupApiAccess.sln
+      - name: Test
+        run: dotnet test CoffeeCupApiAccess.sln
+      - name: Package Models
         run: dotnet pack --configuration Release
+        env:
+          working-directory: "src/Logic/Logic.Models"
+      - name: Package Logic
+        run: dotnet pack --configuration Release
+        env:
+          working-directory: "src/Logic/Logic.Core"
   publish:
     runs-on: ubuntu-latest
     env:
-      working-directory: "src/Logic/Logic.Models"
+      NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
     steps:
-      - name: Publish to Nuget
-        run: dotnet nuget push bin/Release/*.nupkg
+      - name: Publish Models to Nuget
+        run: |
+          dotnet nuget push bin/Release/*.nupkg --skip-duplicate
+          dotnet nuget push bin/Release/*.snupkg --skip-duplicate
         env:
-          NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
+          working-directory: "src/Logic/Logic.Models"
+      - name: Publish Logic to Nuget
+        run: |
+          dotnet nuget push bin/Release/*.nupkg --skip-duplicate
+          dotnet nuget push bin/Release/*.snupkg --skip-duplicate
+        env:
+          working-directory: "src/Logic/Logic.Core"
