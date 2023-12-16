@@ -6,7 +6,6 @@
         <LangVersion>latest</LangVersion>
         <PackageId>devdeer.CoffeeCupApiAccess</PackageId>
         <Title>DEVDEER CoffeeCup Api Access</Title>
-        <Version>2.0.0</Version>
         <Nullable>Enable</Nullable>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -23,9 +22,13 @@
         <PackageIcon>icon.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Copyright>Copyright 2019-2023 DEVDEER GmbH</Copyright>
+        <Version>2.0.1</Version>
         <PackageReleaseNotes>
             - Switched to .NET 6 + .NET 8
-            - Query methods now retrieve arrays instead of IEnumerables
+            - Query methods now retrieve arrays instead of IEnumerables.
+            - Using dependency injection.
+            - Switched to ILogger for traces.
+            - BREAKING: Using configuration options instead of RequestModel.
         </PackageReleaseNotes>
         <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>

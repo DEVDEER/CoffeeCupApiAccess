@@ -1,14 +1,10 @@
 ﻿namespace devdeer.CoffeeCupApiAccess.Tests.Logic.Core
 {
     using System;
-    using System.IO;
     using System.Linq;
-    using System.Net.Http;
-    using System.Text.Json;
     using System.Threading.Tasks;
 
     using CoffeeCupApiAccess.Logic.Core;
-    using CoffeeCupApiAccess.Logic.Models.Options;
     using CoffeeCupApiAccess.Logic.Models.Requests;
 
     using NUnit.Framework;
@@ -22,25 +18,21 @@
         #region methods
 
         /// <summary>
-        /// Simple null-check for <see cref="CoffeeCupAccess.GetTimeEntriesAsync" />.
+        /// Checks the data of <see cref="CoffeeCupAccess.GetTimeEntriesByDayRangeAsync" />.
         /// </summary>
         [Test]
-        public async Task GetTimeEntries_RetrievesNotNull()
+        public async Task GetTimeEntries_ByDayRange()
         {
             Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
-            var result = await ApiAccess.GetTimeEntriesAsync(RequestModel);
+            var minDate = new DateTime(2023, 6, 1);
+            var maxDate = new DateTime(2023, 6, 30);
+            var result = await ApiAccess.GetTimeEntriesByDayRangeAsync(minDate, maxDate);
             Assert.That(result, Is.Not.Null);
-        }
-
-        /// <summary>
-        /// Simple null-check for <see cref="CoffeeCupAccess.GetUserEmploymentsAsync" />.
-        /// </summary>
-        [Test]
-        public async Task GetUserEmployments_RetrievesNotNull()
-        {
-            Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
-            var result = await ApiAccess.GetUserEmploymentsAsync(RequestModel);
-            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Count(), Is.GreaterThan(0));
+            var minResultDate = result.Min(r => r.Day);
+            var maxResultDate = result.Max(r => r.Day);
+            Assert.That(minDate, Is.LessThanOrEqualTo(minResultDate));
+            Assert.That(maxDate, Is.GreaterThanOrEqualTo(maxResultDate));
         }
 
         /// <summary>
@@ -56,11 +48,11 @@
             {
                 From = minDate,
                 To = maxDate,
-                ProjectFilterIds = new [] { 15639 }
+                ProjectFilterIds = new[] { 15639 }
             };
-            var result = await ApiAccess.GetTimeEntriesAsync(RequestModel, filter);
+            var result = await ApiAccess.GetTimeEntriesAsync(filter);
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.Count(), Is.GreaterThan(0));
+            Assert.That(result.Count, Is.GreaterThan(0));
             Assert.That(result.All(r => r.ProjectId == 15639), Is.True);
             var minResultDate = result.Min(r => r.Day);
             var maxResultDate = result.Max(r => r.Day);
@@ -69,21 +61,25 @@
         }
 
         /// <summary>
-        /// Checks the data of <see cref="CoffeeCupAccess.GetTimeEntriesByDayRangeAsync" />.
+        /// Simple null-check for <see cref="CoffeeCupAccess.GetTimeEntriesAsync()" />.
         /// </summary>
         [Test]
-        public async Task GetTimeEntries_ByDayRange()
+        public async Task GetTimeEntries_RetrievesNotNull()
         {
             Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
-            var minDate = new DateTime(2023, 6, 1);
-            var maxDate = new DateTime(2023, 6, 30);
-            var result = await ApiAccess.GetTimeEntriesByDayRangeAsync(RequestModel, minDate, maxDate);
+            var result = await ApiAccess.GetTimeEntriesAsync();
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.Count(), Is.GreaterThan(0));
-            var minResultDate = result.Min(r => r.Day);
-            var maxResultDate = result.Max(r => r.Day);
-            Assert.That(minDate, Is.LessThanOrEqualTo(minResultDate));
-            Assert.That(maxDate, Is.GreaterThanOrEqualTo(maxResultDate));
+        }
+
+        /// <summary>
+        /// Simple null-check for <see cref="CoffeeCupAccess.GetUserEmploymentsAsync" />.
+        /// </summary>
+        [Test]
+        public async Task GetUserEmployments_RetrievesNotNull()
+        {
+            Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
+            var result = await ApiAccess.GetUserEmploymentsAsync();
+            Assert.That(result, Is.Not.Null);
         }
 
         /// <summary>
@@ -92,22 +88,7 @@
         [OneTimeSetUp]
         public void Init()
         {
-            if (!File.Exists("settings.json"))
-            {
-                return;
-            }
-            // the file was found -> map the data
-            var json = File.ReadAllText("settings.json");
-            var document = JsonSerializer.Deserialize<ApiOptions>(json);
-            // generate a new request model
-            RequestModel = new RequestDataModel(document);
-            // initialize HTTP client and logic
-            var client = new HttpClient
-            {
-                BaseAddress = new Uri("https://api.coffeecupapp.com")
-            };
-            client.DefaultRequestHeaders.Add("Origin", document.Origin);
-            ApiAccess = new CoffeeCupAccess(client);
+            ApiAccess = DependencyHelper.GetRequiredService<CoffeeCupAccess>();
         }
 
         #endregion
@@ -118,11 +99,6 @@
         /// Provides easy access to the initialized logic.
         /// </summary>
         private CoffeeCupAccess ApiAccess { get; set; }
-
-        /// <summary>
-        /// Retrieves the prepared request model needed by the <see cref="ApiAccess" />.
-        /// </summary>
-        private RequestDataModel RequestModel { get; set; }
 
         #endregion
     }
