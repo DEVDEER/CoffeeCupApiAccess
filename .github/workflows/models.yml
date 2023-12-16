@@ -1,0 +1,39 @@
+name: "CoffeeCup Models CI/CD"
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/Logic/Logic.Models/**"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      working-directory: "src/Logic/Logic.Models"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v3
+        with:
+          global-json-file: ../../../global.json
+          cache: true
+          cache-dependency-path: packages.lock.json
+      - run: dotnet restore --locked-mode
+      - name: Build
+        run: dotnet build .
+      - name: Package
+        run: dotnet pack --configuration Release
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      working-directory: "src/Logic/Logic.Models"
+    steps:
+      - name: Publish to Nuget
+        run: dotnet nuget push bin/Release/*.nupkg
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
