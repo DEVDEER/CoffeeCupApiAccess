@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-dotnet@v3
         with:
-          global-json-file: ../../../global.json
+          global-json-file: ../../global.json
           cache: true
           cache-dependency-path: packages.lock.json
       - run: dotnet restore --locked-mode
@@ -29,6 +29,7 @@ jobs:
       - name: Package
         run: dotnet pack -c Release
   publish:
+    needs: build
     runs-on: ubuntu-latest
     env:
       working-directory: "src/Logic/Logic.Models"
