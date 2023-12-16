@@ -5,7 +5,7 @@
     using System.Text.Json.Serialization;
 
     using TransportModels;
-    
+
     /// <summary>
     /// Represents the response of the CoffeeCup API when the absences-endpoint is called.
     /// </summary>

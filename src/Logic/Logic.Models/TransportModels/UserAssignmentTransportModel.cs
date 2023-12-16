@@ -2,10 +2,9 @@
 {
     using System;
     using System.Linq;
+    using System.Text.Json.Serialization;
 
     using Enumerations;
-
-    using System.Text.Json.Serialization;
 
     /// <summary>
     /// Contains the information about a single user assignment in CoffeeCup.

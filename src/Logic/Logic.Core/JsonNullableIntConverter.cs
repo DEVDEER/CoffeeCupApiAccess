@@ -7,8 +7,9 @@
     using System.Text.Json.Serialization;
 
     /// <summary>
-    /// Custom JSON converter for <see cref="Nullable{Int32}"/> ignoring invalid JSON.
-    /// </summary>s
+    /// Custom JSON converter for <see cref="Nullable{Int32}" /> ignoring invalid JSON.
+    /// </summary>
+    /// s
     public class JsonNullableIntConverter : JsonConverter<int?>
     {
         #region methods

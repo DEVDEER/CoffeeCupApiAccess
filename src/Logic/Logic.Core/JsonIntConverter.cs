@@ -7,7 +7,7 @@
     using System.Text.Json.Serialization;
 
     /// <summary>
-    /// Custom JSON converter for <see cref="Int32"/> ignoring invalid JSON.
+    /// Custom JSON converter for <see cref="Int32" /> ignoring invalid JSON.
     /// </summary>
     public class JsonIntConverter : JsonConverter<int>
     {
@@ -17,7 +17,7 @@
         public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             var ok = reader.TryGetInt32(out var tmp);
-            return ok ? tmp :0;
+            return ok ? tmp : 0;
         }
 
         /// <inheritdoc />

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace devdeer.CoffeeCupApiAccess.Logic.Models.TransportModels.Analytics
+﻿namespace devdeer.CoffeeCupApiAccess.Logic.Models.TransportModels.Analytics
 {
+    using System;
+    using System.Linq;
     using System.Text.Json.Serialization;
 
     public class AnalyticsUserTransportModel
