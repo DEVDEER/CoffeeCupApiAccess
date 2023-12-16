@@ -61,11 +61,11 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of absence information ordered by date and user.</returns>
-        public async Task<IEnumerable<AbsenceTransportModel>?> GetAbsencesAsync(RequestDataModel requestData)
+        public async Task<AbsenceTransportModel[]?> GetAbsencesAsync(RequestDataModel requestData)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<AbsencesReponseModel>(requestData, "absences");
             return apiResult?.Absences.OrderByDescending(p => p.StartDate)
-                .ThenBy(p => p.UserId);
+                .ThenBy(p => p.UserId).ToArray();
         }
 
         /// <summary>
@@ -73,10 +73,10 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of task information ordered by label.</returns>
-        public async Task<IEnumerable<AbsenceTypeTransportModel>?> GetAbsenceTypesAsync(RequestDataModel requestData)
+        public async Task<AbsenceTypeTransportModel[]?> GetAbsenceTypesAsync(RequestDataModel requestData)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<AbsenceTypesResponseModel>(requestData, "absenceTypes");
-            return apiResult?.AbsenceTypes.OrderBy(p => p.Label);
+            return apiResult?.AbsenceTypes.OrderBy(p => p.Label).ToArray();
         }
 
         /// <summary>
@@ -84,10 +84,10 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of client information.</returns>
-        public async Task<IEnumerable<ClientTransportModel>?> GetClientsAsync(RequestDataModel requestData)
+        public async Task<ClientTransportModel[]?> GetClientsAsync(RequestDataModel requestData)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<ClientsResponseModel>(requestData, "clients");
-            return apiResult?.Clients.OrderBy(p => p.Name);
+            return apiResult?.Clients.OrderBy(p => p.Name).ToArray();
         }
 
         /// <summary>
@@ -95,10 +95,10 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of color information.</returns>
-        public async Task<IEnumerable<ColorTransportModel>?> GetColorsAsync(RequestDataModel requestData)
+        public async Task<ColorTransportModel[]?> GetColorsAsync(RequestDataModel requestData)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<ColorsResponseModel>(requestData, "colors");
-            return apiResult?.Colors.OrderBy(p => p.Label);
+            return apiResult?.Colors.OrderBy(p => p.Label).ToArray();
         }
 
         /// <summary>
@@ -122,10 +122,10 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of project information.</returns>
-        public async Task<IEnumerable<ProjectTransportModel>?> GetProjectsAsync(RequestDataModel requestData)
+        public async Task<ProjectTransportModel[]?> GetProjectsAsync(RequestDataModel requestData)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<ProjectsResponseModel>(requestData, "projects");
-            return apiResult?.Projects.OrderBy(p => p.Name);
+            return apiResult?.Projects.OrderBy(p => p.Name).ToArray();
         }
 
         /// <summary>
@@ -133,12 +133,12 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of task assignments.</returns>
-        public async Task<IEnumerable<TaskAssignmentTransportModel>?> GetTaskAssignmentsAsync(
+        public async Task<TaskAssignmentTransportModel[]?> GetTaskAssignmentsAsync(
             RequestDataModel requestData)
         {
             var apiResult =
                 await GetCoffeeCupApiResultAsync<TaskAssignmentsResponseModel>(requestData, "taskAssignments");
-            return apiResult?.TaskAssignments;
+            return apiResult?.TaskAssignments.ToArray();
         }
 
         /// <summary>
@@ -146,10 +146,10 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of task information.</returns>
-        public async Task<IEnumerable<TaskTransportModel>?> GetTasksAsync(RequestDataModel requestData)
+        public async Task<TaskTransportModel[]?> GetTasksAsync(RequestDataModel requestData)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<TasksResponseModel>(requestData, "tasks");
-            return apiResult?.Tasks.OrderBy(p => p.Label);
+            return apiResult?.Tasks.OrderBy(p => p.Label).ToArray();
         }
 
         /// <summary>
@@ -159,7 +159,7 @@
         /// <param name="filter">The options for filtering the request.</param>
         /// <returns>The list of matching results.</returns>
         /// <exception cref="ArgumentException">Is thrown if from or to are invalid.</exception>
-        public async Task<IEnumerable<TimeEntryTransportModel>?> GetTimeEntriesAsync(
+        public async Task<TimeEntryTransportModel[]?> GetTimeEntriesAsync(
             RequestDataModel requestData,
             TimeEntriesRequest filter)
         {
@@ -192,14 +192,14 @@
             var apiResult =
                 await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(requestData, urlBuilder.ToString());
             var items = apiResult?.TimeEntries.AsQueryable();
-            if (items != null && filter != null)
+            if (items != null)
             {
                 if (postProjectFilter && (filter.ProjectFilterIds?.Any() ?? false))
                 {
                     items = items.Where(i => i.ProjectId != null && i.ProjectId == filter.ProjectFilterIds.First());
                 }
             }
-            return items;
+            return items?.ToArray();
         }
 
         /// <summary>
@@ -210,7 +210,7 @@
         /// <param name="to">The end date for the analysis result.</param>
         /// <returns>The list of matching analytics results.</returns>
         /// <exception cref="ArgumentException">Is thrown if from or to are invalid.</exception>
-        public async Task<IEnumerable<TimeEntryAnalyticsTransportModel>?> GetTimeEntriesAnalyticsAsync(
+        public async Task<TimeEntryAnalyticsTransportModel[]?> GetTimeEntriesAnalyticsAsync(
             RequestDataModel requestData,
             DateTime from,
             DateTime to)
@@ -238,12 +238,12 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of time entries.</returns>
-        public async Task<IEnumerable<TimeEntryTransportModel>?> GetTimeEntriesAsync(RequestDataModel requestData)
+        public async Task<TimeEntryTransportModel[]?> GetTimeEntriesAsync(RequestDataModel requestData)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(requestData, "timeEntries");
             return apiResult?.TimeEntries.OrderBy(p => p.Day)
                 .ThenBy(p => p.StartTime)
-                .ThenBy(p => p.UserId);
+                .ThenBy(p => p.UserId).ToArray();
         }
 
         /// <summary>
@@ -252,7 +252,7 @@
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <param name="day">The day for which to retrieve the entries.</param>
         /// <returns>The list of time entries.</returns>
-        public async Task<IEnumerable<TimeEntryTransportModel>?> GetTimeEntriesByDayAsync(
+        public async Task<TimeEntryTransportModel[]?> GetTimeEntriesByDayAsync(
             RequestDataModel requestData,
             DateTime day)
         {
@@ -263,7 +263,7 @@
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(requestData, relativeUrl);
             return apiResult?.TimeEntries.OrderBy(p => p.Day)
                 .ThenBy(p => p.StartTime)
-                .ThenBy(p => p.UserId);
+                .ThenBy(p => p.UserId).ToArray();
         }
 
         /// <summary>
@@ -273,7 +273,7 @@
         /// <param name="from">The starting day for which to retrieve the entries.</param>
         /// <param name="to">The ending day for which to retrieve the entries.</param>
         /// <returns>The list of time entries.</returns>
-        public async Task<IEnumerable<TimeEntryTransportModel>?> GetTimeEntriesByDayRangeAsync(
+        public async Task<TimeEntryTransportModel[]?> GetTimeEntriesByDayRangeAsync(
             RequestDataModel requestData,
             DateTime from,
             DateTime to)
@@ -287,7 +287,7 @@
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(requestData, relativeUrl);
             return apiResult?.TimeEntries.OrderBy(p => p.Day)
                 .ThenBy(p => p.StartTime)
-                .ThenBy(p => p.UserId);
+                .ThenBy(p => p.UserId).ToArray();
         }
 
         /// <summary>
@@ -295,7 +295,7 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of user assignments.</returns>
-        public async Task<IEnumerable<UserAssignmentTransportModel>?> GetUserAssignmentsAsync(
+        public async Task<UserAssignmentTransportModel[]?> GetUserAssignmentsAsync(
             RequestDataModel requestData)
         {
             var apiResult =
@@ -308,7 +308,7 @@
         /// </summary>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of user employments.</returns>
-        public async Task<IEnumerable<UserEmploymentTransportModel>?> GetUserEmploymentsAsync(
+        public async Task<UserEmploymentTransportModel[]?> GetUserEmploymentsAsync(
             RequestDataModel requestData)
         {
             var apiResult =
@@ -322,14 +322,14 @@
         /// <param name="onlyValid">If set to <c>true</c> only currently valid users will be loaded.</param>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of user information.</returns>
-        public async Task<IEnumerable<UserTransportModel>?> GetUsersAsync(
+        public async Task<UserTransportModel[]?> GetUsersAsync(
             RequestDataModel requestData,
             bool onlyValid = true)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<UsersResponseModel>(requestData, "users");
             var result = apiResult?.Users.OrderBy(u => u.Lastname)
                 .ThenBy(u => u.Firstname);
-            return onlyValid ? result?.Where(r => r.ShowInPlanner) : result;
+            return onlyValid ? result?.Where(r => r.ShowInPlanner).ToArray() : result?.ToArray();
         }
 
         /// <summary>
@@ -338,7 +338,7 @@
         /// <param name="onlyValid">If set to <c>true</c> only currently valid users will be loaded.</param>
         /// <param name="requestData">The contextual data from the API which is needed by the access logic.</param>
         /// <returns>The list of user information.</returns>
-        public async Task<IEnumerable<SimpleUserTransportModel>?> GetUsersSimpleAsync(
+        public async Task<SimpleUserTransportModel[]?> GetUsersSimpleAsync(
             RequestDataModel requestData,
             bool onlyValid = true)
         {
@@ -346,7 +346,7 @@
             var result = apiResult?.Users.Select(u => u.ToSimple())
                 .OrderBy(u => u.Lastname)
                 .ThenBy(u => u.Firstname);
-            return onlyValid ? result?.Where(r => r.IsCurrentlyValid) : result;
+            return onlyValid ? result?.Where(r => r.IsCurrentlyValid).ToArray() : result?.ToArray();
         }
 
         /// <summary>

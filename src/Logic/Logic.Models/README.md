@@ -6,7 +6,7 @@ We are using this package in our own projects. So it is not only a playground bu
 
 ## Summary
 
-This package contains models and other basic types needed for the package
+This package contains models and other basic types needed for the package:
 
 [![NugGet](https://img.shields.io/nuget/vpre/devdeer.CoffeeCupApiAccess.svg?label=devdeer.CoffeeCupApiAccess)](https://www.nuget.org/packages/devdeer.CoffeeCupApiAccess/)
 

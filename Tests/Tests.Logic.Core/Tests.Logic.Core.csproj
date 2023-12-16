@@ -1,18 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <IsPackable>false</IsPackable>
         <AssemblyName>CoffeeCupApiAccess.Tests.Logic.Core</AssemblyName>
         <RootNamespace>devdeer.CoffeeCupApiAccess.Tests.Logic.Core</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
-        <PackageReference Include="NUnit" Version="3.13.3" />
-        <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="NUnit" />
+        <PackageReference Include="NUnit3TestAdapter" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Logic\Logic.Core\Logic.Core.csproj" />
-        <ProjectReference Include="..\..\src\Logic\Logic.Models\Logic.Models.csproj" />
+      <ProjectReference Include="..\..\src\Logic\Logic.Core\Logic.Core.csproj" />
+      <ProjectReference Include="..\..\src\Logic\Logic.Models\Logic.Models.csproj" />
     </ItemGroup>
     <ItemGroup>
         <None Update="settings.json">
