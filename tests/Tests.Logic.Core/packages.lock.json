@@ -176,7 +176,7 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Http": "[8.0.0, )",
-          "devdeer.CoffeeCupModels": "[3.0.1, )"
+          "devdeer.CoffeeCupModels": "[3.0.2, )"
         }
       },
       "Microsoft.Extensions.Http": {

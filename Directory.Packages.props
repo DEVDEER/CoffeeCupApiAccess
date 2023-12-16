@@ -5,7 +5,7 @@
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="devdeer.CoffeeCupModels" Version="3.0.1" />
+    <PackageVersion Include="devdeer.CoffeeCupModels" Version="3.0.2" />
     <PackageVersion Include="Microsoft.Extensions.Http" Version="8.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageVersion Include="NUnit" Version="4.0.1" />

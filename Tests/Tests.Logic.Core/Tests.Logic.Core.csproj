@@ -1,7 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <IsPackable>false</IsPackable>
+        <Nullable>enable</Nullable>
         <AssemblyName>CoffeeCupApiAccess.Tests.Logic.Core</AssemblyName>
         <RootNamespace>devdeer.CoffeeCupApiAccess.Tests.Logic.Core</RootNamespace>
     </PropertyGroup>
@@ -15,12 +16,7 @@
       <ProjectReference Include="..\..\src\Logic\Logic.Models\Logic.Models.csproj" />
     </ItemGroup>
     <ItemGroup>
-        <None Update="appsettings.json">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Update="appsettings.template.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
+        <None Update="appsettings.template.json" />
         <None Update="appsettings.json">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>

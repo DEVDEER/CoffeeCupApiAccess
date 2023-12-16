@@ -21,9 +21,7 @@
     using Models.Responses;
     using Models.DataModels;
     using Models.DataModels.Analytics;
-
-    using CoffeeCupTask = Models.DataModels.Task;
-
+    
     /// <summary>
     /// Allows data retrieval from the CoffeeCup API.
     /// </summary>
@@ -142,9 +140,9 @@
         /// Retrieves the list of task assignments from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of task assignments.</returns>
-        public async Task<TaskAssignment[]?> GetTaskAssignmentsAsync()
+        public async Task<CoffeeCupTaskAssignment[]?> GetTaskAssignmentsAsync()
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<TaskAssignmentsResponse>("taskAssignments");
+            var apiResult = await GetCoffeeCupApiResultAsync<CoffeeCupTaskAssignmentsResponse>("taskAssignments");
             return apiResult?.TaskAssignments.ToArray();
         }
 
@@ -154,7 +152,7 @@
         /// <returns>The list of task information.</returns>
         public async Task<CoffeeCupTask[]?> GetTasksAsync()
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<TasksResponse>("tasks");
+            var apiResult = await GetCoffeeCupApiResultAsync<CoffeeCupTasksResponse>("tasks");
             return apiResult?.Tasks.OrderBy(p => p.Label).ToArray();
         }
 

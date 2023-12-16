@@ -28,7 +28,11 @@
             var maxDate = new DateTime(2023, 6, 30);
             var result = await ApiAccess.GetTimeEntriesByDayRangeAsync(minDate, maxDate);
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.Count(), Is.GreaterThan(0));
+            if (result == null)
+            {
+                return;
+            }
+            Assert.That(result.Count, Is.GreaterThan(0));
             var minResultDate = result.Min(r => r.Day);
             var maxResultDate = result.Max(r => r.Day);
             Assert.That(minDate, Is.LessThanOrEqualTo(minResultDate));
@@ -36,7 +40,7 @@
         }
 
         /// <summary>
-        /// Checks the data of <see cref="CoffeeCupAccess.GetTimeEntriesAsync(RequestDataModel,TimeEntriesRequest)" />.
+        /// Checks the data of <see cref="CoffeeCupAccess.GetTimeEntriesAsync()" />.
         /// </summary>
         [Test]
         public async Task GetTimeEntries_Filtered()
@@ -52,8 +56,12 @@
             };
             var result = await ApiAccess.GetTimeEntriesAsync(filter);
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.Count, Is.GreaterThan(0));
-            Assert.That(result.All(r => r.ProjectId == 15639), Is.True);
+            if (result == null)
+            {
+                return;
+            }
+            Assert.That(result!.Count, Is.GreaterThan(0));
+            Assert.That(result!.All(r => r.ProjectId == 15639), Is.True);
             var minResultDate = result.Min(r => r.Day);
             var maxResultDate = result.Max(r => r.Day);
             Assert.That(minDate, Is.LessThanOrEqualTo(minResultDate));
@@ -98,7 +106,7 @@
         /// <summary>
         /// Provides easy access to the initialized logic.
         /// </summary>
-        private CoffeeCupAccess ApiAccess { get; set; }
+        private CoffeeCupAccess ApiAccess { get; set; } = default!;
 
         #endregion
     }
