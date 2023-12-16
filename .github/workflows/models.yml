@@ -30,6 +30,11 @@ jobs:
         run: dotnet pack src/Logic/Logic.Models/Logic.Models.csproj   -c Release
         env:
           working-directory: "src/Logic/Logic.Models"
+      - name: Publish artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: packages
+          path: 'src/Logic/Logic.Models/bin/Release/*.*'
   publish:
     needs: build
     environment: 'nuget'
@@ -38,8 +43,13 @@ jobs:
       working-directory: "src/Logic/Logic.Models"
       NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
     steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: packages
+          path: '.'
       - name: Publish Models to Nuget
         run: |
-          dotnet nuget push bin/Release/*.nupkg --skip-duplicate
-          dotnet nuget push bin/Release/*.snupkg --skip-duplicate
+          dotnet nuget push *.nupkg --skip-duplicate
+          dotnet nuget push *.snupkg --skip-duplicate
 
