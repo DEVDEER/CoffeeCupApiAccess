@@ -14,8 +14,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      working-directory: "src/Logic/Logic.Models"
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-dotnet@v3
@@ -24,10 +22,16 @@ jobs:
           cache: true
           cache-dependency-path: src/Logic/Logic.Models/packages.lock.json
       - run: dotnet restore .
+        env:
+          working-directory: "src/Logic/Logic.Models"
       - name: Build
         run: dotnet build .
+        env:
+          working-directory: "src/Logic/Logic.Models"
       - name: Package
         run: dotnet pack -c Release
+        env:
+          working-directory: "src/Logic/Logic.Models"
   publish:
     needs: build
     runs-on: ubuntu-latest
