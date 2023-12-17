@@ -52,6 +52,7 @@ jobs:
         run: |
           nupkg=(find . -type f -iname "*.nupkg")
           snupkg=(find . -type f -iname "*.snupkg")
-          dotnet nuget push $nupkg --skip-duplicate
-          dotnet nuget push $snupkg --skip-duplicate
+          echo $nupkg
+          dotnet nuget push $nupkg -s https://api.nuget.org/v3/index.json --skip-duplicate
+          dotnet nuget push $snupkg -s https://api.nuget.org/v3/index.json --skip-duplicate
 
