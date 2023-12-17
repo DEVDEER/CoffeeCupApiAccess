@@ -1,10 +1,10 @@
-name: "CoffeeCup Models CI/CD"
+name: "CoffeeCup Logic CI/CD"
 
 on:
   pull_request:
     branches: [main]
     paths:
-      - "src/Logic/Logic.Models/**"
+      - "src/Logic/Logic.Core/**"
   workflow_dispatch:
 
 concurrency:
@@ -20,27 +20,27 @@ jobs:
         with:
           global-json-file: global.json
           cache: false
-          cache-dependency-path: src/Logic/Logic.Models/packages.lock.json
-      - run: dotnet restore src/Logic/Logic.Models/Logic.Models.csproj
+          cache-dependency-path: src/Logic/Logic.Core/packages.lock.json
+      - run: dotnet restore src/Logic/Logic.Core/Logic.Core.csproj
       - name: Build
-        run: dotnet build src/Logic/Logic.Models/Logic.Models.csproj
+        run: dotnet build src/Logic/Logic.Core/Logic.Core.csproj
         env:
-          working-directory: "src/Logic/Logic.Models"
+          working-directory: "src/Logic/Logic.Core"
       - name: Package
-        run: dotnet pack src/Logic/Logic.Models/Logic.Models.csproj -c Release -o src/Logic/Logic.Models/packs
+        run: dotnet pack src/Logic/Logic.Core/Logic.Core.csproj -c Release -o src/Logic/Logic.Core/packs
         env:
-          working-directory: "src/Logic/Logic.Models"
+          working-directory: "src/Logic/Logic.Core"
       - name: Publish artifact
         uses: actions/upload-artifact@v4
         with:
           name: packages
-          path: "src/Logic/Logic.Models/packs/*.*"
+          path: "src/Logic/Logic.Core/packs/*.*"
   publish:
     needs: build
     environment: "nuget"
     runs-on: ubuntu-latest
     env:
-      working-directory: "src/Logic/Logic.Models"
+      working-directory: "src/Logic/Logic.Core"
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v4
