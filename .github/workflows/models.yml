@@ -34,10 +34,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: packages
-          path: 'src/Logic/Logic.Models/packs/*.*'
+          path: "src/Logic/Logic.Models/packs/*.*"
   publish:
     needs: build
-    environment: 'nuget'
+    environment: "nuget"
     runs-on: ubuntu-latest
     env:
       working-directory: "src/Logic/Logic.Models"
@@ -46,11 +46,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: packages
-          path: '.'
+          path: "."
       - name: Publish Models to Nuget
         run: |
           nupkg=$(find . -type f -name "*.nupkg" | head -n 1)
           snupkg=$(find . -type f -name "*.snupkg" | head -n 1)
           dotnet nuget push $nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_TOKEN }} --skip-duplicate
-          dotnet nuget push $snupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_TOKEN }} --skip-duplicate
-
