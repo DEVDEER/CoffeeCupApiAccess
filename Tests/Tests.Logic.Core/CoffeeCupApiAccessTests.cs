@@ -91,6 +91,18 @@
         }
 
         /// <summary>
+        /// Simple null-check for <see cref="CoffeeCupAccess.GetAbsenceRequestsAsync" />.
+        /// </summary>
+        [Test]
+        public async Task GetAbsencyRequests_RetrievesNotNull()
+        {
+            Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
+            var result = await ApiAccess.GetAbsenceRequestsAsync(2024);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result!.Any(), Is.True);
+        }
+
+        /// <summary>
         /// Reads the values from the settings.json file if it exists.
         /// </summary>
         [OneTimeSetUp]

@@ -4,9 +4,15 @@
     "net6.0": {
       "devdeer.CoffeeCupModels": {
         "type": "Direct",
-        "requested": "[3.0.2, )",
-        "resolved": "3.0.2",
-        "contentHash": "z0FJRpxPy8jCQhZz+jL5VzO7WgHhACBxHM91f06sdYzD3iR0njw6fChN0pjxYTBY5x6CTCf/WZMTyd4w2A48cA=="
+        "requested": "[3.0.4, )",
+        "resolved": "3.0.4",
+        "contentHash": "Q+TVIFKSYvIftFJ/UiymaO4nXUucjeZJ7uGPfbKZp45ZPleiI8E8HmMdVz84GRqJLHvI6Qb74LJ/R6JpMCpBMQ=="
+      },
+      "devdeer.Libraries.Utilities": {
+        "type": "Direct",
+        "requested": "[2.0.0, )",
+        "resolved": "2.0.0",
+        "contentHash": "N+VeHyh6bRZre3yT2aKAR++berMHcM+uBGIdEHN2rzW0LkYkVqhwGttdd1KeQGFlUnVJCbXnZnEJbEpWb6SmSw=="
       },
       "Microsoft.Extensions.Http": {
         "type": "Direct",
@@ -86,9 +92,15 @@
     "net8.0": {
       "devdeer.CoffeeCupModels": {
         "type": "Direct",
-        "requested": "[3.0.2, )",
-        "resolved": "3.0.2",
-        "contentHash": "z0FJRpxPy8jCQhZz+jL5VzO7WgHhACBxHM91f06sdYzD3iR0njw6fChN0pjxYTBY5x6CTCf/WZMTyd4w2A48cA=="
+        "requested": "[3.0.4, )",
+        "resolved": "3.0.4",
+        "contentHash": "Q+TVIFKSYvIftFJ/UiymaO4nXUucjeZJ7uGPfbKZp45ZPleiI8E8HmMdVz84GRqJLHvI6Qb74LJ/R6JpMCpBMQ=="
+      },
+      "devdeer.Libraries.Utilities": {
+        "type": "Direct",
+        "requested": "[2.0.0, )",
+        "resolved": "2.0.0",
+        "contentHash": "N+VeHyh6bRZre3yT2aKAR++berMHcM+uBGIdEHN2rzW0LkYkVqhwGttdd1KeQGFlUnVJCbXnZnEJbEpWb6SmSw=="
       },
       "Microsoft.Extensions.Http": {
         "type": "Direct",

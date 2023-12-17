@@ -169,15 +169,22 @@
         "resolved": "1.6.0",
         "contentHash": "COC1aiAJjCoA5GBF+QKL2uLqEBew4JsCkQmoHKbN3TlOZKa2fKLz5CpiRQKDz0RsAOEGsVKqOD5bomsXq/4STQ=="
       },
-      "devdeer.CoffeeCupModels": {
-        "type": "Project"
-      },
       "devdeer.CoffeeCupApiAccess": {
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Http": "[8.0.0, )",
-          "devdeer.CoffeeCupModels": "[3.0.2, )"
+          "devdeer.CoffeeCupModels": "[3.0.4, )",
+          "devdeer.Libraries.Utilities": "[2.0.0, )"
         }
+      },
+      "devdeer.CoffeeCupModels": {
+        "type": "Project"
+      },
+      "devdeer.Libraries.Utilities": {
+        "type": "CentralTransitive",
+        "requested": "[2.0.0, )",
+        "resolved": "2.0.0",
+        "contentHash": "N+VeHyh6bRZre3yT2aKAR++berMHcM+uBGIdEHN2rzW0LkYkVqhwGttdd1KeQGFlUnVJCbXnZnEJbEpWb6SmSw=="
       },
       "Microsoft.Extensions.Http": {
         "type": "CentralTransitive",
