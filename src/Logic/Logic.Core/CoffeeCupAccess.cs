@@ -13,6 +13,8 @@
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
 
+    using Libraries.Utilities.Extensions;
+
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
 
@@ -81,9 +83,31 @@
         }
 
         /// <summary>
-        /// Retrieves the list of task information from the CoffeeCup API.
+        /// Retrieves the list of absence request information from the CoffeeCup API.
         /// </summary>
-        /// <returns>The list of task information ordered by label.</returns>
+        /// <param name="year">The year for which to retrieve the requests or <c>null</c> if all requests should be returned.</param>
+        /// <returns>The list of absence request information ordered by label.</returns>
+        public async Task<AbsenceRequest[]?> GetAbsenceRequestsAsync(int? year = null)
+        {
+            var urlBuilder = new StringBuilder("absenceRequests");
+            if (year.HasValue)
+            {
+                var startDate = new DateTime(year.Value, 1, 1).BeginOfDay();
+                var endDate = startDate.EndOfYear();
+                urlBuilder.AppendFormat(
+                    CultureInfo.InvariantCulture,
+                    @"?where={{""startDate"":{{"">="": ""{0}"", ""<="": ""{1}""}}}}",
+                    startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture), endDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
+            }
+            var apiResult = await GetCoffeeCupApiResultAsync<AbsenceRequestsResponse>(urlBuilder.ToString());
+            return apiResult?.AbsenceRequests.OrderBy(p => p.StartDate)
+                .ToArray();
+        }
+
+        /// <summary>
+        /// Retrieves the list of absence type information from the CoffeeCup API.
+        /// </summary>
+        /// <returns>The list of absence type information ordered by label.</returns>
         public async Task<AbsenceType[]?> GetAbsenceTypesAsync()
         {
             var apiResult = await GetCoffeeCupApiResultAsync<AbsenceTypesResponse>("absenceTypes");

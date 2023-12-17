@@ -22,12 +22,13 @@
         <PackageIcon>icon.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Copyright>Copyright 2019-2023 DEVDEER GmbH</Copyright>
-        <Version>2.0.1</Version>
+        <Version>2.0.2</Version>
         <PackageReleaseNotes>
             - Switched to .NET 6 + .NET 8
             - Query methods now retrieve arrays instead of IEnumerables.
             - Using dependency injection.
             - Switched to ILogger for traces.
+            - Absence requests can be retrieved.
             - BREAKING: Using configuration options instead of RequestModel.
         </PackageReleaseNotes>
         <RepositoryType>git</RepositoryType>
@@ -38,6 +39,7 @@
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="devdeer.CoffeeCupModels" />
+        <PackageReference Include="devdeer.Libraries.Utilities" />
         <PackageReference Include="Microsoft.Extensions.Http" />
     </ItemGroup>
     <ItemGroup>
