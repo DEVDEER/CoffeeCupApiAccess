@@ -22,13 +22,14 @@
         <PackageIcon>icon.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Copyright>Copyright 2019-2023 DEVDEER GmbH</Copyright>
-        <Version>2.0.2</Version>
+        <Version>2.0.3</Version>
         <PackageReleaseNotes>
             - Switched to .NET 6 + .NET 8
             - Query methods now retrieve arrays instead of IEnumerables.
             - Using dependency injection.
             - Switched to ILogger for traces.
-            - Absence requests can be retrieved.
+            - Absence results can be retrieved.
+            - Vacation budget results can be retrieved.
             - BREAKING: Using configuration options instead of RequestModel.
         </PackageReleaseNotes>
         <RepositoryType>git</RepositoryType>
