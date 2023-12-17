@@ -50,6 +50,7 @@ jobs:
           path: '.'
       - name: Publish Models to Nuget
         run: |
+          ls -la
           nupkg=(find . -type f -iname "*.nupkg")
           snupkg=(find . -type f -iname "*.snupkg")
           echo $nupkg
