@@ -376,7 +376,7 @@
                 urlBuilder.Append(filter is { UserId: not null } ? '&' : '?');
                 urlBuilder.AppendFormat(
                     CultureInfo.InvariantCulture,
-                    "startDate[]>={0}",
+                    "startDate[]<={0}",
                     filter.Date.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
             }
             _logger.LogDebug(urlBuilder.ToString());
