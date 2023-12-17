@@ -27,14 +27,14 @@ jobs:
         env:
           working-directory: "src/Logic/Logic.Models"
       - name: Package
-        run: dotnet pack src/Logic/Logic.Models/Logic.Models.csproj   -c Release
+        run: dotnet pack src/Logic/Logic.Models/Logic.Models.csproj -c Release -o src/Logic/Logic.Models/packs
         env:
           working-directory: "src/Logic/Logic.Models"
       - name: Publish artifact
         uses: actions/upload-artifact@v2
         with:
           name: packages
-          path: 'src/Logic/Logic.Models/bin/Release/*.*'
+          path: 'src/Logic/Logic.Models/packs/*.*'
   publish:
     needs: build
     environment: 'nuget'
@@ -50,6 +50,8 @@ jobs:
           path: '.'
       - name: Publish Models to Nuget
         run: |
-          dotnet nuget push *.nupkg --skip-duplicate
-          dotnet nuget push *.snupkg --skip-duplicate
+          nupkg=(find . -type f -iname "*.nupkg")
+          snupkg=(find . -type f -iname "*.snupkg")
+          dotnet nuget push $nupkg --skip-duplicate
+          dotnet nuget push $snupkg --skip-duplicate
 
