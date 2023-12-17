@@ -19,11 +19,11 @@
     using Microsoft.Extensions.Options;
 
     using Models.Options;
-    using Models.Requests;
     using Models.Responses;
     using Models.DataModels;
     using Models.DataModels.Analytics;
-    
+    using Models.Filters;
+
     /// <summary>
     /// Allows data retrieval from the CoffeeCup API.
     /// </summary>
@@ -209,10 +209,10 @@
         /// <summary>
         /// Retrieves a list of entries for time entries based on a given <paramref name="filter" />.
         /// </summary>
-        /// <param name="filter">The apiOptions for filtering the request.</param>
+        /// <param name="filter">The optional filter for the request.</param>
         /// <returns>The list of matching results.</returns>
         /// <exception cref="ArgumentException">Is thrown if from or to are invalid.</exception>
-        public async Task<TimeEntry[]?> GetTimeEntriesAsync(TimeEntriesRequest filter)
+        public async Task<TimeEntry[]?> GetTimeEntriesAsync(TimeEntriesFilter? filter = null)
         {
             var urlBuilder = new StringBuilder("timeEntries");
             var postProjectFilter = false;
@@ -296,7 +296,6 @@
                 @"timeEntries?where={{""day"":{{"">="": ""{0}"", ""<="": ""{1}""}}}}",
                 from.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
                 to.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
-            Trace.WriteLine(relativeUrl);
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(relativeUrl);
             return apiResult?.TimeEntries.OrderBy(p => p.Day)
                 .ThenBy(p => p.StartTime)
@@ -355,6 +354,34 @@
                 ? result?.Where(r => r.IsCurrentlyValid)
                     .ToArray()
                 : result?.ToArray();
+        }
+
+        /// <summary>
+        /// Retrieves the list of vacation budgets from the CoffeeCup API.
+        /// </summary>
+        /// <param name="filter">Optional filter too be applied.</param>
+        /// <returns>The list of vacation budgets.</returns>
+        public async Task<VacationBudget[]?> GetVacationBudgetsAsync(VacationBudgetsFilter? filter = null)
+        {
+            var urlBuilder = new StringBuilder("vacationbudgets");
+            if (filter is { UserId: not null })
+            {
+                urlBuilder.AppendFormat(
+                    CultureInfo.InvariantCulture,
+                    "?user[]={0}",
+                    filter.UserId);
+            }
+            if (filter is { Date: not null })
+            {
+                urlBuilder.Append(filter is { UserId: not null } ? '&' : '?');
+                urlBuilder.AppendFormat(
+                    CultureInfo.InvariantCulture,
+                    "startDate[]<={0}",
+                    filter.Date.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
+            }
+            _logger.LogDebug(urlBuilder.ToString());
+            var apiResult = await GetCoffeeCupApiResultAsync<VacationBudgetsResponse>(urlBuilder.ToString());
+            return apiResult?.VacationBudgets;
         }
 
         /// <summary>

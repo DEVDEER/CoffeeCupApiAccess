@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
 
     using CoffeeCupApiAccess.Logic.Core;
-    using CoffeeCupApiAccess.Logic.Models.Requests;
+    using CoffeeCupApiAccess.Logic.Models.Filters;
 
     using NUnit.Framework;
 
@@ -16,6 +16,48 @@
     public class CoffeeCupApiAccessTests
     {
         #region methods
+
+        /// <summary>
+        /// Simple null-check for <see cref="CoffeeCupAccess.GetAbsenceRequestsAsync" />.
+        /// </summary>
+        [Test]
+        public async Task GetAbsencyRequests_RetrievesNotNull()
+        {
+            Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
+            var result = await ApiAccess.GetAbsenceRequestsAsync(2024);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result!.Any(), Is.True);
+        }
+
+        /// <summary>
+        /// Simple null-check for <see cref="CoffeeCupAccess.GetVacationBudgetsAsync" />.
+        /// </summary>
+        [Test]
+        public async Task GetGetVacationBudgets_RetrievesNotNull()
+        {
+            Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
+            var result = await ApiAccess.GetVacationBudgetsAsync();
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result!.Any(), Is.True);
+        }
+
+        /// <summary>
+        /// Simple null-check for <see cref="CoffeeCupAccess.GetVacationBudgetsAsync" />.
+        /// </summary>
+        [Test]
+        public async Task GetGetVacationBudgetsFiltered_RetrievesNotNull()
+        {
+            Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
+            var filter = new VacationBudgetsFilter
+            {
+                UserId = 14766,
+                Date = new DateTime(DateTime.Now.Year, 1, 1)
+            };
+            var result = await ApiAccess.GetVacationBudgetsAsync(filter);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result!.Any(), Is.True);
+            Assert.That(result!.All(r => r.UserId == filter.UserId), Is.True);
+        }
 
         /// <summary>
         /// Checks the data of <see cref="CoffeeCupAccess.GetTimeEntriesByDayRangeAsync" />.
@@ -48,7 +90,7 @@
             Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
             var minDate = new DateTime(2023, 6, 1);
             var maxDate = new DateTime(2023, 6, 30);
-            var filter = new TimeEntriesRequest
+            var filter = new TimeEntriesFilter
             {
                 From = minDate,
                 To = maxDate,
@@ -88,18 +130,6 @@
             Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
             var result = await ApiAccess.GetUserEmploymentsAsync();
             Assert.That(result, Is.Not.Null);
-        }
-
-        /// <summary>
-        /// Simple null-check for <see cref="CoffeeCupAccess.GetAbsenceRequestsAsync" />.
-        /// </summary>
-        [Test]
-        public async Task GetAbsencyRequests_RetrievesNotNull()
-        {
-            Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
-            var result = await ApiAccess.GetAbsenceRequestsAsync(2024);
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result!.Any(), Is.True);
         }
 
         /// <summary>

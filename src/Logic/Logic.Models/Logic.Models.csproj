@@ -23,15 +23,16 @@
         <PackageIcon>icon.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Copyright>2019-2023 DEVDEER GmbH</Copyright>
-        <Version>3.0.5</Version>
+        <Version>3.0.7</Version>
         <PackageReleaseNotes>
             - Switched to .NET 6 + 8
             - Updated readme.
             - BREAKING:
             - Namespace s was renamed to DataModels.
-            - Suffix "" was removed from types.
+            - Suffix "TransportModels" was removed from types.
             - Suffix "Model" was removed from types.
             - TaskTransportModel is now CoffeeCupTask
+            - Requests are renamed to Filters.
             - Added types for absence requests.
             - Added types for vacation budget requests.
         </PackageReleaseNotes>

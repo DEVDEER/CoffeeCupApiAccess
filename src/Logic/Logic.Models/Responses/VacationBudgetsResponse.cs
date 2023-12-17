@@ -9,7 +9,7 @@
     /// <summary>
     /// Represents the response of the CoffeeCup API when the vacation budgets endpoint is called.
     /// </summary>
-    public class VacationBudgetResponse : BaseResponse
+    public class VacationBudgetsResponse : BaseResponse
     {
         #region properties
 
