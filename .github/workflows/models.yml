@@ -31,7 +31,7 @@ jobs:
         env:
           working-directory: "src/Logic/Logic.Models"
       - name: Publish artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: packages
           path: 'src/Logic/Logic.Models/packs/*.*'
@@ -50,10 +50,12 @@ jobs:
           path: '.'
       - name: Publish Models to Nuget
         run: |
-          ls -la
-          nupkg=(find . -type f -iname "*.nupkg")
-          snupkg=(find . -type f -iname "*.snupkg")
-          echo $nupkg
+          echo "trying..."
+          find . -type f -name "*.nupkg" | head -n 1
+          echo "doing"
+          nupkg=(find . -type f -name "*.nupkg")
+          snupkg=(find . -type f -name "*.snupkg")
+          echo "pushing"
           dotnet nuget push $nupkg -s https://api.nuget.org/v3/index.json --skip-duplicate
           dotnet nuget push $snupkg -s https://api.nuget.org/v3/index.json --skip-duplicate
 
