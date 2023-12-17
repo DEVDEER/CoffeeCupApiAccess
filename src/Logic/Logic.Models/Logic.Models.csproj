@@ -29,7 +29,7 @@
             - Updated readme.
             - BREAKING:
             - Namespace s was renamed to DataModels.
-            - Suffix "" was removed from types.
+            - Suffix "TransportModels" was removed from types.
             - Suffix "Model" was removed from types.
             - TaskTransportModel is now CoffeeCupTask
             - Requests are renamed to Filters.
