@@ -22,7 +22,7 @@
         <PackageIcon>icon.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Copyright>Copyright 2019-2024 DEVDEER GmbH</Copyright>
-        <Version>2.1.0</Version>
+        <Version>3.0.0</Version>
         <PackageReleaseNotes>Please use release-notes.txt!</PackageReleaseNotes>
         <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>

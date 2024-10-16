@@ -1,6 +1,2 @@
-﻿- Switched to .NET 6 + .NET 8
-- Query methods now retrieve arrays instead of IEnumerables.
-- Using dependency injection.
-- Switched to ILogger for traces.
-- Absence requests can be retrieved.
-- BREAKING: Using configuration options instead of RequestModel.
+﻿- Nuget updates.
+- End time will be corrected by the logic. CoffeeCup delivers wrong end times when work is tracked into the next day. This is fixed now.
