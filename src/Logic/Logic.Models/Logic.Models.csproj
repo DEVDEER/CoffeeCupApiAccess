@@ -22,19 +22,9 @@
         <PackageTags>.NET CoffeeCup CoffeeCupApp API Models</PackageTags>
         <PackageIcon>icon.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <Copyright>2019-2023 DEVDEER GmbH</Copyright>
+        <Copyright>2019-2024 DEVDEER GmbH</Copyright>
         <Version>3.0.5</Version>
-        <PackageReleaseNotes>
-            - Switched to .NET 6 + 8
-            - Updated readme.
-            - BREAKING:
-            - Namespace s was renamed to DataModels.
-            - Suffix "" was removed from types.
-            - Suffix "Model" was removed from types.
-            - TaskTransportModel is now CoffeeCupTask
-            - Added types for absence requests.
-            - Added types for vacation budget requests.
-        </PackageReleaseNotes>
+        <PackageReleaseNotes>Please use release-notes.txt!</PackageReleaseNotes>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
@@ -46,4 +36,12 @@
         <None Include="$(OutputPath)/$(AssemblyName).xml" Pack="true" PackagePath="\" />
         <None Include="icon.png" Pack="true" PackagePath="\" />
     </ItemGroup>
+    <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec">
+        <ReadLinesFromFile File="release-notes.txt">
+            <Output TaskParameter="Lines" ItemName="ReleaseNoteLines" />
+        </ReadLinesFromFile>
+        <PropertyGroup>
+            <PackageReleaseNotes>@(ReleaseNoteLines, '%0a')</PackageReleaseNotes>
+        </PropertyGroup>
+    </Target>
 </Project>
