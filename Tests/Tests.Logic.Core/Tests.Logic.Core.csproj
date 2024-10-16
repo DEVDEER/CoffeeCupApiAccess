@@ -7,6 +7,14 @@
         <RootNamespace>devdeer.CoffeeCupApiAccess.Tests.Logic.Core</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
+      <None Remove="appsettings.json" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+    <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
         <PackageReference Include="NUnit" />
         <PackageReference Include="NUnit3TestAdapter" />
@@ -17,8 +25,5 @@
     </ItemGroup>
     <ItemGroup>
         <None Update="appsettings.template.json" />
-        <None Update="appsettings.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
     </ItemGroup>
 </Project>

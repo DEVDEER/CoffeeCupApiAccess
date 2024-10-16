@@ -1,0 +1,2 @@
+﻿- Nuget updates.
+- End time will be corrected by the logic. CoffeeCup delivers wrong end times when work is tracked into the next day. This is fixed now.

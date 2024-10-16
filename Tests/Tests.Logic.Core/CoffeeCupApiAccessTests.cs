@@ -8,6 +8,7 @@
     using CoffeeCupApiAccess.Logic.Models.Filters;
 
     using NUnit.Framework;
+    using NUnit.Framework.Constraints;
 
     /// <summary>
     /// Contains end-2-end-tests for the <see cref="CoffeeCupAccess" />.
@@ -98,12 +99,9 @@
             };
             var result = await ApiAccess.GetTimeEntriesAsync(filter);
             Assert.That(result, Is.Not.Null);
-            if (result == null)
-            {
-                return;
-            }
-            Assert.That(result!.Count, Is.GreaterThan(0));
-            Assert.That(result!.All(r => r.ProjectId == 15639), Is.True);
+            Assert.That(result!.Count(e => e.EndTime < e.StartTime), Is.EqualTo(0));
+            Assert.That(result.Count, Is.GreaterThan(0));
+            Assert.That(result.All(r => r.ProjectId == 15639), Is.True);
             var minResultDate = result.Min(r => r.Day);
             var maxResultDate = result.Max(r => r.Day);
             Assert.That(minDate, Is.LessThanOrEqualTo(minResultDate));

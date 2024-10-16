@@ -241,15 +241,17 @@
                 postProjectFilter = filter.ProjectFilterIds?.Any() ?? false;
             }
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(urlBuilder.ToString());
-            var items = apiResult?.TimeEntries.AsQueryable();
-            if (items != null)
+            if (apiResult == null)
             {
-                if (postProjectFilter && (filter.ProjectFilterIds?.Any() ?? false))
-                {
-                    items = items.Where(i => i.ProjectId != null && i.ProjectId == filter.ProjectFilterIds.First());
-                }
+                return Array.Empty<TimeEntry>();
             }
-            return items?.ToArray();
+            var items = apiResult.TimeEntries.AsQueryable();
+            if (postProjectFilter && (filter.ProjectFilterIds?.Any() ?? false))
+            {
+                items = items.Where(i => i.ProjectId != null && i.ProjectId == filter.ProjectFilterIds.First());
+            }
+            CorrectNegativeTimeEntries(items.ToArray());
+            return items.ToArray();
         }
 
         /// <summary>
@@ -259,10 +261,26 @@
         public async Task<TimeEntry[]?> GetTimeEntriesAsync()
         {
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>("timeEntries");
-            return apiResult?.TimeEntries.OrderBy(p => p.Day)
+            if (apiResult == null)
+            {
+                return Array.Empty<TimeEntry>();
+            }
+            CorrectNegativeTimeEntries(apiResult.TimeEntries);
+            return apiResult.TimeEntries.OrderBy(p => p.Day)
                 .ThenBy(p => p.StartTime)
                 .ThenBy(p => p.UserId)
                 .ToArray();
+        }
+
+        /// <summary>
+        /// Adds the duration of each entry to its start time if the end time is coming smaller out of Coffee Cup.
+        /// </summary>
+        /// <param name="entries">The entries from CoffeeCup.</param>
+        private static void CorrectNegativeTimeEntries(TimeEntry[] entries)
+        {
+            entries.Where(e => e is { StartTime: not null, EndTime: not null } && e.EndTime < e.StartTime)
+                .ToList()
+                .ForEach(entry => entry.EndTime = entry.StartTime!.Value.AddSeconds(entry.Duration));
         }
 
         /// <summary>
@@ -277,7 +295,12 @@
                 @"timeEntries?where={{""day"":{{"">="": ""{0}""}}}}",
                 day.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(relativeUrl);
-            return apiResult?.TimeEntries.OrderBy(p => p.Day)
+            if (apiResult == null)
+            {
+                return Array.Empty<TimeEntry>();
+            }
+            CorrectNegativeTimeEntries(apiResult.TimeEntries);
+            return apiResult.TimeEntries.OrderBy(p => p.Day)
                 .ThenBy(p => p.StartTime)
                 .ThenBy(p => p.UserId)
                 .ToArray();
@@ -297,7 +320,12 @@
                 from.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
                 to.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(relativeUrl);
-            return apiResult?.TimeEntries.OrderBy(p => p.Day)
+            if (apiResult == null)
+            {
+                return Array.Empty<TimeEntry>();
+            }
+            CorrectNegativeTimeEntries(apiResult.TimeEntries);
+            return apiResult.TimeEntries.OrderBy(p => p.Day)
                 .ThenBy(p => p.StartTime)
                 .ThenBy(p => p.UserId)
                 .ToArray();
