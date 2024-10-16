@@ -21,16 +21,9 @@
         <PackageTags>.NET CoffeeCup CoffeeCupApp API HTTP</PackageTags>
         <PackageIcon>icon.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <Copyright>Copyright 2019-2023 DEVDEER GmbH</Copyright>
-        <Version>2.0.2</Version>
-        <PackageReleaseNotes>
-            - Switched to .NET 6 + .NET 8
-            - Query methods now retrieve arrays instead of IEnumerables.
-            - Using dependency injection.
-            - Switched to ILogger for traces.
-            - Absence requests can be retrieved.
-            - BREAKING: Using configuration options instead of RequestModel.
-        </PackageReleaseNotes>
+        <Copyright>Copyright 2019-2024 DEVDEER GmbH</Copyright>
+        <Version>2.1.0</Version>
+        <PackageReleaseNotes>Please use release-notes.txt!</PackageReleaseNotes>
         <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
@@ -47,4 +40,12 @@
         <None Include="$(OutputPath)/$(AssemblyName).xml" Pack="true" PackagePath="\" />
         <None Include="icon.png" Pack="true" PackagePath="\" />
     </ItemGroup>
+    <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec">
+        <ReadLinesFromFile File="release-notes.txt">
+            <Output TaskParameter="Lines" ItemName="ReleaseNoteLines" />
+        </ReadLinesFromFile>
+        <PropertyGroup>
+            <PackageReleaseNotes>@(ReleaseNoteLines, '%0a')</PackageReleaseNotes>
+        </PropertyGroup>
+    </Target>
 </Project>

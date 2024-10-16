@@ -1,0 +1,6 @@
+﻿- Switched to .NET 6 + .NET 8
+- Query methods now retrieve arrays instead of IEnumerables.
+- Using dependency injection.
+- Switched to ILogger for traces.
+- Absence requests can be retrieved.
+- BREAKING: Using configuration options instead of RequestModel.
