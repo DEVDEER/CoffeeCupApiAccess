@@ -48,30 +48,29 @@
                     var services = new ServiceCollection();
                     services.AddLogging();
                     services.AddOptions<ApiOptions>()
-                        .Configure(
-                            a =>
-                            {
-                                if (!File.Exists("appsettings.json"))
-                                {
-                                    return;
-                                }
-                                // the file was found -> map the data
-                                var json = File.ReadAllText("appsettings.json");
-                                var document = JsonSerializer.Deserialize<ApiOptions>(json) ?? throw new ApplicationException("Could not deserialize settings.");
-                                a.ApiVersion = document.ApiVersion;
-                                a.ClientId = document.ClientId;
-                                a.ClientSecret = document.ClientSecret;
-                                a.Origin = document.Origin;
-                                a.Username = document.Username;
-                                a.Password = document.Password;
-                            });
-                    services.AddHttpClient<CoffeeCupAccess>(
-                        c =>
+                        .Configure(a =>
                         {
-                            var options = GetRequiredService<IOptions<ApiOptions>>();
-                            c.BaseAddress = new Uri("https://api.coffeecupapp.com");
-                            c.DefaultRequestHeaders.Add("Origin", options.Value.Origin);
+                            if (!File.Exists("appsettings.json"))
+                            {
+                                return;
+                            }
+                            // the file was found -> map the data
+                            var json = File.ReadAllText("appsettings.json");
+                            var document = JsonSerializer.Deserialize<ApiOptions>(json)
+                                           ?? throw new ApplicationException("Could not deserialize settings.");
+                            a.ApiVersion = document.ApiVersion;
+                            a.ClientId = document.ClientId;
+                            a.ClientSecret = document.ClientSecret;
+                            a.Origin = document.Origin;
+                            a.Username = document.Username;
+                            a.Password = document.Password;
                         });
+                    services.AddHttpClient<CoffeeCupAccess>(c =>
+                    {
+                        var options = GetRequiredService<IOptions<ApiOptions>>();
+                        c.BaseAddress = new Uri("https://api.coffeecupapp.com");
+                        c.DefaultRequestHeaders.Add("Origin", options.Value.Origin);
+                    });
                     _provider = services.BuildServiceProvider();
                 }
                 return _provider;

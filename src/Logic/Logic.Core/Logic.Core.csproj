@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+        <Version>3.0.1</Version>
+        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
         <RootNamespace>devdeer.CoffeeCupApiAccess.Logic.Core</RootNamespace>
         <AssemblyName>CoffeeCupApiAccess.Logic.Core</AssemblyName>
         <LangVersion>latest</LangVersion>
@@ -16,13 +17,12 @@
         <Product>CoffeeCupApiAccess</Product>
         <Description>A .NET library to gain access to the CoffeeCup API.</Description>
         <Summary>A .NET library to gain access to the CoffeeCup API.</Summary>
-        <PackageProjectUrl>https://github.com/DEVDEERZ/CoffeeCupApiAccess</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/DEVDEERZ/CoffeeCupApiAccess</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/DEVDEER/CoffeeCupApiAccess</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/DEVDEER/CoffeeCupApiAccess</RepositoryUrl>
         <PackageTags>.NET CoffeeCup CoffeeCupApp API HTTP</PackageTags>
         <PackageIcon>icon.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <Copyright>Copyright 2019-2024 DEVDEER GmbH</Copyright>
-        <Version>3.0.0</Version>
+        <Copyright>2025 DEVDEER GmbH</Copyright>
         <PackageReleaseNotes>Please use release-notes.txt!</PackageReleaseNotes>
         <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>

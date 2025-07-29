@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
     using System.Net;
@@ -18,11 +17,11 @@
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
 
-    using Models.Options;
-    using Models.Responses;
     using Models.DataModels;
     using Models.DataModels.Analytics;
     using Models.Filters;
+    using Models.Options;
+    using Models.Responses;
 
     /// <summary>
     /// Allows data retrieval from the CoffeeCup API.
@@ -71,18 +70,6 @@
         #region methods
 
         /// <summary>
-        /// Retrieves the list of absence information from the CoffeeCup API.
-        /// </summary>
-        /// <returns>The list of absence information ordered by date and user.</returns>
-        public async Task<Absence[]?> GetAbsencesAsync()
-        {
-            var apiResult = await GetCoffeeCupApiResultAsync<AbsencesReponse>("absences");
-            return apiResult?.Absences.OrderByDescending(p => p.StartDate)
-                .ThenBy(p => p.UserId)
-                .ToArray();
-        }
-
-        /// <summary>
         /// Retrieves the list of absence request information from the CoffeeCup API.
         /// </summary>
         /// <param name="year">The year for which to retrieve the requests or <c>null</c> if all requests should be returned.</param>
@@ -97,10 +84,23 @@
                 urlBuilder.AppendFormat(
                     CultureInfo.InvariantCulture,
                     @"?where={{""startDate"":{{"">="": ""{0}"", ""<="": ""{1}""}}}}",
-                    startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture), endDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
+                    startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
+                    endDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
             }
             var apiResult = await GetCoffeeCupApiResultAsync<AbsenceRequestsResponse>(urlBuilder.ToString());
             return apiResult?.AbsenceRequests.OrderBy(p => p.StartDate)
+                .ToArray();
+        }
+
+        /// <summary>
+        /// Retrieves the list of absence information from the CoffeeCup API.
+        /// </summary>
+        /// <returns>The list of absence information ordered by date and user.</returns>
+        public async Task<Absence[]?> GetAbsencesAsync()
+        {
+            var apiResult = await GetCoffeeCupApiResultAsync<AbsencesReponse>("absences");
+            return apiResult?.Absences.OrderByDescending(p => p.StartDate)
+                .ThenBy(p => p.UserId)
                 .ToArray();
         }
 
@@ -177,7 +177,8 @@
         public async Task<CoffeeCupTask[]?> GetTasksAsync()
         {
             var apiResult = await GetCoffeeCupApiResultAsync<CoffeeCupTasksResponse>("tasks");
-            return apiResult?.Tasks.OrderBy(p => p.Label).ToArray();
+            return apiResult?.Tasks.OrderBy(p => p.Label)
+                .ToArray();
         }
 
         /// <summary>
@@ -212,7 +213,7 @@
         /// <param name="filter">The optional filter for the request.</param>
         /// <returns>The list of matching results.</returns>
         /// <exception cref="ArgumentException">Is thrown if from or to are invalid.</exception>
-        public async Task<TimeEntry[]?> GetTimeEntriesAsync(TimeEntriesFilter? filter = null)
+        public async Task<TimeEntry[]?> GetTimeEntriesAsync(TimeEntriesFilter? filter)
         {
             var urlBuilder = new StringBuilder("timeEntries");
             var postProjectFilter = false;
@@ -243,10 +244,10 @@
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(urlBuilder.ToString());
             if (apiResult == null)
             {
-                return Array.Empty<TimeEntry>();
+                return [];
             }
             var items = apiResult.TimeEntries.AsQueryable();
-            if (postProjectFilter && (filter.ProjectFilterIds?.Any() ?? false))
+            if (postProjectFilter && (filter?.ProjectFilterIds?.Any() ?? false))
             {
                 items = items.Where(i => i.ProjectId != null && i.ProjectId == filter.ProjectFilterIds.First());
             }
@@ -263,24 +264,13 @@
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>("timeEntries");
             if (apiResult == null)
             {
-                return Array.Empty<TimeEntry>();
+                return [];
             }
             CorrectNegativeTimeEntries(apiResult.TimeEntries);
             return apiResult.TimeEntries.OrderBy(p => p.Day)
                 .ThenBy(p => p.StartTime)
                 .ThenBy(p => p.UserId)
                 .ToArray();
-        }
-
-        /// <summary>
-        /// Adds the duration of each entry to its start time if the end time is coming smaller out of Coffee Cup.
-        /// </summary>
-        /// <param name="entries">The entries from CoffeeCup.</param>
-        private static void CorrectNegativeTimeEntries(TimeEntry[] entries)
-        {
-            entries.Where(e => e is { StartTime: not null, EndTime: not null } && e.EndTime < e.StartTime)
-                .ToList()
-                .ForEach(entry => entry.EndTime = entry.StartTime!.Value.AddSeconds(entry.Duration));
         }
 
         /// <summary>
@@ -297,7 +287,7 @@
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(relativeUrl);
             if (apiResult == null)
             {
-                return Array.Empty<TimeEntry>();
+                return [];
             }
             CorrectNegativeTimeEntries(apiResult.TimeEntries);
             return apiResult.TimeEntries.OrderBy(p => p.Day)
@@ -322,7 +312,7 @@
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(relativeUrl);
             if (apiResult == null)
             {
-                return Array.Empty<TimeEntry>();
+                return [];
             }
             CorrectNegativeTimeEntries(apiResult.TimeEntries);
             return apiResult.TimeEntries.OrderBy(p => p.Day)
@@ -394,10 +384,7 @@
             var urlBuilder = new StringBuilder("vacationbudgets");
             if (filter is { UserId: not null })
             {
-                urlBuilder.AppendFormat(
-                    CultureInfo.InvariantCulture,
-                    "?user[]={0}",
-                    filter.UserId);
+                urlBuilder.AppendFormat(CultureInfo.InvariantCulture, "?user[]={0}", filter.UserId);
             }
             if (filter is { Date: not null })
             {
@@ -410,6 +397,17 @@
             _logger.LogDebug(urlBuilder.ToString());
             var apiResult = await GetCoffeeCupApiResultAsync<VacationBudgetsResponse>(urlBuilder.ToString());
             return apiResult?.VacationBudgets;
+        }
+
+        /// <summary>
+        /// Adds the duration of each entry to its start time if the end time is coming smaller out of Coffee Cup.
+        /// </summary>
+        /// <param name="entries">The entries from CoffeeCup.</param>
+        private static void CorrectNegativeTimeEntries(TimeEntry[] entries)
+        {
+            entries.Where(e => e is { StartTime: not null, EndTime: not null } && e.EndTime < e.StartTime)
+                .ToList()
+                .ForEach(entry => entry.EndTime = entry.StartTime!.Value.AddSeconds(entry.Duration));
         }
 
         /// <summary>
