@@ -1,4 +1,4 @@
-# devdeer.CoffeeCupModels
+﻿# devdeer.CoffeeCupModels
 
 ## Disclaimer
 
@@ -12,10 +12,18 @@ This package contains models and other basic types needed for the package:
 
 ## About DEVDEER
 
-DEVDEER is a company from Magdeburg, Germany which is specialized in consulting, project management and development. We are very focussed on Microsoft Azure as a platform to run our products and solutions in the cloud. So all of our backend components usually runs in this environment and is developed using .NET. In the frontend area we are using react and a huge bunch of packages to build our UIs.
+DEVDEER is a company from Magdeburg, Germany which is specialized in consulting, project management and development. We
+are very focussed on Microsoft Azure as a platform to run our products and solutions in the cloud. So all of our backend
+components usually runs in this environment and is developed using .NET. In the frontend area we are using react and a
+huge bunch of packages to build our UIs.
 
 You can find us online:
 
-- [GitHub](https://github.com/devdeer)
-- [Twitter](https://twitter.com/devdeerz)
-- [Youtube](https://m.youtube.com/@real-codingfreaks)
+[![Website](https://img.shields.io/badge/Website-devdeer.com-304CF4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://devdeer.com)
+
+[![GitHub](https://img.shields.io/badge/GitHub-devdeer-1E2044?style=for-the-badge&logo=github)](https://github.com/devdeer)
+![GitHub Org's stars](https://img.shields.io/github/stars/devdeer?style=for-the-badge&color=dfb043)
+
+[![YouTube](https://img.shields.io/badge/YouTube-Real_Coding_Freaks-7CC3CD?style=for-the-badge&logo=youtube&logoColor=white)](https://m.youtube.com/@real-codingfreaks)
+![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCRc_zRmw1Lql59cAqT85cmA?style=for-the-badge&color=FC0434)
+![YouTube Channel Views](https://img.shields.io/youtube/channel/views/UCRc_zRmw1Lql59cAqT85cmA?style=for-the-badge&color=FC0434)

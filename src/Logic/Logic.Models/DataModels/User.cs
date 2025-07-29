@@ -153,7 +153,7 @@
         public string? Street { get; set; }
 
         [JsonPropertyName("timeEntryBackgroundColor")]
-        public TimeEntryBackgroundColorType TimeEntryBackgroundColor { get; set; }
+        public TimeEntryBackgroundColorType? TimeEntryBackgroundColor { get; set; }
 
         [JsonPropertyName("timeFormat")]
         public string? TimeFormat { get; set; }

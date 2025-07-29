@@ -1,3 +1,4 @@
-﻿- Updated copyright.
-
-
+﻿- Breaking: No support for .NET 6 anymore.
+- Support for .NET 9
+- User.TimeEntryBackgroundColor is nullable now.
+- Nuget updates

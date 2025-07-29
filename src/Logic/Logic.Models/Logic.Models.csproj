@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+        <Version>4.0.0</Version>
+        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
         <RootNamespace>devdeer.CoffeeCupApiAccess.Logic.Models</RootNamespace>
         <AssemblyName>CoffeeCupApiAccess.Logic.Models</AssemblyName>
         <LangVersion>latest</LangVersion>
@@ -22,8 +23,7 @@
         <PackageTags>.NET CoffeeCup CoffeeCupApp API Models</PackageTags>
         <PackageIcon>icon.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <Copyright>2019-2024 DEVDEER GmbH</Copyright>
-        <Version>3.1.0</Version>
+        <Copyright>2019-2025 DEVDEER GmbH</Copyright>
         <PackageReleaseNotes>Please use release-notes.txt!</PackageReleaseNotes>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>

@@ -6,8 +6,6 @@
 
     using DataModels;
 
-    using Models;
-
     /// <summary>
     /// Represents the response of the CoffeeCup API when the absences-endpoint is called.
     /// </summary>

@@ -15,31 +15,31 @@
         public int AbsenceTypeId { get; set; }
 
         [JsonPropertyName("senderComment")]
-        public string SenderComment { get; set; } = default!;
+        public string SenderComment { get; set; } = null!;
 
         [JsonPropertyName("receiverComment")]
-        public string? ReceiverComment { get; set; } = default!;
+        public string? ReceiverComment { get; set; } = null!;
 
         [JsonPropertyName("createdAt")]
-        public DateTime CreatedAt { get; set; } = default!;
+        public DateTime CreatedAt { get; set; }
 
         [JsonPropertyName("endDate")]
-        public DateTime? EndDate { get; set; } = default!;
+        public DateTime? EndDate { get; set; } = null!;
 
         [JsonPropertyName("id")]
         public int Id { get; set; }
 
         [JsonPropertyName("rangeType")]
-        public string RangeType { get; set; } = default!;
+        public string RangeType { get; set; } = null!;
 
         [JsonPropertyName("startDate")]
-        public DateTime StartDate { get; set; } = default!;
+        public DateTime StartDate { get; set; }
 
         [JsonPropertyName("updatedAt")]
-        public DateTime UpdatedAt { get; set; } = default!;
+        public DateTime UpdatedAt { get; set; }
 
         [JsonPropertyName("state")]
-        public string State { get; set; } = default;
+        public string State { get; set; } = null!;
 
         [JsonPropertyName("sender")]
         public int SenderId { get; set; }
