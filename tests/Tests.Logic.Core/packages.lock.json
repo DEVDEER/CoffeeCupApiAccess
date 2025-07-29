@@ -233,7 +233,7 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Http": "[9.0.7, )",
-          "devdeer.CoffeeCupModels": "[3.1.0, )",
+          "devdeer.CoffeeCupModels": "[4.0.1, )",
           "devdeer.Libraries.Utilities": "[3.0.6, )"
         }
       },

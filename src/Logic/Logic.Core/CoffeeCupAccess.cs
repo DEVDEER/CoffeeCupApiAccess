@@ -287,7 +287,7 @@
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(relativeUrl);
             if (apiResult == null)
             {
-                return Array.Empty<TimeEntry>();
+                return [];
             }
             CorrectNegativeTimeEntries(apiResult.TimeEntries);
             return apiResult.TimeEntries.OrderBy(p => p.Day)
@@ -312,7 +312,7 @@
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>(relativeUrl);
             if (apiResult == null)
             {
-                return Array.Empty<TimeEntry>();
+                return [];
             }
             CorrectNegativeTimeEntries(apiResult.TimeEntries);
             return apiResult.TimeEntries.OrderBy(p => p.Day)

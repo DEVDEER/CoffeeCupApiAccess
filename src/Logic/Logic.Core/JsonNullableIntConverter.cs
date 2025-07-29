@@ -18,7 +18,7 @@
         public override int? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             var ok = reader.TryGetInt32(out var tmp);
-            return ok ? tmp : default(int?);
+            return ok ? tmp : null;
         }
 
         /// <inheritdoc />
