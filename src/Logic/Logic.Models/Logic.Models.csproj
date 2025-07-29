@@ -18,8 +18,8 @@
         <Product>CoffeeCupApiAccess</Product>
         <Description>Contains the models necessary for the CoffeeCup API Access in NuGet package devdeer.CoffeeCupApiAccess.</Description>
         <Summary>Contains the models necessary for the CoffeeCup API Access in NuGet package devdeer.CoffeeCupApiAccess.</Summary>
-        <PackageProjectUrl>https://github.com/DEVDEERZ/CoffeeCupApiAccess</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/DEVDEERZ/CoffeeCupApiAccess</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/DEVDEER/CoffeeCupApiAccess</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/DEVDEER/CoffeeCupApiAccess</RepositoryUrl>
         <PackageTags>.NET CoffeeCup CoffeeCupApp API Models</PackageTags>
         <PackageIcon>icon.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
