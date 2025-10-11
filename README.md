@@ -6,7 +6,7 @@ We are using [CoffeeCupApp](https://www.coffeecupapp.com) for time tracking on o
 
 This library supports in accessing the public [API](https://dev.coffeecupapp.com/) which is developed at [Github](https://github.com/coffeecupapp/api).
 
-We are currently targetting version 1.0.2 of the CoffeeCup API.
+We are currently targeting version 1.0.2 of the CoffeeCup API.
 
 # Known limitations
 
@@ -15,6 +15,13 @@ We are currently targetting version 1.0.2 of the CoffeeCup API.
 - No unit tests where written to this point.
 - The retry-policy in the repository is poor (to say the least).
 - Most of the optional parameters for queries are not supported.
+
+# Local testing
+
+The unit tests need to provide some secret values. In order to do this 
+copy the `appsettings.template.json` into the test folder naming it
+`appsettings.json`. This file is ignored by git. So the fill in
+the desired values and run your tests again.
 
 # Contribution
 

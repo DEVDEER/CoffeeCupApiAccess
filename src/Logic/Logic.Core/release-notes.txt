@@ -1,2 +1,3 @@
-﻿- Breaking: No support for .NET 6 anymore.
-- Support for .NET 9
+﻿- Nuget updates.
+- Switched to ValueTask<> as return type instead of Task<>.
+- CoffeeCupAccess now is sealed.
