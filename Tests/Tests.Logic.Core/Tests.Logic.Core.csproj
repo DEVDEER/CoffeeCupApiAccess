@@ -1,19 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <IsPackable>false</IsPackable>
         <Nullable>enable</Nullable>
         <AssemblyName>CoffeeCupApiAccess.Tests.Logic.Core</AssemblyName>
         <RootNamespace>devdeer.CoffeeCupApiAccess.Tests.Logic.Core</RootNamespace>
-    </PropertyGroup>
-    <ItemGroup>
-      <None Remove="appsettings.json" />
-    </ItemGroup>
-    <ItemGroup>
-      <Content Include="appsettings.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-    </ItemGroup>
+  </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
         <PackageReference Include="NUnit" />
@@ -25,5 +17,8 @@
     </ItemGroup>
     <ItemGroup>
         <None Update="appsettings.template.json" />
+        <None Update="appsettings.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 </Project>

@@ -26,7 +26,7 @@
     /// <summary>
     /// Allows data retrieval from the CoffeeCup API.
     /// </summary>
-    public class CoffeeCupAccess
+    public sealed class CoffeeCupAccess
     {
         #region member vars
 
@@ -74,7 +74,7 @@
         /// </summary>
         /// <param name="year">The year for which to retrieve the requests or <c>null</c> if all requests should be returned.</param>
         /// <returns>The list of absence request information ordered by label.</returns>
-        public async Task<AbsenceRequest[]?> GetAbsenceRequestsAsync(int? year = null)
+        public async ValueTask<AbsenceRequest[]?> GetAbsenceRequestsAsync(int? year = null)
         {
             var urlBuilder = new StringBuilder("absenceRequests");
             if (year.HasValue)
@@ -96,7 +96,7 @@
         /// Retrieves the list of absence information from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of absence information ordered by date and user.</returns>
-        public async Task<Absence[]?> GetAbsencesAsync()
+        public async ValueTask<Absence[]?> GetAbsencesAsync()
         {
             var apiResult = await GetCoffeeCupApiResultAsync<AbsencesReponse>("absences");
             return apiResult?.Absences.OrderByDescending(p => p.StartDate)
@@ -108,7 +108,7 @@
         /// Retrieves the list of absence type information from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of absence type information ordered by label.</returns>
-        public async Task<AbsenceType[]?> GetAbsenceTypesAsync()
+        public async ValueTask<AbsenceType[]?> GetAbsenceTypesAsync()
         {
             var apiResult = await GetCoffeeCupApiResultAsync<AbsenceTypesResponse>("absenceTypes");
             return apiResult?.AbsenceTypes.OrderBy(p => p.Label)
@@ -119,7 +119,7 @@
         /// Retrieves the list of client information from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of client information.</returns>
-        public async Task<Client[]?> GetClientsAsync()
+        public async ValueTask<Client[]?> GetClientsAsync()
         {
             var apiResult = await GetCoffeeCupApiResultAsync<ClientsResponseModel>("clients");
             return apiResult?.Clients.OrderBy(p => p.Name)
@@ -130,7 +130,7 @@
         /// Retrieves the list of color information from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of color information.</returns>
-        public async Task<Color[]?> GetColorsAsync()
+        public async ValueTask<Color[]?> GetColorsAsync()
         {
             var apiResult = await GetCoffeeCupApiResultAsync<ColorsResponse>("colors");
             return apiResult?.Colors.OrderBy(p => p.Label)
@@ -142,7 +142,7 @@
         /// </summary>
         /// <param name="projectId">The unique id of the project in CoffeeCup.</param>
         /// <returns>The project information or <c>null</c> if the project wasn't found.</returns>
-        public async Task<ProjectAnalytics?> GetProjectAnalyticsAsync(int projectId)
+        public async ValueTask<ProjectAnalytics?> GetProjectAnalyticsAsync(int projectId)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<ProjectAnalyticsResponse>(
                 $"analytics/projects?project={projectId}");
@@ -153,7 +153,7 @@
         /// Retrieves the list of project information from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of project information.</returns>
-        public async Task<Project[]?> GetProjectsAsync()
+        public async ValueTask<Project[]?> GetProjectsAsync()
         {
             var apiResult = await GetCoffeeCupApiResultAsync<ProjectsResponseModel>("projects");
             return apiResult?.Projects.OrderBy(p => p.Name)
@@ -164,7 +164,7 @@
         /// Retrieves the list of task assignments from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of task assignments.</returns>
-        public async Task<CoffeeCupTaskAssignment[]?> GetTaskAssignmentsAsync()
+        public async ValueTask<CoffeeCupTaskAssignment[]?> GetTaskAssignmentsAsync()
         {
             var apiResult = await GetCoffeeCupApiResultAsync<CoffeeCupTaskAssignmentsResponse>("taskAssignments");
             return apiResult?.TaskAssignments.ToArray();
@@ -174,7 +174,7 @@
         /// Retrieves the list of task information from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of task information.</returns>
-        public async Task<CoffeeCupTask[]?> GetTasksAsync()
+        public async ValueTask<CoffeeCupTask[]?> GetTasksAsync()
         {
             var apiResult = await GetCoffeeCupApiResultAsync<CoffeeCupTasksResponse>("tasks");
             return apiResult?.Tasks.OrderBy(p => p.Label)
@@ -188,7 +188,7 @@
         /// <param name="to">The end date for the analysis result.</param>
         /// <returns>The list of matching analytics results.</returns>
         /// <exception cref="ArgumentException">Is thrown if from or to are invalid.</exception>
-        public async Task<TimeEntryAnalytics[]?> GetTimeEntriesAnalyticsAsync(DateTime from, DateTime to)
+        public async ValueTask<TimeEntryAnalytics[]?> GetTimeEntriesAnalyticsAsync(DateTime from, DateTime to)
         {
             if (from >= DateTime.Now)
             {
@@ -213,7 +213,7 @@
         /// <param name="filter">The optional filter for the request.</param>
         /// <returns>The list of matching results.</returns>
         /// <exception cref="ArgumentException">Is thrown if from or to are invalid.</exception>
-        public async Task<TimeEntry[]?> GetTimeEntriesAsync(TimeEntriesFilter? filter)
+        public async ValueTask<TimeEntry[]?> GetTimeEntriesAsync(TimeEntriesFilter? filter)
         {
             var urlBuilder = new StringBuilder("timeEntries");
             var postProjectFilter = false;
@@ -259,7 +259,7 @@
         /// Retrieves the list of time entries from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of time entries.</returns>
-        public async Task<TimeEntry[]?> GetTimeEntriesAsync()
+        public async ValueTask<TimeEntry[]?> GetTimeEntriesAsync()
         {
             var apiResult = await GetCoffeeCupApiResultAsync<TimeEntriesResponseModel>("timeEntries");
             if (apiResult == null)
@@ -278,7 +278,7 @@
         /// </summary>
         /// <param name="day">The day for which to retrieve the entries.</param>
         /// <returns>The list of time entries.</returns>
-        public async Task<TimeEntry[]?> GetTimeEntriesByDayAsync(DateTime day)
+        public async ValueTask<TimeEntry[]?> GetTimeEntriesByDayAsync(DateTime day)
         {
             var relativeUrl = string.Format(
                 CultureInfo.InvariantCulture,
@@ -302,7 +302,7 @@
         /// <param name="from">The starting day for which to retrieve the entries.</param>
         /// <param name="to">The ending day for which to retrieve the entries.</param>
         /// <returns>The list of time entries.</returns>
-        public async Task<TimeEntry[]?> GetTimeEntriesByDayRangeAsync(DateTime from, DateTime to)
+        public async ValueTask<TimeEntry[]?> GetTimeEntriesByDayRangeAsync(DateTime from, DateTime to)
         {
             var relativeUrl = string.Format(
                 CultureInfo.InvariantCulture,
@@ -325,7 +325,7 @@
         /// Retrieves the list of user assignments from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of user assignments.</returns>
-        public async Task<UserAssignment[]?> GetUserAssignmentsAsync()
+        public async ValueTask<UserAssignment[]?> GetUserAssignmentsAsync()
         {
             var apiResult = await GetCoffeeCupApiResultAsync<UserAssignmentsResponse>("userAssignments");
             return apiResult?.UserAssignments;
@@ -335,7 +335,7 @@
         /// Retrieves the list of user employments from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of user employments.</returns>
-        public async Task<UserEmployment[]?> GetUserEmploymentsAsync()
+        public async ValueTask<UserEmployment[]?> GetUserEmploymentsAsync()
         {
             var apiResult = await GetCoffeeCupApiResultAsync<UserEmploymentsResponse>("userEmployments");
             return apiResult?.UserEmployments;
@@ -346,7 +346,7 @@
         /// </summary>
         /// <param name="onlyValid">If set to <c>true</c> only currently valid users will be loaded.</param>
         /// <returns>The list of user information.</returns>
-        public async Task<User[]?> GetUsersAsync(bool onlyValid = true)
+        public async ValueTask<User[]?> GetUsersAsync(bool onlyValid = true)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<UsersResponse>("users");
             var result = apiResult?.Users.OrderBy(u => u.Lastname)
@@ -362,7 +362,7 @@
         /// </summary>
         /// <param name="onlyValid">If set to <c>true</c> only currently valid users will be loaded.</param>
         /// <returns>The list of user information.</returns>
-        public async Task<SimpleUser[]?> GetUsersSimpleAsync(bool onlyValid = true)
+        public async ValueTask<SimpleUser[]?> GetUsersSimpleAsync(bool onlyValid = true)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<UsersResponse>("users");
             var result = apiResult?.Users.Select(u => u.ToSimple())
@@ -379,7 +379,7 @@
         /// </summary>
         /// <param name="filter">Optional filter too be applied.</param>
         /// <returns>The list of vacation budgets.</returns>
-        public async Task<VacationBudget[]?> GetVacationBudgetsAsync(VacationBudgetsFilter? filter = null)
+        public async ValueTask<VacationBudget[]?> GetVacationBudgetsAsync(VacationBudgetsFilter? filter = null)
         {
             var urlBuilder = new StringBuilder("vacationbudgets");
             if (filter is { UserId: not null })
@@ -414,7 +414,7 @@
         /// Retrieves the currently valid or an updated bearer token from the CoffeeCup API.
         /// </summary>
         /// <returns>The a string of the pattern "Bearer {token}" if the operation succeeded.</returns>
-        private async Task<string> GetBearerTokenAsync()
+        private async ValueTask<string> GetBearerTokenAsync()
         {
             if (_bearerToken == null
                 || (_barerTokenInvalidationTime.HasValue && _barerTokenInvalidationTime.Value < DateTime.Now))
@@ -465,7 +465,7 @@
         /// <typeparam name="TResult">The type the result is expected to be.</typeparam>
         /// <param name="relativeUrl">The relative URL to the CoffeeCup API without the configured base address.</param>
         /// <returns>The result.</returns>
-        private async Task<TResult?> GetCoffeeCupApiResultAsync<TResult>(string relativeUrl)
+        private async ValueTask<TResult?> GetCoffeeCupApiResultAsync<TResult>(string relativeUrl)
         {
             if (_barerTokenInvalidationTime <= DateTime.Now)
             {
