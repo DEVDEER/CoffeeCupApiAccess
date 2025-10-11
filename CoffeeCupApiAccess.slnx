@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/.solution/">
+    <File Path=".gitignore" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Logic/">
+    <Project Path="src/Logic/Logic.Core/Logic.Core.csproj" />
+    <Project Path="src/Logic/Logic.Models/Logic.Models.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="tests/Tests.Logic.Core/Tests.Logic.Core.csproj" />
+  </Folder>
+</Solution>
