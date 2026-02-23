@@ -109,6 +109,9 @@
         [JsonPropertyName("roundingType")]
         public int RoundingType { get; set; }
 
+        /// <summary>
+        /// The start-date for the project.
+        /// </summary>
         [JsonPropertyName("startDate")]
         public DateTime? StartDate { get; set; }
 
@@ -117,6 +120,12 @@
         /// </summary>
         [JsonPropertyName("status")]
         public Status Status { get; set; }
+
+        /// <summary>
+        /// The current status of the project. If <c>null</c>, the project is archived.
+        /// </summary>
+        [JsonPropertyName("projectState")]
+        public State? State { get; set; }
 
         /// <summary>
         /// The timestamp when the project was updated last.
