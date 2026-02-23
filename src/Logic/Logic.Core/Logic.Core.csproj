@@ -8,6 +8,7 @@
         <Title>DEVDEER CoffeeCup/Aerion Api Access</Title>
         <Description>A .NET library to gain access to the CoffeeCup/Aerion API.</Description>
         <Summary>A .NET library to gain access to the CoffeeCup/Aerion API.</Summary>
+        <DocumentationFile>bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="devdeer.CoffeeCupModels" />

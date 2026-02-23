@@ -9,5 +9,6 @@
         <NoWarn>1591</NoWarn>
         <Description>Contains the models necessary for the CoffeeCup/Aerion API Access in NuGet package devdeer.CoffeeCupApiAccess.</Description>
         <Summary>Contains the models necessary for the CoffeeCup/Aerion API Access in NuGet package devdeer.CoffeeCupApiAccess.</Summary>
+        <DocumentationFile>bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
     </PropertyGroup>
 </Project>
