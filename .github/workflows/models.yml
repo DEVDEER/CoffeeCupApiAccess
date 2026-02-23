@@ -1,56 +1,56 @@
-name: "CoffeeCup Models CI/CD"
+name: 'CoffeeCup Models CI/CD'
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - "src/Logic/Logic.Models/**"
-  workflow_dispatch:
+    pull_request:
+        branches: [main]
+        paths:
+            - 'src/Logic/Logic.Models/**'
+    workflow_dispatch:
 
 concurrency:
-  group: ${{ github.workflow }}
-  cancel-in-progress: true
+    group: ${{ github.workflow }}
+    cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-dotnet@v3
-        with:
-          global-json-file: global.json
-          cache: false
-          cache-dependency-path: src/Logic/Logic.Models/packages.lock.json
-      - run: dotnet restore src/Logic/Logic.Models/Logic.Models.csproj
-      - name: Build
-        run: dotnet build src/Logic/Logic.Models/Logic.Models.csproj
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-dotnet@v3
+              with:
+                  global-json-file: global.json
+                  cache: false
+                  cache-dependency-path: src/Logic/Logic.Models/packages.lock.json
+            - run: dotnet restore src/Logic/Logic.Models/Logic.Models.csproj
+            - name: Build
+              run: dotnet build src/Logic/Logic.Models/Logic.Models.csproj
+              env:
+                  working-directory: 'src/Logic/Logic.Models'
+            - name: Package
+              run: dotnet pack src/Logic/Logic.Models/Logic.Models.csproj -c Release -o src/Logic/Logic.Models/packs
+              env:
+                  working-directory: 'src/Logic/Logic.Models'
+            - name: Publish artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: packages
+                  path: 'src/Logic/Logic.Models/packs/*.*'
+    publish:
+        needs: build
+        environment: 'nuget'
+        runs-on: ubuntu-latest
         env:
-          working-directory: "src/Logic/Logic.Models"
-      - name: Package
-        run: dotnet pack src/Logic/Logic.Models/Logic.Models.csproj -c Release -o src/Logic/Logic.Models/packs
-        env:
-          working-directory: "src/Logic/Logic.Models"
-      - name: Publish artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: packages
-          path: "src/Logic/Logic.Models/packs/*.*"
-  publish:
-    needs: build
-    environment: "nuget"
-    runs-on: ubuntu-latest
-    env:
-      working-directory: "src/Logic/Logic.Models"
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: packages
-          path: "."
-          secret: ${{ secrets.NUGET_TOKEN }}
-      - name: Publish Models to Nuget
-        run: |
-          nupkg=$(find . -type f -name "*.nupkg" | head -n 1)
-          snupkg=$(find . -type f -name "*.snupkg" | head -n 1)
-          echo ${#secret}
-          dotnet nuget push $nupkg -s https://api.nuget.org/v3/index.json -k "$secret" --skip-duplicate
+            working-directory: 'src/Logic/Logic.Models'
+        steps:
+            - name: Download artifact
+              uses: actions/download-artifact@v4
+              with:
+                  name: packages
+                  path: '.'
+                  secret: ${{ secrets.NUGET_TOKEN }}
+            - name: Publish Models to Nuget
+              run: |
+                  nupkg=$(find . -type f -name "*.nupkg" | head -n 1)
+                  snupkg=$(find . -type f -name "*.snupkg" | head -n 1)
+                  dotnet nuget list source
+                  dotnet nuget push $nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_TOKEN }} --skip-duplicate
