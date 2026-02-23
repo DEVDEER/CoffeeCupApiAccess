@@ -1,51 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="$(MSBuildThisFileDirectory)../../Base.props"/>
     <PropertyGroup>
         <Version>3.1.2</Version>
-        <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
         <RootNamespace>devdeer.CoffeeCupApiAccess.Logic.Core</RootNamespace>
         <AssemblyName>CoffeeCupApiAccess.Logic.Core</AssemblyName>
-        <LangVersion>latest</LangVersion>
         <PackageId>devdeer.CoffeeCupApiAccess</PackageId>
-        <Title>DEVDEER CoffeeCup Api Access</Title>
-        <Nullable>Enable</Nullable>
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <DocumentationFile>bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
-        <Authors>DEVDEER</Authors>
-        <Product>CoffeeCupApiAccess</Product>
-        <Description>A .NET library to gain access to the CoffeeCup API.</Description>
-        <Summary>A .NET library to gain access to the CoffeeCup API.</Summary>
-        <PackageProjectUrl>https://github.com/DEVDEER/CoffeeCupApiAccess</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/DEVDEER/CoffeeCupApiAccess</RepositoryUrl>
-        <PackageTags>.NET CoffeeCup CoffeeCupApp API HTTP</PackageTags>
-        <PackageIcon>icon.png</PackageIcon>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-        <Copyright>2025 DEVDEER GmbH</Copyright>
-        <PackageReleaseNotes>Please use release-notes.txt!</PackageReleaseNotes>
-        <RepositoryType>git</RepositoryType>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+        <Title>DEVDEER CoffeeCup/Aerion Api Access</Title>
+        <Description>A .NET library to gain access to the CoffeeCup/Aerion API.</Description>
+        <Summary>A .NET library to gain access to the CoffeeCup/Aerion API.</Summary>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="devdeer.CoffeeCupModels" />
         <PackageReference Include="devdeer.Libraries.Utilities" />
         <PackageReference Include="Microsoft.Extensions.Http" />
     </ItemGroup>
-    <ItemGroup>
-        <None Include="README.md" Pack="true" PackagePath="\" />
-        <None Include="$(OutputPath)/$(AssemblyName).xml" Pack="true" PackagePath="\" />
-        <None Include="icon.png" Pack="true" PackagePath="\" />
-    </ItemGroup>
-    <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec">
-        <ReadLinesFromFile File="release-notes.txt">
-            <Output TaskParameter="Lines" ItemName="ReleaseNoteLines" />
-        </ReadLinesFromFile>
-        <PropertyGroup>
-            <PackageReleaseNotes>@(ReleaseNoteLines, '%0a')</PackageReleaseNotes>
-        </PropertyGroup>
-    </Target>
 </Project>

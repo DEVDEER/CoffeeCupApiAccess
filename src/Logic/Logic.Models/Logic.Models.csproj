@@ -1,47 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="$(MSBuildThisFileDirectory)../../Base.props"/>
     <PropertyGroup>
-        <Version>4.0.3</Version>
-        <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+        <Version>4.1.0</Version>
         <RootNamespace>devdeer.CoffeeCupApiAccess.Logic.Models</RootNamespace>
         <AssemblyName>CoffeeCupApiAccess.Logic.Models</AssemblyName>
-        <LangVersion>latest</LangVersion>
-        <NoWarn>1591</NoWarn>
         <PackageId>devdeer.CoffeeCupModels</PackageId>
         <Title>DEVDEER CoffeeCup API Access Models</Title>
-        <Nullable>Enable</Nullable>
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <DocumentationFile>bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
-        <Authors>DEVDEER</Authors>
-        <Product>CoffeeCupApiAccess</Product>
-        <Description>Contains the models necessary for the CoffeeCup API Access in NuGet package devdeer.CoffeeCupApiAccess.</Description>
-        <Summary>Contains the models necessary for the CoffeeCup API Access in NuGet package devdeer.CoffeeCupApiAccess.</Summary>
-        <PackageProjectUrl>https://github.com/DEVDEER/CoffeeCupApiAccess</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/DEVDEER/CoffeeCupApiAccess</RepositoryUrl>
-        <PackageTags>.NET CoffeeCup CoffeeCupApp API Models</PackageTags>
-        <PackageIcon>icon.png</PackageIcon>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-        <Copyright>2025 DEVDEER GmbH</Copyright>
-        <PackageReleaseNotes>Please use release-notes.txt!</PackageReleaseNotes>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <RepositoryType>git</RepositoryType>
-        <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+        <NoWarn>1591</NoWarn>
+        <Description>Contains the models necessary for the CoffeeCup/Aerion API Access in NuGet package devdeer.CoffeeCupApiAccess.</Description>
+        <Summary>Contains the models necessary for the CoffeeCup/Aerion API Access in NuGet package devdeer.CoffeeCupApiAccess.</Summary>
     </PropertyGroup>
-    <ItemGroup>
-        <None Include="README.md" Pack="true" PackagePath="\" />
-        <None Include="$(OutputPath)/$(AssemblyName).xml" Pack="true" PackagePath="\" />
-        <None Include="icon.png" Pack="true" PackagePath="\" />
-    </ItemGroup>
-    <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec">
-        <ReadLinesFromFile File="release-notes.txt">
-            <Output TaskParameter="Lines" ItemName="ReleaseNoteLines" />
-        </ReadLinesFromFile>
-        <PropertyGroup>
-            <PackageReleaseNotes>@(ReleaseNoteLines, '%0a')</PackageReleaseNotes>
-        </PropertyGroup>
-    </Target>
 </Project>
