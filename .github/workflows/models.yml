@@ -36,7 +36,6 @@ jobs:
           name: packages
           path: "src/Logic/Logic.Models/packs/*.*"
   publish:
-    secrets: inherit
     needs: build
     environment: "nuget"
     runs-on: ubuntu-latest
