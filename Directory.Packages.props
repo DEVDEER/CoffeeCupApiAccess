@@ -5,11 +5,11 @@
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="devdeer.CoffeeCupModels" Version="4.0.2" />
-    <PackageVersion Include="devdeer.Libraries.Utilities" Version="3.1.13" />
-    <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.9" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
-    <PackageVersion Include="NUnit" Version="4.4.0" />
-    <PackageVersion Include="NUnit3TestAdapter" Version="5.2.0" />
+    <PackageVersion Include="devdeer.CoffeeCupModels" Version="4.0.3" />
+    <PackageVersion Include="devdeer.Libraries.Utilities" Version="4.0.5" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.3" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageVersion Include="NUnit" Version="4.5.0" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="6.1.0" />
   </ItemGroup>
 </Project>

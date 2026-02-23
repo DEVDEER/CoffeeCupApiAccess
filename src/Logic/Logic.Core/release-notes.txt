@@ -1,3 +1,5 @@
 ﻿- Nuget updates.
 - Switched to ValueTask<> as return type instead of Task<>.
 - CoffeeCupAccess now is sealed.
+- .NET 10 is supported
+- Project endpoints are delivering state now.
