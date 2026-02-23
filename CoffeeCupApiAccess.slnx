@@ -4,6 +4,7 @@
     <File Path="Directory.Packages.props" />
     <File Path="global.json" />
     <File Path="README.md" />
+    <File Path="src\Base.props" />
   </Folder>
   <Folder Name="/Logic/">
     <Project Path="src/Logic/Logic.Core/Logic.Core.csproj" />
