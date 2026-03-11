@@ -2,4 +2,5 @@
 - Support for .NET 10
 - User.TimeEntryBackgroundColor is nullable now.
 - Added State for project model.
+- Added expense category and expense models.
 - Nuget updates
