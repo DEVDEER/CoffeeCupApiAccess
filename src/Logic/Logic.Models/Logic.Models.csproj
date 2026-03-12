@@ -5,7 +5,7 @@
         <RootNamespace>devdeer.CoffeeCupApiAccess.Logic.Models</RootNamespace>
         <AssemblyName>CoffeeCupApiAccess.Logic.Models</AssemblyName>
         <PackageId>devdeer.CoffeeCupModels</PackageId>
-        <Title>DEVDEER CoffeeCup API Access Models</Title>
+        <Title>DEVDEER CoffeeCup/Aerion API Access Models</Title>
         <NoWarn>1591</NoWarn>
         <Description>Contains the models necessary for the CoffeeCup/Aerion API Access in NuGet package devdeer.CoffeeCupApiAccess.</Description>
         <Summary>Contains the models necessary for the CoffeeCup/Aerion API Access in NuGet package devdeer.CoffeeCupApiAccess.</Summary>
