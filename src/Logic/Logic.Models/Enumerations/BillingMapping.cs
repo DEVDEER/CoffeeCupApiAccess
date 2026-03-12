@@ -13,7 +13,7 @@ namespace devdeer.CoffeeCupApiAccess.Logic.Models.Enumerations
     public enum BillingMapping
     {
         /// <summary>
-        /// Undefined expense category type, signalazing parsing error.
+        /// Undefined billing mapping, signalazing parsing error.
         /// </summary>
         Undefined = 0,
         Service = 1,
