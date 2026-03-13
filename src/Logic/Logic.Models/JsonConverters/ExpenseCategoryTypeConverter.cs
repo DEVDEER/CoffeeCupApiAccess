@@ -21,6 +21,7 @@ namespace devdeer.CoffeeCupApiAccess.Logic.Models.JsonConverters
         {
             if (reader.TokenType == JsonTokenType.Number)
             {
+                // Awoids JSON exception when deserializing a numeric value.(In case of API changes)
                 return ExpenseCategoryType.Undefined;
             }
             var value = reader.GetString();
