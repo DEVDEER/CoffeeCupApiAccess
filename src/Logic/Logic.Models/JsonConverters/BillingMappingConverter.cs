@@ -19,6 +19,10 @@ namespace devdeer.CoffeeCupApiAccess.Logic.Models.JsonConverters
             Type typeToConvert,
             JsonSerializerOptions options)
         {
+            if (reader.TokenType == JsonTokenType.Number)
+            {
+                return BillingMapping.Undefined;
+            }
             var value = reader.GetString();
             return value?.ToUpperInvariant() switch
             {
