@@ -3,4 +3,6 @@
 - User.TimeEntryBackgroundColor is nullable now.
 - Added State for project model.
 - Added expense category and expense models.
+- Added response models for expenses and expense categories.
+- Small fix for custom JSON converters
 - Nuget updates

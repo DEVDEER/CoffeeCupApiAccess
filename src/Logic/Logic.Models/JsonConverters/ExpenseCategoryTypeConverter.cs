@@ -19,6 +19,11 @@ namespace devdeer.CoffeeCupApiAccess.Logic.Models.JsonConverters
             Type typeToConvert,
             JsonSerializerOptions options)
         {
+            if (reader.TokenType == JsonTokenType.Number)
+            {
+                // Avoids JSON exception when deserializing a numeric value.(In case of API changes)
+                return ExpenseCategoryType.Undefined;
+            }
             var value = reader.GetString();
             return value?.ToUpperInvariant() switch
             {

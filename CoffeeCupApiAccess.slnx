@@ -12,5 +12,6 @@
   </Folder>
   <Folder Name="/Tests/">
     <Project Path="tests/Tests.Logic.Core/Tests.Logic.Core.csproj" />
+    <Project Path="tests/Tests.Logic.Models/Tests.Logic.Models.csproj" />
   </Folder>
 </Solution>
