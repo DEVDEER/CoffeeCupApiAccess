@@ -39,7 +39,7 @@ namespace devdeer.CoffeeCupApiAccess.Logic.Models.DataModels
         /// The quantity of the expense.
         /// </summary>
         [JsonPropertyName("quantity")]
-        public int? Quantity { get; set; }
+        public double? Quantity { get; set; }
 
         /// <summary>
         /// The internal price of the expense.
@@ -75,13 +75,13 @@ namespace devdeer.CoffeeCupApiAccess.Logic.Models.DataModels
         /// The timestamp when the expense was billed.
         /// </summary>
         [JsonPropertyName("billedAt")]
-        public DateTime BilledAt { get; set; }
+        public DateTime? BilledAt { get; set; }
 
         /// <summary>
         /// The day of the expense.
         /// </summary>
         [JsonPropertyName("day")]
-        public DateOnly Day { get; set; }
+        public DateTime Day { get; set; }
 
         /// <summary>
         /// The percentage associated with the expense.

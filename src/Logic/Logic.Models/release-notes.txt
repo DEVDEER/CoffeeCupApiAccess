@@ -5,4 +5,5 @@
 - Added expense category and expense models.
 - Added response models for expenses and expense categories.
 - Small fix for custom JSON converters
+- Expense-related models' properties fixes
 - Nuget updates
