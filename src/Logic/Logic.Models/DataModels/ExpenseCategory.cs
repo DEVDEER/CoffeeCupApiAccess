@@ -55,6 +55,9 @@ namespace devdeer.CoffeeCupApiAccess.Logic.Models.DataModels
         [JsonPropertyName("icon")]
         public int Icon { get; set; }
 
+        /// <summary>
+        /// The price per unit of the expense category.
+        /// </summary>
         [JsonPropertyName("pricePerUnit")]
         public double? PricePerUnit { get; set; }
 
