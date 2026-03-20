@@ -138,6 +138,36 @@
         }
 
         /// <summary>
+        /// Retrieves the list of expense categories from the CoffeeCup API.
+        /// </summary>
+        /// <returns>The list of expense categories.</returns>
+        public async ValueTask<ExpenseCategory[]> GetExpenseCategoriesAsync()
+        {
+            var apiResult = await GetCoffeeCupApiResultAsync<ExpenseCategoryResponse>("expensecategories");
+            if (apiResult == null)
+            {
+                return [];
+            }
+            return apiResult.ExpenseCategories.OrderBy(category => category.CreatedAt)
+                .ToArray();
+        }
+
+        /// <summary>
+        /// Retrieves the list of expenses from the CoffeeCup API.
+        /// </summary>
+        /// <returns>The list of expenses.</returns>
+        public async ValueTask<Expense[]> GetExpencesAsync()
+        {
+            var apiResult = await GetCoffeeCupApiResultAsync<ExpenseResponse>("expenses");
+            if (apiResult == null)
+            {
+                return [];
+            }
+            return apiResult.Expenses.OrderBy(expense => expense.CreatedAt)
+                .ToArray();
+        }
+
+        /// <summary>
         /// Retrieves the analytics data for a single project identified by its <paramref name="projectId" />.
         /// </summary>
         /// <param name="projectId">The unique id of the project in CoffeeCup.</param>
