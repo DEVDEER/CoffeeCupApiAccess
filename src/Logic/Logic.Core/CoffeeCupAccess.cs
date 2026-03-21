@@ -138,21 +138,6 @@
         }
 
         /// <summary>
-        /// Retrieves the list of expense categories from the CoffeeCup API.
-        /// </summary>
-        /// <returns>The list of expense categories.</returns>
-        public async ValueTask<ExpenseCategory[]> GetExpenseCategoriesAsync()
-        {
-            var apiResult = await GetCoffeeCupApiResultAsync<ExpenseCategoryResponse>("expensecategories");
-            if (apiResult == null)
-            {
-                return [];
-            }
-            return apiResult.ExpenseCategories.OrderBy(category => category.CreatedAt)
-                .ToArray();
-        }
-
-        /// <summary>
         /// Retrieves the list of expenses from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of expenses.</returns>
@@ -168,18 +153,17 @@
         }
 
         /// <summary>
-        /// Retrieves the list of expenses related to a specific project from the CoffeeCup API.
+        /// Retrieves the list of expense categories from the CoffeeCup API.
         /// </summary>
-        /// <returns>The list of expenses.</returns>
-        public async ValueTask<Expense[]> GetProjectExpencesAsync(int projectId)
+        /// <returns>The list of expense categories.</returns>
+        public async ValueTask<ExpenseCategory[]> GetExpenseCategoriesAsync()
         {
-            var apiResult = await GetCoffeeCupApiResultAsync<ExpenseResponse>("expenses");
+            var apiResult = await GetCoffeeCupApiResultAsync<ExpenseCategoryResponse>("expensecategories");
             if (apiResult == null)
             {
                 return [];
             }
-            return apiResult.Expenses.Where(expense => expense.ProjectId == projectId)
-                .OrderBy(expense => expense.CreatedAt)
+            return apiResult.ExpenseCategories.OrderBy(category => category.CreatedAt)
                 .ToArray();
         }
 
@@ -193,6 +177,23 @@
             var apiResult = await GetCoffeeCupApiResultAsync<ProjectAnalyticsResponse>(
                 $"analytics/projects?project={projectId}");
             return apiResult?.Project;
+        }
+
+        /// <summary>
+        /// Retrieves the list of expenses related to a specific project from the CoffeeCup API.
+        /// </summary>
+        /// <param name="projectId">The unique id of the project in CoffeeCup.</param>
+        /// <returns>The list of expenses.</returns>
+        public async ValueTask<Expense[]> GetProjectExpencesAsync(int projectId)
+        {
+            var apiResult = await GetCoffeeCupApiResultAsync<ExpenseResponse>("expenses");
+            if (apiResult == null)
+            {
+                return [];
+            }
+            return apiResult.Expenses.Where(expense => expense.ProjectId == projectId)
+                .OrderBy(expense => expense.CreatedAt)
+                .ToArray();
         }
 
         /// <summary>
