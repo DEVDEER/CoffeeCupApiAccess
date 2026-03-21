@@ -52,6 +52,17 @@
         }
 
         /// <summary>
+        /// Simple null-check for <see cref="CoffeeCupAccess.GetProjectExpencesAsync" />.
+        /// </summary>
+        [Test]
+        public async Task GetProjectExpenseRequests_RetrievesNotNull()
+        {
+            Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
+            var result = await ApiAccess.GetProjectExpencesAsync(3402);
+            Assert.That(result.Length != 0, Is.True);
+        }
+
+        /// <summary>
         /// Simple null-check for <see cref="CoffeeCupAccess.GetVacationBudgetsAsync" />.
         /// </summary>
         [Test]
