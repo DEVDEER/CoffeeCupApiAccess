@@ -30,6 +30,28 @@
         }
 
         /// <summary>
+        /// Simple null-check for <see cref="CoffeeCupAccess.GetExpenseCategoriesAsync" />.
+        /// </summary>
+        [Test]
+        public async Task GetExpenseCategoryRequests_RetrievesNotNull()
+        {
+            Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
+            var result = await ApiAccess.GetExpenseCategoriesAsync();
+            Assert.That(result.Length != 0, Is.True);
+        }
+
+        /// <summary>
+        /// Simple null-check for <see cref="CoffeeCupAccess.GetExpencesAsync" />.
+        /// </summary>
+        [Test]
+        public async Task GetExpenseRequests_RetrievesNotNull()
+        {
+            Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
+            var result = await ApiAccess.GetExpencesAsync();
+            Assert.That(result.Length != 0, Is.True);
+        }
+
+        /// <summary>
         /// Simple null-check for <see cref="CoffeeCupAccess.GetVacationBudgetsAsync" />.
         /// </summary>
         [Test]
@@ -57,6 +79,17 @@
             Assert.That(result, Is.Not.Null);
             Assert.That(result!.Any(), Is.True);
             Assert.That(result!.All(r => r.UserId == filter.UserId), Is.True);
+        }
+
+        /// <summary>
+        /// Simple null-check for <see cref="CoffeeCupAccess.GetProjectExpencesAsync" />.
+        /// </summary>
+        [Test]
+        public async Task GetProjectExpenseRequests_RetrievesNotNull()
+        {
+            Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
+            var result = await ApiAccess.GetProjectExpencesAsync(3402);
+            Assert.That(result.Length != 0, Is.True);
         }
 
         /// <summary>
