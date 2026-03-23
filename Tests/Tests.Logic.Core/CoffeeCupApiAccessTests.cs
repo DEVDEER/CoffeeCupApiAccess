@@ -41,6 +41,17 @@
         }
 
         /// <summary>
+        /// Simple null-check for <see cref="CoffeeCupAccess.GetExpenseCategoryAsync" />.
+        /// </summary>
+        [Test]
+        public async Task GetExpenseCategoryByIdRequests_RetrievesNotNull()
+        {
+            Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
+            var result = await ApiAccess.GetExpenseCategoryAsync(10);
+            Assert.That(result, Is.Not.Null);
+        }
+
+        /// <summary>
         /// Simple null-check for <see cref="CoffeeCupAccess.GetExpensesAsync" />.
         /// </summary>
         [Test]

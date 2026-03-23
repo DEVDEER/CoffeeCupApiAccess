@@ -153,6 +153,17 @@
         }
 
         /// <summary>
+        /// Retrieves an expense category by ID from the CoffeeCup API.
+        /// </summary>
+        /// <param name="categoryId">The unique id of the expense category in CoffeeCup.</param>
+        /// <returns>Expense category or <c>null</c> if not found.</returns>
+        public async ValueTask<ExpenseCategory?> GetExpenseCategoryAsync(int categoryId)
+        {
+            var apiResult = await GetCoffeeCupApiResultAsync<ExpenseCategoryResponse>("expensecategories");
+            return apiResult?.ExpenseCategories.FirstOrDefault(category => category.Id == categoryId);
+        }
+
+        /// <summary>
         /// Retrieves the list of expenses from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of expenses.</returns>
