@@ -49,6 +49,11 @@
             Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
             var result = await ApiAccess.GetExpenseCategoryAsync(Constants.ExpenseCategoryId);
             Assert.That(result, Is.Not.Null);
+            if (result == null)
+            {
+                return;
+            }
+            Assert.That(result.Id, Is.EqualTo(Constants.ExpenseCategoryId));
         }
 
         /// <summary>
@@ -109,6 +114,7 @@
             Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
             var result = await ApiAccess.GetProjectExpensesAsync(Constants.ExpensesProjectId);
             Assert.That(result.Length != 0, Is.True);
+            Assert.That(result.All(r => r.ProjectId == Constants.ExpensesProjectId), Is.True);
         }
 
         /// <summary>
