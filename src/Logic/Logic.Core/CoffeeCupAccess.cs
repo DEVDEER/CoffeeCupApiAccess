@@ -138,21 +138,6 @@
         }
 
         /// <summary>
-        /// Retrieves the list of expenses from the CoffeeCup API.
-        /// </summary>
-        /// <returns>The list of expenses.</returns>
-        public async ValueTask<Expense[]> GetExpencesAsync()
-        {
-            var apiResult = await GetCoffeeCupApiResultAsync<ExpenseResponse>("expenses");
-            if (apiResult == null)
-            {
-                return [];
-            }
-            return apiResult.Expenses.OrderBy(expense => expense.CreatedAt)
-                .ToArray();
-        }
-
-        /// <summary>
         /// Retrieves the list of expense categories from the CoffeeCup API.
         /// </summary>
         /// <returns>The list of expense categories.</returns>
@@ -164,6 +149,32 @@
                 return [];
             }
             return apiResult.ExpenseCategories.OrderBy(category => category.CreatedAt)
+                .ToArray();
+        }
+
+        /// <summary>
+        /// Retrieves an expense category by ID from the CoffeeCup API.
+        /// </summary>
+        /// <param name="categoryId">The unique id of the expense category in CoffeeCup.</param>
+        /// <returns>Expense category or <c>null</c> if not found.</returns>
+        public async ValueTask<ExpenseCategory?> GetExpenseCategoryAsync(int categoryId)
+        {
+            var apiResult = await GetCoffeeCupApiResultAsync<ExpenseCategoryResponse>("expensecategories");
+            return apiResult?.ExpenseCategories.FirstOrDefault(category => category.Id == categoryId);
+        }
+
+        /// <summary>
+        /// Retrieves the list of expenses from the CoffeeCup API.
+        /// </summary>
+        /// <returns>The list of expenses.</returns>
+        public async ValueTask<Expense[]> GetExpensesAsync()
+        {
+            var apiResult = await GetCoffeeCupApiResultAsync<ExpenseResponse>("expenses");
+            if (apiResult == null)
+            {
+                return [];
+            }
+            return apiResult.Expenses.OrderBy(expense => expense.CreatedAt)
                 .ToArray();
         }
 
@@ -184,7 +195,7 @@
         /// </summary>
         /// <param name="projectId">The unique id of the project in CoffeeCup.</param>
         /// <returns>The list of expenses.</returns>
-        public async ValueTask<Expense[]> GetProjectExpencesAsync(int projectId)
+        public async ValueTask<Expense[]> GetProjectExpensesAsync(int projectId)
         {
             var apiResult = await GetCoffeeCupApiResultAsync<ExpenseResponse>("expenses");
             if (apiResult == null)
