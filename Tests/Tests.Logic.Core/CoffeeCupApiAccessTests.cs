@@ -24,7 +24,7 @@
         public async Task GetAbsencyRequests_RetrievesNotNull()
         {
             Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
-            var result = await ApiAccess.GetAbsenceRequestsAsync(2024);
+            var result = await ApiAccess.GetAbsenceRequestsAsync(Constants.CurrentYear);
             Assert.That(result, Is.Not.Null);
             Assert.That(result!.Any(), Is.True);
         }
@@ -47,7 +47,7 @@
         public async Task GetExpenseCategoryByIdRequests_RetrievesNotNull()
         {
             Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
-            var result = await ApiAccess.GetExpenseCategoryAsync(10);
+            var result = await ApiAccess.GetExpenseCategoryAsync(Constants.ExpenseCategoryId);
             Assert.That(result, Is.Not.Null);
         }
 
@@ -71,7 +71,11 @@
             Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
             var result = await ApiAccess.GetVacationBudgetsAsync();
             Assert.That(result, Is.Not.Null);
-            Assert.That(result!.Any(), Is.True);
+            if (result == null)
+            {
+                return;
+            }
+            Assert.That(result.Any(), Is.True);
         }
 
         /// <summary>
@@ -83,13 +87,17 @@
             Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
             var filter = new VacationBudgetsFilter
             {
-                UserId = 14766,
-                Date = new DateTime(DateTime.Now.Year, 1, 1)
+                UserId = Constants.VacationBudgetUserId,
+                Date = Constants.BeginningOfYear
             };
             var result = await ApiAccess.GetVacationBudgetsAsync(filter);
             Assert.That(result, Is.Not.Null);
-            Assert.That(result!.Any(), Is.True);
-            Assert.That(result!.All(r => r.UserId == filter.UserId), Is.True);
+            if (result == null)
+            {
+                return;
+            }
+            Assert.That(result.Any(), Is.True);
+            Assert.That(result.All(r => r.UserId == filter.UserId), Is.True);
         }
 
         /// <summary>
@@ -99,7 +107,7 @@
         public async Task GetProjectExpenseRequests_RetrievesNotNull()
         {
             Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
-            var result = await ApiAccess.GetProjectExpensesAsync(3402);
+            var result = await ApiAccess.GetProjectExpensesAsync(Constants.ExpensesProjectId);
             Assert.That(result.Length != 0, Is.True);
         }
 
@@ -110,9 +118,7 @@
         public async Task GetTimeEntries_ByDayRange()
         {
             Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
-            var minDate = new DateTime(2023, 6, 1);
-            var maxDate = new DateTime(2023, 6, 30);
-            var result = await ApiAccess.GetTimeEntriesByDayRangeAsync(minDate, maxDate);
+            var result = await ApiAccess.GetTimeEntriesByDayRangeAsync(Constants.FromDate, Constants.ToDate);
             Assert.That(result, Is.Not.Null);
             if (result == null)
             {
@@ -121,8 +127,8 @@
             Assert.That(result.Count, Is.GreaterThan(0));
             var minResultDate = result.Min(r => r.Day);
             var maxResultDate = result.Max(r => r.Day);
-            Assert.That(minDate, Is.LessThanOrEqualTo(minResultDate));
-            Assert.That(maxDate, Is.GreaterThanOrEqualTo(maxResultDate));
+            Assert.That(Constants.FromDate, Is.LessThanOrEqualTo(minResultDate));
+            Assert.That(Constants.ToDate, Is.GreaterThanOrEqualTo(maxResultDate));
         }
 
         /// <summary>
@@ -132,23 +138,25 @@
         public async Task GetTimeEntries_Filtered()
         {
             Assert.That(ApiAccess, Is.Not.Null, "Logic not initialized");
-            var minDate = new DateTime(2023, 6, 1);
-            var maxDate = new DateTime(2023, 6, 30);
             var filter = new TimeEntriesFilter
             {
-                From = minDate,
-                To = maxDate,
-                ProjectFilterIds = [15639]
+                From = Constants.FromDate,
+                To = Constants.ToDate,
+                ProjectFilterIds = [Constants.TimeEntriesProjectId]
             };
             var result = await ApiAccess.GetTimeEntriesAsync(filter);
             Assert.That(result, Is.Not.Null);
-            Assert.That(result!.Count(e => e.EndTime < e.StartTime), Is.EqualTo(0));
-            Assert.That(result!.Count, Is.GreaterThan(0));
-            Assert.That(result!.All(r => r.ProjectId == 15639), Is.True);
-            var minResultDate = result!.Min(r => r.Day);
-            var maxResultDate = result!.Max(r => r.Day);
-            Assert.That(minDate, Is.LessThanOrEqualTo(minResultDate));
-            Assert.That(maxDate, Is.GreaterThanOrEqualTo(maxResultDate));
+            if (result == null)
+            {
+                return;
+            }
+            Assert.That(result.Count(e => e.EndTime < e.StartTime), Is.EqualTo(0));
+            Assert.That(result.Count, Is.GreaterThan(0));
+            Assert.That(result.All(r => r.ProjectId == Constants.TimeEntriesProjectId), Is.True);
+            var minResultDate = result.Min(r => r.Day);
+            var maxResultDate = result.Max(r => r.Day);
+            Assert.That(Constants.FromDate, Is.LessThanOrEqualTo(minResultDate));
+            Assert.That(Constants.ToDate, Is.GreaterThanOrEqualTo(maxResultDate));
         }
 
         /// <summary>
@@ -200,7 +208,7 @@
         /// <summary>
         /// Provides easy access to the initialized logic.
         /// </summary>
-        private CoffeeCupAccess ApiAccess { get; set; } = default!;
+        private CoffeeCupAccess ApiAccess { get; set; } = null!;
 
         #endregion
     }
